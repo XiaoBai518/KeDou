@@ -29,6 +29,12 @@ import org.hibernate.annotations.GenericGenerator;
 		private String userIp;
 		private String userRealName;//真实姓名
 		private int userGrade;//身份识别码
+		
+		
+		public User (String email,String pwd) {
+			userEmail = email;
+			userPwd = pwd;
+		}
 		public int getUserId() {
 			return userId;
 		}
