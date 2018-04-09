@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<title></title>
+		<script str="js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript">
+			window.onload=function(){
+				var str = document.myform.email.value;
+				if(str.length==0){
+					document.getElementById('id').disabled=true;
+				}
+			}
+			function check_email(){
+			var str = document.myform.email.value;
+			var reg = /^[0-9a-zA-Z_]{5,12}@(163|126|qq|yahoo|gmail|sina)\.(com|com\.cn|cn|la)$/;
+			var regu = /^[1][0-9][0-9]{9}$/; 
+			var re = new RegExp(regu); 
+			if(str.length<=11){
+				if (!re.test(str)) { 
+					document.getElementById('emailmsg').innerHTML = '请输入正确的手机号或邮箱格式！';
+						document.getElementById('id').disabled=true;
+					document.getElementById('email').innerHTML = '';
+					
+					 
+				}else{
+					document.getElementById('emailmsg').innerHTML = '';
+					document.getElementById('email').innerHTML = '手机号合适正确！';
+					//判断是否同意我们的协议
+					var checkbox = document.getElementById("ch");//选中checkbox的id；
+		            if(checkbox.checked==true){//按钮已选中
+		                document.getElementById("id").style.backgroundColor="";
+		                document.getElementById('id').disabled=false;//移除disabled
+		            }else{
+		              	document.getElementById('id').disabled=true;
+		            }
+				}
+			}else{
+				if(str.search(reg) < 0){
+				document.getElementById('emailmsg').innerHTML = '邮箱错误！';
+				document.getElementById('id').disabled=true;
+				document.getElementById('email').innerHTML = '';
+				}else{
+					document.getElementById('emailmsg').innerHTML = '';
+					document.getElementById('email').innerHTML = '邮箱正确！';
+					//判断是否同意我们的协议
+					var checkbox = document.getElementById("ch");//选中checkbox的id；
+		            if(checkbox.checked==true){//按钮已选中
+		                document.getElementById("id").style.backgroundColor="red";
+		                document.getElementById('id').disabled=false;//移除disabled
+		            }else{
+		              	document.getElementById('id').disabled=true;
+		            }
+				
+				}
+			}	
+			}
+			
+			function check(){
+						var str = document.myform.email.value;
+			var reg = /^[0-9a-zA-Z_]{5,12}@(163|126|qq|yahoo|gmail|sina)\.(com|com\.cn|cn|la)$/;
+			var regu = /^[1][0-9][0-9]{9}$/; 
+			var re = new RegExp(regu); 
+			if(str.length<=11){
+				if (!re.test(str)) { 
+						document.getElementById('id').disabled=true;
+				}else{
+					document.getElementById('id').disabled=false;
+				}
+			}else{
+				if(str.search(reg) < 0){
+				document.getElementById('id').disabled=true;
+				}else{
+				var checkbox = document.getElementById("ch");//选中checkbox的id；
+	            if(checkbox.checked==true){//按钮已选中
+	                document.getElementById("id").style.backgroundColor="red";
+	                document.getElementById('id').disabled=false;//移除disabled
+	            }else{
+		 			document.getElementById("id").style.backgroundColor="gree";
+	              	document.getElementById('id').disabled=true;
+	            }
+				}
+			}	
+        }
+			
+
+			<!--验证码调用函数
+			
+			
+			
+			
+			
+			
+			
+			
+			-->
+			
+			
+			
+		</script>
+
+	</head>
+	<body>
+		<div id="two_ifr">
+			<div id="logo"><img src="img/logo.jpg"></div><!--logo的位置-->
+			<div id="input">
+				<form name="myform" action="form_action.asp" method="get">
+					<div>&nbsp;</div>
+					<div><input type="text" name="email" onblur="check_email()" placeholder="输入手机号或邮箱账号" id="input_size"/></div><!--账号密码的位置-->
+					<span style="font-size:15px;color:darkred;" id="emailmsg"></span><span style="font-size:15px;color:darkgreen;" id="email"></span></br>
+					<span></span></br>
+					<div id="input_size2">
+						<div><input type="text"  placeholder="请输入验证码" id="input_size1"/>
+						<!--验证码码输入的位置-->
+						<div id="span_position"><img src="img/yanzhengma.jpg"></div><!--验证码图片的位置-->
+						</div>
+					</div>
+					<span></span></br>
+					<span ><input type="checkbox" id="ch" onclick="check()">我同意协议</span></br>
+				<div>
+					<input  type="submit" value="注册"   id="id" class="input_position" />
+				</div>
+				</form >
+		 <div id="fond_style">已账号:&nbsp;<a href="page1.html" target="box">登录</a></div>
+	</div>
+	</div>
+	</body>
+</html>
+		
