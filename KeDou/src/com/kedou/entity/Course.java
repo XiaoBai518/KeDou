@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="collection")
+@Table(name="course")
 public class Course {
 
 	@Id

@@ -1,10 +1,13 @@
 package com.kedou.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -29,12 +32,8 @@ import org.hibernate.annotations.GenericGenerator;
 		private String userIp;
 		private String userRealName;//真实姓名
 		private int userGrade;//身份识别码
-		
-		
-		public User (String email,String pwd) {
-			userEmail = email;
-			userPwd = pwd;
-		}
+		@Transient
+		private Set<Article> ArticleSet = new HashSet<Article>();
 		public int getUserId() {
 			return userId;
 		}
@@ -95,8 +94,7 @@ import org.hibernate.annotations.GenericGenerator;
 		public void setUserGrade(int userGrade) {
 			this.userGrade = userGrade;
 		}
-		
-		
+				
 }
 		
 		
