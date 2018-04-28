@@ -1,20 +1,20 @@
-<!DOCTYPE>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>课兜后台管理系统</title>
-</head>
+  <head>
+    <!-- ZUI 标准版压缩后的 CSS 文件 -->
+<link rel="stylesheet" href="dist/css/zui.min.css">
 
-
-
-
+<!-- ZUI Javascript 依赖 jQuery -->
 <script src="dist/lib/jquery/jquery.js"></script>
-
+<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
 <script src="dist/js/zui.min.js"></script>
+
+<link type="text/css" rel="stylesheet" href="css/style.css" />
+<script type="text/javascript" src="js/menu.js"></script>
 <link href="dist/lib/datagrid/zui.datagrid.min.css" rel="stylesheet">
 <script src="dist/lib/datagrid/zui.datagrid.min.js"></script>
 <script type="text/javascript">
-  $('#myDataGrid').datagrid({
+$(document).ready(function(){
+ $('#myDataGrid').datagrid({
     dataSource: {
         cols:[
             {name: 'time', label: '时间', width: 132},
@@ -32,8 +32,10 @@
     },
     // ... 其他初始化选项
 });
+});
 </script>
-<body>
-  <div id="datagridExample" class="datagrid" data-ride="datagrid"></div>
-</body>
+  </head>
+  <body>
+    <div id="datagridExample" class="datagrid"></div>
+  </body>
 </html>

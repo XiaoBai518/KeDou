@@ -6,11 +6,15 @@
 
 
 
+<!-- ZUI 标准版压缩后的 CSS 文件 -->
 <link rel="stylesheet" href="dist/css/zui.min.css">
-<link type="text/css" rel="stylesheet" href="css/style.css" />
-<script type="text/javascript" src="js/jquery.js"></script>
+
+<!-- ZUI Javascript 依赖 jQuery -->
+<script src="dist/lib/jquery/jquery.js"></script>
+<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
 <script src="dist/js/zui.min.js"></script>
 
+<link type="text/css" rel="stylesheet" href="css/style.css" />
 <script type="text/javascript" src="js/menu.js"></script>
 
 
@@ -22,7 +26,8 @@
 
 
 <script type="text/javascript">
-$(".form-date").datetimepicker(
+$(document).ready(function(){
+  $(".form-date").datetimepicker(
 {
     language:  "zh-CN",
     weekStart: 1,
@@ -34,6 +39,8 @@ $(".form-date").datetimepicker(
     forceParse: 0,
     format: "yyyy-mm-dd"
 });
+});
+
 </script>
 
 </head>
@@ -155,21 +162,13 @@ $(".form-date").datetimepicker(
           <tr>
             <td>课程开始时间</td>
             <td>
-              <div class="input-group date form-date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-  <input class="form-control" size="16" type="text" value="" readonly="">
-  <span class="input-group-addon"><span class="icon-remove"></span></span>
-  <span class="input-group-addon"><span class="icon-calendar"></span></span>
-</div>
+              <input type="text" class="form-control form-date" placeholder="选择或者输入一个日期：yyyy-MM-dd">
              </td>
           </tr>
           <tr>
             <td>课程结束时间</td>
             <td>
-              <div class="input-group date form-date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-  <input class="form-control" size="16" type="text" value="" readonly="">
-  <span class="input-group-addon"><span class="icon-remove"></span></span>
-  <span class="input-group-addon"><span class="icon-calendar"></span></span>
-</div>
+             <input type="text" class="form-control form-date" placeholder="选择或者输入一个日期：yyyy-MM-dd">
              </td>
           </tr>
           <tr>
