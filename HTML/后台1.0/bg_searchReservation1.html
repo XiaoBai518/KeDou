@@ -7,6 +7,7 @@
 <script src="dist/lib/jquery/jquery.js"></script>
 <script src="dist/js/zui.min.js"></script>
 
+
 <link type="text/css" rel="stylesheet" href="css/style.css" />
 <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="js/menu.js"></script>
@@ -34,7 +35,7 @@
           <div class="list-item none">
             <a href='bg_addAdmin.html'>添加管理员</a>
             <a href='bg_editUser.html'>修改用户信息</a>
-            <a href='bg_searchUser.html'>查看用户列表</a>
+            <a href=''>查看用户列表</a>
             <a href='bg_lockUser.html'>锁定用户</a>
           </div>
         </li>
@@ -51,23 +52,25 @@
         <li>
           <h4 class="M3"><i class="icon icon-time">&nbsp;&nbsp;</i>预约管理</h4>
           <div class="list-item none">
-            <a href='bg_searchReservation.html'>预约检索</a>
+            <a href=''>预约检索</a>
+            <a href=''>查看预约列表</a>
           </div>
         </li>
         <li>
           <h4 class="M4"><i class="icon icon-align-left">&nbsp;&nbsp;</i>课程类型管理</h4>
           <div class="list-item none">
-            <a href='bg_addClassType.html'>添加课程里类型</a>
-            <a href='bg_editClassType.html'>修改课程类型</a>
-            <a href='bg_searchClassType.html'>查看课程类型列表</a>
+            <a href=''>添加课程里类型</a>
+            <a href=''>修改课程类型</a>
+            <a href=''>查看课程类型列表</a>
             <a href="">批量管理</a>
           </div>
         </li>
         <li>
           <h4 class="M5"><i class="icon icon-book">&nbsp;&nbsp;</i>课程管理</h4>
           <div class="list-item none">
-            <a href='bg_editClass.html'>修改课程</a>
-            <a href='bg_searchClass.html'>查看课程列表</a>
+            <a href=''>修改课程</a>
+            <a href=''>查看课程列表</a>
+            <a href=''>批量管理课程</a>
           </div>
         </li>
         <li>
@@ -76,7 +79,7 @@
             <a href='bg_bulletin.html'>发布公告</a>
             <a href=''>添加公告</a>
             <a href=''>修改公告</a>
-            <a href=''>撤销公告</a>
+            <a href="">撤销公告</a>
           </div>
         </li>       				
   </ul>
@@ -87,16 +90,50 @@
 							<li></li>
 								<li style="margin-left:25px;">您当前的位置：</li>
 								<li><a href="#">首页</a></li>
-								
+								<li>></li>
+                <li><a href="#">预约检索</a></li>
 						</ul>
 			</div>
 			<div class="main">
-				
-			</div>
+          <div class="input-group">
+            <div class="input-control search-box search-box-circle has-icon-left has-icon-right search-example" id="searchboxExample">
+              <input id="inputSearchExample3" type="search" class="form-control search-input" placeholder="搜索">
+                <label for="inputSearchExample3" class="input-control-icon-left search-icon"><i class="icon icon-search"></i></label>
+            </div>
+            <span class="input-group-btn">
+              <button class="btn btn-primary" type="button">搜索</button>
+            </span>
+          </div>
+          <hr>
+            <table class="table">
+                <thead>
+                 <tr>
+                  <th>订单ID</th>
+                  <th>用户姓名</th>
+                  <th>用户电话</th>
+                  <th>课程编号</th>
+                  <th>课程名称</th>
+                  <th>商家ID</th>
+                  <th>用户备注</th>
+                 </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+                </table>
+			   
 		</div>
 </div>
 <div class="bottom"></div>
-<div id="footer"><p>Copyright©</p></div>
+<div id="footer"><p>Copyright©  2015</p></div>
 <script>navList(12);</script>
 </body>
 </html>

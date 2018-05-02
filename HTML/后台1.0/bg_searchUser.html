@@ -64,8 +64,6 @@ var myDataGrid = $('#datagridPageExample').data('zui.datagrid');
 // 获取当前已选中的行数据项
 var selectedItems = myDataGrid.getCheckItems();
 </script>
-
-
 </head>
 
 <body>
@@ -143,30 +141,21 @@ var selectedItems = myDataGrid.getCheckItems();
 					<ul>
 							<li></li>
 								<li style="margin-left:25px;">您当前的位置：</li>
-								<li><a href="#">首页</a></li>
+								<li><a href="bg_index.html">首页</a></li>
 								<li>></li>
-                <li><a href="#">查看课程类型</a></li>
+                <li><a href="#">搜索用户列表</a></li>
 						</ul>
 			</div>
 			<div class="main">
       <div>
         <div id="datagridExample" class="datagrid datagrid-borderless">
-          <div class="input-control search-box search-box-circle has-icon-left has-icon-right" id="searchboxExample2" style="margin-bottom: 10px">
-          <div class="input-control search-box search-box-circle has-icon-left has-icon-right" style="max-width: 300px"> 
-          <input id="inputSearchExample2" type="search" class="form-control search-input" placeholder="搜索">
-            <label for="inputSearchExample2" class="input-control-icon-left search-icon"><i class="icon icon-search"></i></label>
-            <a href="#" class="input-control-icon-right search-clear-btn"><i class="icon icon-remove"></i></a></div>
-           
-               <div class="div1" style="position:absolute; right:0px;top:0px"><div class="btn-group">
-  <button type="button" class="btn">发布</button>
-  <button type="button" class="btn">编辑</button>
-  <button type="button" class="btn">删除</button>
-</div></div>
-          </div>
-
+          <div class="input-control search-box search-box-circle has-icon-left has-icon-right" id="searchboxExample2" style="margin-bottom: 10px; max-width: 300px">
+    <input id="inputSearchExample2" type="search" class="form-control search-input" placeholder="搜索">
+    <label for="inputSearchExample2" class="input-control-icon-left search-icon"><i class="icon icon-search"></i></label>
+    <a href="#" class="input-control-icon-right search-clear-btn"><i class="icon icon-remove"></i></a>
+  </div>
             <div class="datagrid-container"></div>
             <div class="pager"></div>
-            <div class="btn-group">
         </div>
         </div>
 			</div>
