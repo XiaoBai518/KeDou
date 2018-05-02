@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>个人中心</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
+		<script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+	</head>
+	<body>
+		<div class="body">
+			<div class="text">个人信息</div>
+			<hr class="hr"/>
+			<div class="person_name">
+				<div class="name_left">昵称</div>
+				<div class="name_right">啊啦啦啦啦啦啦</div>
+			</div>
+			<div class="person_name">
+				<div class="name_left">性别</div>
+				<div class="name_right">啊啦啦啦啦啦啦</div>
+			</div>
+			<div class="person_name">
+				<div class="name_left">地址</div>
+				<div class="name_right">啊啦啦啦啦啦啦</div>
+			</div>
+			<div class="person_name">
+				<div class="name_left">个人描述</div>
+				<div class="name_right">啊啦啦啦啦啦啦</div>
+			</div>	
+			<!--
+            	<div id="mask"></div>
+				<div id="messagechange">
+					<div id="message">
+						<div id="close"></div>
+					</div>
+				</div>
+            -->
+			
+
+	</body>
+	<script>
+		window.onload=function(){
+			var bton=document.getElementById("buton");//获取button按钮
+				bton.onclick=function(){
+				//获取页面高度和宽度
+				var sHeight=document.documentElement.scrollHeight;
+				var sWidth=document.documentElement.scrollWidth;
+				
+				//可是区域的高度和宽度
+				var wHeight=document.documentElement.clientHeight;
+				
+				var oMask=document.createElement("div");
+					oMask.id="mask";
+					oMask.style.height=sHeight+"px";
+					oMask.style.Width=sWidth+"px";
+					document.body.appendChild(oMask);
+				var oLogin=document.createElement("div");
+					oLogin.id="messagechange";
+					oLogin.innerHTML="<div id='message'><div id='close'></div></div>"	
+					document.body.appendChild(oLogin);
+				//获取login的高度和宽度
+				var dHeight=oLogin.offsetHeight;
+				var dWidth=oLogin.offsetWidth;
+				oLogin.style.left=(sWidth-dWidth)/2+"px";
+				oLogin.style.top=(wHeight-dHeight)/2+"px";	
+				
+				var oClose=document.getElementById("close");
+					oMask.onclick=oClose.onclick=function(){
+						document.body.removeChild(oMask);
+						document.body.removeChild(oLogin);
+					}
+				}
+
+			
+		}
+		
+	</script>
+</html>
