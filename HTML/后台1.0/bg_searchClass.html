@@ -17,6 +17,7 @@
 <script src="dist/lib/datagrid/zui.datagrid.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+  //这是定义的静态数组 传回数据是按照如下格式传回即可
   $('#datagridExample').datagrid({
     dataSource: {
         cols:[
@@ -33,17 +34,35 @@ $(document).ready(function(){
             {time: '00:21:43', hero:'力丸', action: '购买了', target: '隐刀', desc: '力丸购买了隐刀。'}
         ]
     },
+    //特殊列的参数
+    configs:{
+      C0:{
+        className: 'text-left',
+        style:{
+
+          color:'#00b8b4',
+        }
+      }
+    },
+    rowDefaultHeight:50,
     //分页
      states: {
         pager: {page: 1, recPerPage: 20}
     },
+
     //排序开关
     sortable: true,
     // checkbox
     checkable: true,
-    checkByClickRow: true
+    checkByClickRow: true,
+
 });
 });
+// 获取数据表格实例
+var myDataGrid = $('#datagridPageExample').data('zui.datagrid');
+
+// 获取当前已选中的行数据项
+var selectedItems = myDataGrid.getCheckItems();
 </script>
 </head>
 
@@ -128,7 +147,7 @@ $(document).ready(function(){
 			</div>
 			<div class="main">
       <div>
-        <div id="datagridExample" class="datagrid">
+        <div id="datagridExample" class="datagrid datagrid-borderless">
           <div class="input-control search-box search-box-circle has-icon-left has-icon-right" id="searchboxExample2" style="margin-bottom: 10px; max-width: 300px">
     <input id="inputSearchExample2" type="search" class="form-control search-input" placeholder="搜索">
     <label for="inputSearchExample2" class="input-control-icon-left search-icon"><i class="icon icon-search"></i></label>
