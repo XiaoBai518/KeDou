@@ -7,7 +7,6 @@
 <script src="dist/lib/jquery/jquery.js"></script>
 <script src="dist/js/zui.min.js"></script>
 
-
 <link type="text/css" rel="stylesheet" href="css/style.css" />
 <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="js/menu.js"></script>
@@ -35,51 +34,43 @@
           <div class="list-item none">
             <a href='bg_addAdmin.html'>添加管理员</a>
             <a href='bg_editUser.html'>修改用户信息</a>
-            <a href=''>查看用户列表</a>
-            <a href='bg_lockUser.html'>锁定用户</a>
+            <a href='bg_searchUser.html'>查看用户列表</a>
           </div>
         </li>
         <li>
           <h4 class="M2"><i class="icon icon-shopping-cart">&nbsp;&nbsp;</i>机构管理</h4>
           <div class="list-item none">
-            <a href="#">审核机构</a>
-            <a href="#">修改机构</a>
-            <a href="#">查看机构列表</a>
-            <a href="#">锁定机构账户</a>
-            <a href="#">查看机构详情</a>          
+            <a href="bg_editStore.html">修改机构</a>
+            <a href="bg_searchStore.html">查看机构列表</a>         
            </div>
         </li>
         <li>
           <h4 class="M3"><i class="icon icon-time">&nbsp;&nbsp;</i>预约管理</h4>
           <div class="list-item none">
-            <a href=''>预约检索</a>
-            <a href=''>查看预约列表</a>
+            <a href='bg_searchReservation.html'>预约检索</a>
           </div>
         </li>
         <li>
           <h4 class="M4"><i class="icon icon-align-left">&nbsp;&nbsp;</i>课程类型管理</h4>
           <div class="list-item none">
-            <a href=''>添加课程里类型</a>
-            <a href=''>修改课程类型</a>
-            <a href=''>查看课程类型列表</a>
-            <a href="">批量管理</a>
+            <a href='bg_addClassType.html'>添加课程里类型</a>
+            <a href='bg_editClassType.html'>修改课程类型</a>
+            <a href='bg_searchClassType.html'>查看课程类型列表</a>
           </div>
         </li>
         <li>
           <h4 class="M5"><i class="icon icon-book">&nbsp;&nbsp;</i>课程管理</h4>
           <div class="list-item none">
-            <a href=''>修改课程</a>
-            <a href=''>查看课程列表</a>
-            <a href=''>批量管理课程</a>
+            <a href='bg_editClass.html'>修改课程</a>
+            <a href='bg_searchClass.html'>查看课程列表</a>
           </div>
         </li>
         <li>
           <h4  class="M6"><i class="icon icon-newspaper-o">&nbsp;&nbsp;</i>公告管理</h4>
           <div class="list-item none">
-            <a href='bg_bulletin.html'>发布公告</a>
-            <a href=''>添加公告</a>
-            <a href=''>修改公告</a>
-            <a href="">撤销公告</a>
+            <a href='bg_addBulletin.html'>添加公告</a>
+            <a href='bg_searchBulletin.html'>公告操作</a>
+            <a href='bg_editBulletin.html'>修改公告</a>
           </div>
         </li>       				
   </ul>
@@ -90,44 +81,16 @@
 							<li></li>
 								<li style="margin-left:25px;">您当前的位置：</li>
 								<li><a href="#">首页</a></li>
-								<li>></li>
-                <li><a href="#">添加课程类型</a></li>
+								
 						</ul>
 			</div>
 			<div class="main">
-            <table class="table table-hover">
-        <thead>
-           <tr>
-             <th></th>
-             <th></th>
-           </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>添加课程类型</td>
-            <td>
-             <div class="input-group">
-                  <input type="text" class="form-control" placeholder="课程类型">
-                <span class="input-group-addon">课程</span>
-              </div>
-             </td>
-          </tr>
-          </tbody>
-         <tfoot>
-        <tr  style="text-align:right">
-          <td></td>
-           <td>
-              <input class="btn btn-primary btn6 mr10" value="提交" type="submit">
-              <input class="btn btn6" onclick="history.go(-1)" value="返回" type="button">
-           </td>
-        </tr>
-      </tfoot>
-    </table>
-
+				
+			</div>
 		</div>
 </div>
 <div class="bottom"></div>
-<div id="footer"><p>Copyright©  2015</p></div>
+<div id="footer"><p>Copyright©</p></div>
 <script>navList(12);</script>
 </body>
 </html>

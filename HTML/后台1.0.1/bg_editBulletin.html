@@ -61,59 +61,51 @@ $(document).ready(function(){
 </div>
 <div id="content">
 	<div class="left_menu">
-				<ul id="nav_dot">
+				        <ul id="nav_dot">
       <li>
           <h4 class="M1"><i class="icon icon-user">&nbsp;&nbsp;</i>用户管理</h4>
           <div class="list-item none">
             <a href='bg_addAdmin.html'>添加管理员</a>
             <a href='bg_editUser.html'>修改用户信息</a>
-            <a href=''>查看用户列表</a>
-            <a href='bg_lockUser.html'>锁定用户</a>
+            <a href='bg_searchUser.html'>查看用户列表</a>
           </div>
         </li>
         <li>
           <h4 class="M2"><i class="icon icon-shopping-cart">&nbsp;&nbsp;</i>机构管理</h4>
           <div class="list-item none">
-            <a href="#">审核机构</a>
-            <a href="#">修改机构</a>
-            <a href="#">查看机构列表</a>
-            <a href="#">锁定机构账户</a>
-            <a href="#">查看机构详情</a>          
+            <a href="bg_editStore.html">修改机构</a>
+            <a href="bg_searchStore.html">查看机构列表</a>         
            </div>
         </li>
         <li>
           <h4 class="M3"><i class="icon icon-time">&nbsp;&nbsp;</i>预约管理</h4>
           <div class="list-item none">
-            <a href=''>预约检索</a>
-            <a href=''>查看预约列表</a>
+            <a href='bg_searchReservation.html'>预约检索</a>
           </div>
         </li>
-				<li>
+        <li>
           <h4 class="M4"><i class="icon icon-align-left">&nbsp;&nbsp;</i>课程类型管理</h4>
           <div class="list-item none">
-            <a href=''>添加课程里类型</a>
-            <a href=''>修改课程类型</a>
-            <a href=''>查看课程类型列表</a>
-            <a href="">批量管理</a>
+            <a href='bg_addClassType.html'>添加课程里类型</a>
+            <a href='bg_editClassType.html'>修改课程类型</a>
+            <a href='bg_searchClassType.html'>查看课程类型列表</a>
           </div>
         </li>
-				<li>
+        <li>
           <h4 class="M5"><i class="icon icon-book">&nbsp;&nbsp;</i>课程管理</h4>
           <div class="list-item none">
-            <a href=''>修改课程</a>
-            <a href=''>查看课程列表</a>
-            <a href=''>批量管理课程</a>
+            <a href='bg_editClass.html'>修改课程</a>
+            <a href='bg_searchClass.html'>查看课程列表</a>
           </div>
         </li>
-				<li>
+        <li>
           <h4  class="M6"><i class="icon icon-newspaper-o">&nbsp;&nbsp;</i>公告管理</h4>
           <div class="list-item none">
-            <a href='bg_bulletin.html'>发布公告</a>
-            <a href=''>添加公告</a>
-            <a href=''>修改公告</a>
-            <a href="">撤销公告</a>
+            <a href='bg_addBulletin.html'>添加公告</a>
+            <a href='bg_searchBulletin.html'>公告操作</a>
+            <a href='bg_editBulletin.html'>修改公告</a>
           </div>
-        </li>				
+        </li>               
   </ul>
 		</div>
 		<div class="m-right">
@@ -123,11 +115,20 @@ $(document).ready(function(){
 								<li style="margin-left:25px;">您当前的位置：</li>
 								<li><a href="bg_index.html">首页</a></li>
 								<li>></li>
-								<li><a href="#">修改课程</a></li>
+								<li><a href="#">修改公告</a></li>
 						</ul>
 			</div>
 			<div class="main">
-				  
+				       <div class="input-group">
+            <div class="input-control search-box search-box-circle has-icon-left has-icon-right search-example" id="searchboxExample">
+              <input id="inputSearchExample3" type="search" class="form-control search-input" placeholder="搜索">
+                <label for="inputSearchExample3" class="input-control-icon-left search-icon"><i class="icon icon-search"></i></label>
+            </div>
+            <span class="input-group-btn">
+              <button class="btn btn-primary" type="button">搜索</button>
+            </span>
+          </div>
+        
 
           <table class="table table-hover">
         <thead>
@@ -138,45 +139,41 @@ $(document).ready(function(){
         </thead>
         <tbody>
           <tr>
-            <td>课程名称</td>
+            <td>标题</td>
             <td>
-              <input type="text" class="form-control" placeholder="课程名称">
+              <input type="text" class="form-control" placeholder="标题">
              </td>
           </tr>
           <tr>
-            <td>课程描述</td>
-            <td>
-              <textarea class="form-control" rows="3" placeholder="课程描述"></textarea>
-          </tr>
-          <tr>
-            <td>课程类型</td>
+            <td>分类</td>
             <td>
               <select class="form-control">
-                <option value="">请选择课程类型</option>
-                <option value="apple">语文</option>
-                <option value="banana">数学</option>
-                <option value="orange">英语</option>
+                <option value="18">请选择公告分类</option>
+                <option value="19">运动健身</option>
+                <option value="20">旅游</option>
+                <option value="21">文学艺术</option>
+                <option value="22">演讲</option>
+                <option value="23">经济</option>
+                <option value="24">电影</option>
+                <option value="25">科技</option>
+                <option value="26">美食</option>
               </select>
-             </td>
-          </tr>
-          <tr>
-            <td>课程开始时间</td>
-            <td>
-              <input type="text" class="form-control form-date" placeholder="选择或者输入一个日期：yyyy-MM-dd">
-             </td>
-          </tr>
-          <tr>
-            <td>课程结束时间</td>
-            <td>
-             <input type="text" class="form-control form-date" placeholder="选择或者输入一个日期：yyyy-MM-dd">
-             </td>
-          </tr>
-          <tr>
-            <td>价格</td>
-            <td>
-              <input type="text" class="form-control" placeholder="价格">
-             </td>
-          </tr>
+            </td>
+        </tr>
+        <tr>
+          <td>图片</td>
+          <td>
+            <input type="file" class="form-control" value="">
+          </td>
+        </tr>
+        <tr>
+          <td>视频</td>
+          <td><input type="file" class="form-control" value=""></td>
+        </tr>
+        <tr>
+          <td>公告详情</td>
+          <td><textarea class="form-control" rows="3" placeholder="在此输入公告的内容"></textarea></td>
+        </tr>
       </tbody>
       <tfoot>
         <tr  style="text-align:right">

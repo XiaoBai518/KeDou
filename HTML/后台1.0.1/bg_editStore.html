@@ -1,0 +1,240 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>课兜后台管理系统</title>
+
+
+
+<!-- ZUI 标准版压缩后的 CSS 文件 -->
+<link rel="stylesheet" href="dist/css/zui.min.css">
+
+<!-- ZUI Javascript 依赖 jQuery -->
+<script src="dist/lib/jquery/jquery.js"></script>
+<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
+<script src="dist/js/zui.min.js"></script>
+
+<link type="text/css" rel="stylesheet" href="css/style.css" />
+<script type="text/javascript" src="js/menu.js"></script>
+
+
+
+
+<link href="dist/lib/datetimepicker/datetimepicker.min.css" rel="stylesheet">
+<script src="dist/lib/datetimepicker/datetimepicker.min.js"></script>
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".form-date").datetimepicker(
+{
+    language:  "zh-CN",
+    weekStart: 1,
+    todayBtn:  1,
+    autoclose: 1,
+    todayHighlight: 1,
+    startView: 2,
+    minView: 2,
+    forceParse: 0,
+    format: "yyyy-mm-dd"
+});
+});
+
+</script>
+
+</head>
+
+<body>
+<div class="top"></div>
+<div id="header">
+	<div class="logo">课兜后台管理系统</div>
+	<div class="navigation">
+		<ul>
+		 	<li>欢迎您！</li>
+			<li><a href="">Tony</a></li>
+			<li><a href="">修改密码</a></li>
+			<li><a href="">设置</a></li>
+			<li><a href="">退出</a></li>
+		</ul>
+	</div>
+</div>
+<div id="content">
+	<div class="left_menu">
+				        <ul id="nav_dot">
+      <li>
+          <h4 class="M1"><i class="icon icon-user">&nbsp;&nbsp;</i>用户管理</h4>
+          <div class="list-item none">
+            <a href='bg_addAdmin.html'>添加管理员</a>
+            <a href='bg_editUser.html'>修改用户信息</a>
+            <a href='bg_searchUser.html'>查看用户列表</a>
+          </div>
+        </li>
+        <li>
+          <h4 class="M2"><i class="icon icon-shopping-cart">&nbsp;&nbsp;</i>机构管理</h4>
+          <div class="list-item none">
+            <a href="bg_editStore.html">修改机构</a>
+            <a href="bg_searchStore.html">查看机构列表</a>         
+           </div>
+        </li>
+        <li>
+          <h4 class="M3"><i class="icon icon-time">&nbsp;&nbsp;</i>预约管理</h4>
+          <div class="list-item none">
+            <a href='bg_searchReservation.html'>预约检索</a>
+          </div>
+        </li>
+        <li>
+          <h4 class="M4"><i class="icon icon-align-left">&nbsp;&nbsp;</i>课程类型管理</h4>
+          <div class="list-item none">
+            <a href='bg_addClassType.html'>添加课程里类型</a>
+            <a href='bg_editClassType.html'>修改课程类型</a>
+            <a href='bg_searchClassType.html'>查看课程类型列表</a>
+          </div>
+        </li>
+        <li>
+          <h4 class="M5"><i class="icon icon-book">&nbsp;&nbsp;</i>课程管理</h4>
+          <div class="list-item none">
+            <a href='bg_editClass.html'>修改课程</a>
+            <a href='bg_searchClass.html'>查看课程列表</a>
+          </div>
+        </li>
+        <li>
+          <h4  class="M6"><i class="icon icon-newspaper-o">&nbsp;&nbsp;</i>公告管理</h4>
+          <div class="list-item none">
+            <a href='bg_addBulletin.html'>添加公告</a>
+            <a href='bg_searchBulletin.html'>公告操作</a>
+            <a href='bg_editBulletin.html'>修改公告</a>
+          </div>
+        </li>               
+  </ul>
+		</div>
+		<div class="m-right">
+			<div class="right-nav">
+					<ul>
+							<li></li>
+								<li style="margin-left:25px;">您当前的位置：</li>
+								<li><a href="bg_index.html">首页</a></li>
+								<li>></li>
+								<li><a href="#">修改课程</a></li>
+						</ul>
+			</div>
+			<div class="main">
+				  
+              <div class="input-group">
+            <div class="input-control search-box search-box-circle has-icon-left has-icon-right search-example" id="searchboxExample">
+              <input id="inputSearchExample3" type="search" class="form-control search-input" placeholder="搜索">
+                <label for="inputSearchExample3" class="input-control-icon-left search-icon"><i class="icon icon-search"></i></label>
+            </div>
+            <span class="input-group-btn">
+              <button class="btn btn-primary" type="button">搜索</button>
+            </span>
+          </div>
+
+          <table class="table table-hover">
+        <thead>
+           <tr>
+             <th></th>
+             <th></th>
+           </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>商家ID</td>
+            <td>
+              <input type="text" class="form-control" placeholder="商家ID">
+             </td>
+          </tr>
+          <tr>
+            <td>商家名称</td>
+            <td>
+              <input type="text" class="form-control" placeholder="商家名称">
+             </td>
+          </tr>
+          <tr>
+            <td>联系人</td>
+            <td>
+              <input type="text" class="form-control" placeholder="联系人">
+             </td>
+          </tr>
+          <tr>
+            <td>电话</td>
+            <td>
+              <input type="text" class="form-control" placeholder="电话">
+             </td>
+          </tr>
+          <tr>
+            <td>营业执照号</td>
+            <td>
+              <input type="text" class="form-control" placeholder="营业执照号">
+             </td>
+          </tr>
+          <tr>
+            <td>公司地址</td>
+            <td>
+              <textarea class="form-control" rows="3" placeholder="公司地址"></textarea>
+          </tr>
+          <tr>
+            <td>公司法人</td>
+            <td>
+              <input type="text" class="form-control" placeholder="公司法人">
+             </td>
+          </tr>
+          <tr>
+            <td>商家状态</td>
+            <td>
+              <input type="text" class="form-control" placeholder="商家状态">
+             </td>
+          </tr>
+          <tr>
+            <td>商家账号</td>
+            <td>
+              <input type="text" class="form-control" placeholder="商家账号">
+             </td>
+          </tr>
+          <tr>
+            <td>邮箱</td>
+            <td>
+              <input type="text" class="form-control" placeholder="邮箱">
+             </td>
+          </tr>
+          <tr>
+            <td>密码</td>
+            <td>
+              <input type="text" class="form-control" placeholder="密码">
+             </td>
+          </tr>
+      </tbody>
+      <tfoot>
+        <tr  style="text-align:right">
+          <td></td>
+           <td>
+              <input class="btn btn-primary btn6 mr10" value="修改" type="submit">
+              <input class="btn btn6" onclick="history.go(-1)" value="返回" type="button">
+           </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+
+
+
+
+			</div>
+		</div>
+</div>
+<div class="bottom"></div>
+<div id="footer"><p>Copyright©</p></div>
+<script>navList(12);</script>
+</body>
+</html>
