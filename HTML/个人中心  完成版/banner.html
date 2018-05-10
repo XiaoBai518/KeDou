@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			function check(){
+				var str = document.search.message.value;
+				if(str.length<1){
+					document.getElementById('id').disabled=true;
+				}else{
+					document.getElementById('id').disabled=false;
+				}
+			}
+			setInterval(check,100);  //循环调用函数判断搜索框中为空值是，搜索按钮不可点击
+		</script>
+ 	<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	</head>
+	<body>
+		
+		<div id="banner1">
+			<div id="banner_logo"><img src="img/logo1.png"></div>
+			<div id="banner_tex"></div>  <!--预留的字段，后期添加-->
+			<div id="banner_tex"></div>  <!--预留的字段，后期添加-->
+			<div id="banner_tex"></div>  <!--预留的字段，后期添加-->
+			<form name="search" method="get" action="ss">
+			<div id="banner_seek"> <input type="text" name="message" id="banner_input_size" ></div>
+			<div id="banner_button"><input type="submit" value="ss"  id="id" class="banner_button_style" ></div>
+			</form>
+			<div id="banner_logo_address"> <img src="img/adress.png"></div>
+			<div id="banner_address_position"><span>石家庄</span><button id="banner_aderss_button">切换地址</button></div>
+			
+			<div id="banner_login"><span id="banner_register_stype">立即登录</span>&nbsp;|&nbsp;<span id="banner_login_stype">注册</span></div>
+		</div>
+		
+	</body>
+</html>

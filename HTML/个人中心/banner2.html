@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
+		
+		<script type="text/javascript">
+			function check(){
+				var str = document.search.message.value;
+				if(str.length<1){
+					document.getElementById('id').disabled=true;
+				}else{
+					document.getElementById('id').disabled=false;
+				}
+			}
+			setInterval(check,100);  //循环调用函数判断搜索框中为空值是，搜索按钮不可点击
+		</script>
+ 	<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	</head>
+	<body>
+		
+			<div id="banner1">
+				<div id="banner_logo"><img src="img/logo1.png"></div>
+				<form name="search" method="get" action="ss">
+				<div id="banner_seek"> <input type="text" name="message" id="banner_input_size" ></div>
+				<div id="banner_button"><input type="submit" value="搜索"  id="id" class="banner_button_style" ></div>
+				</form>
+				<div id="banner_logo_address"> <img src="img/adress.png"></div>
+				<div id="banner_address_position"><span>石家庄</span><button id="banner_aderss_button">切换地址</button></div>
+				<div class="banner_personcenter_position" >
+				
+					<div id="d1"></div>		
+					<div id="d2">
+						<div id="d1-3"></div>
+						<div id="d1-1">
+							<div id="d1-1-1"><img src="img/Personal Center .png" width="100%" height="100%"></div>
+							<div id="d1-1-2">哇哈哈</div>
+						</div>
+						<div id="d1-2">
+							<div id="d2-2-1">个人资料</div>
+							<div id="d2-2-2">预约</div>
+							<div id="d2-2-3">访问历史</div>
+							<div id="d2-2-4">收藏</div>
+						</div>
+					</div>	
+					
+				</div>
+			
+			</div>
+		
+
+	    <script>
+        var d1 = document.getElementById('d1');
+        var d2 = document.getElementById('d2');
+
+        d1.onmouseover = function() {
+            d2.style.display = "block";
+        }
+        d1.onmouseout = function() {
+            d2.style.display = "none";
+        }
+        d2.onmouseover = function() {
+            d2.style.display = "block";
+        }
+        d2.onmouseout = function() {
+            d2.style.display = "none";
+        }
+    </script>
+    <script>
+        var d11 = document.getElementById('d2-2-1');
+        var d22 = document.getElementById('d2-2-2');
+		var d33 = document.getElementById('d2-2-3');
+		var d44 = document.getElementById('d2-2-4');
+        d11.onmouseover = function() {
+            d11.style.background = "#CDCDC1";
+        }
+        d11.onmouseout = function() {
+            d11.style.background = "beige";
+        }
+        d22.onmouseover = function() {
+            d22.style.background = "#CDCDC1";
+        }
+        d22.onmouseout = function() {
+            d22.style.background = "beige";
+        }
+        d33.onmouseover = function() {
+            d33.style.background = "#CDCDC1";
+        }
+        d33.onmouseout = function() {
+            d33.style.background = "beige";
+        }
+        d44.onmouseover = function() {
+            d44.style.background = "#CDCDC1";
+        }
+        d44.onmouseout = function() {
+            d44.style.background = "beige";
+        }
+    </script>
+	</body>
+</html>

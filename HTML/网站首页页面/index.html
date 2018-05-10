@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>课兜儿首页</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+	<div class="banner" id="b04">
+		<div id="center-search">
+			<!-- logo -->
+			<img src="img/logo.png" id="logo">
+			<iframe src="minimalist.html" frameborder="0" name="search_box"></iframe>		
+		</div>		
+		<div id="navigation">
+		<!-- 右下角导航 -->
+			<a href="index.html" id="index-nav">
+				<img src="img/indexball.png" id="indexball">
+				<div id="login"><a href="#"><img src="img/login.png" class="nav"></a></div>
+				<div id="register"><a href="#"><img src="img/register.png" class="nav"></a></div>
+				<div id="qrcode"><a href="#"><img src="img/qrcode.png" class="nav"></a></div>
+			</a>
+		</div>
+		<!-- 轮播大图 -->
+		<ul>
+			<li class="slider-item">
+				<a href="#">
+					<img src="img/01.jpg" alt="第一张图片" width="1366" height="635" >
+					<span class="slider-title"><em>第一张图片</em></span>
+				</a>
+			</li>
+			<li class="slider-item">
+				<a href="#">
+					<img src="img/02.jpg" alt="第二张图片" width="1366" height="635" >
+					<span class="slider-title"><em>第二张图片</em></span>
+				</a>
+			</li>
+			<li class="slider-item">
+				<a href="#">
+					<img src="img/03.jpg" alt="第三张图片" width="1366" height="635" >
+					<span class="slider-title"><em>第三张图片</em></span>
+				</a>
+			</li>
+			<li class="slider-item">
+				<a href="#">
+					<img src="img/04.jpg" alt="第四张图片" width="1366" height="635" >
+					<span class="slider-title"><em>第四张图片</em></span>
+				</a>
+			</li>
+			<li class="slider-item">
+				<a href="#">
+					<img src="img/05.jpg" alt="第五张图片" width="1366" height="635" >
+					<span class="slider-title"><em>第五张图片</em></span>
+				</a>
+			</li>
+		</ul>
+		<div class="progress"></div>
+		<a href="javascript:void(0);" class="unslider-arrow04 prev">
+			<img class="arrow" id="al" src="img/arrowl.png" alt="prev" width="20" height="35">
+		</a>
+		<a href="javascript:void(0);" class="unslider-arrow04 next">
+			<img class="arrow" id="ar" src="img/arrowr.png" alt="next" width="20" height="37">
+		</a>
+	</div>
+
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/unslider.min.js"></script>
+
+	<script>
+		// 轮播图
+		$(document).ready(function(e) {
+			var progress = $(".progress"),li_width = $("#b04 li").length;
+		    var unslider04 = $('#b04').unslider({
+				dots: true,
+				complete:function(index){//自己添加的，官方没有
+					progress.animate({"width":(100/li_width)*(index+1)+"%"});
+				}
+			}),
+
+			data04 = unslider04.data('unslider');
+			$('.unslider-arrow04').click(function() {
+		        var fn = this.className.split(' ')[1];
+		        data04[fn]();
+		    });
+		});
+		// 右下角导航
+		$(document).ready(function(){
+  			$("#indexball").hover(function(){
+  				$(".nav").toggle();
+  			});
+		});
+		$(document).ready(function(){
+  			$(".nav").hover(function(){
+  				$(".nav").show();
+  			});
+  			$(".nav").mouseleave(function(){
+  				$(".nav").hide();
+  			});
+		});
+	</script>
+</body>
+</html>

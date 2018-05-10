@@ -1,0 +1,260 @@
+*{
+	color: #424242;
+	font-family: "楷体";
+	/*background-color: #F8F8FF;*/
+	/*opacity: 0.2;*/
+}
+#header{
+	/*background-image: url(images/abt.jpg);*/
+	height: 100%;
+	width: 100%;
+}
+#logo{
+	float: left;
+	width: 100%;
+	height: 110px;
+	margin-top: 20px;
+	margin-left: 45px; 
+}
+.d{
+	height: 100px;
+	width: 200px;	
+}
+#search{
+	float: left;
+	margin-top: -90px;
+	margin-left: 340px;
+}
+ 
+.s{
+	width: 100px;
+	height: 44px;
+	background-color: cornflowerblue;
+	border-radius: 6px;
+	font-size: 20px;
+}
+.t{
+	width: 460px;
+	height: 40px;
+	border: 1px solid cornflowerblue;
+	
+	border-radius: 2px;
+}
+#ss{
+	position: absolute;
+	margin-left: 561px;
+}
+#tt{
+	float: left;
+	margin-left: 100px;
+}
+ 
+
+#content{
+	width: 100%;
+	position: absolute;
+	margin-top: 50px;
+	/*background-color: #FFEFDB;*/
+}
+#content-left{
+	width: 50%;
+	
+	 
+}
+#daohang{
+	width: 100%;
+	margin-left: 90px;
+	margin-top: -50px;
+}
+/*ol.nav{  
+    margin:0px;  
+    padding:0px;  
+    list-style-type:none; 
+}  
+ol.nav li{  
+    float:left;/*浮动列表项 使用外边距把他们分开*/  
+  /*  margin-left:130px;  
+}  
+  
+ol.nav a,ol.nav li{  
+    display: block;  
+    padding:2px 10px;/*控制li中的元素与li之间的距离*/  
+    /*border:0px;  
+    border-radius: 6px;
+    text-decoration:none;  
+ 	background-color:#F2F2F2;
+    font-size: 18px;
+    color: #CDB79E;
+}*/
+#con{
+    width: 72%;
+    height: 230px;
+  	border: 1px solid #F2F2F2;
+  /*	background-color: #F8F8FF;*/
+    border-radius: 6px;
+    position: absolute;
+    margin: 60px 50px;
+
+}
+.im{
+    width: 250px;
+    height: 150px;
+    float: left;
+    padding: 20px 40px;
+     border-radius: 16px;
+    margin-top: 20px;
+    /*background: rgba(255,255,255,0.5);*/
+  
+}
+#p1{
+	 height: 150px;
+	 margin-left: 330px;
+	 margin-top: 60px;
+	/*background: rgba(255,255,255,0.5);*/
+}
+p{
+	/*background-color: #f0f0f0;*/
+	position: absolute;
+	margin-left: 630px;
+	margin-top: 60px;
+	 overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow:ellipsis;
+    /*background: rgba(255,255,255,0.5);*/
+    
+} 
+a:link{
+	text-decoration: none;
+}
+a.pp{
+	height: 93px;
+	width: 225px;
+	margin-top: -70px;
+	float: right;
+	margin-right: 60px; 
+　　border-radius: 6px;
+ 	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow:ellipsis;
+    /*background: rgba(255,255,255,0.5);*/
+    
+
+}
+#con1{
+    width: 72%;
+    height: 230px;
+    border: 1px solid #f2f2f2;
+     border-radius: 6px;
+    position: absolute;
+    margin-top: 300px;
+    margin-left: 50px;
+    background: rgba(255,255,255,0.5);
+}
+#con2{
+    width: 72%;
+    height: 230px;
+    border: 1px solid #F2F2F2;
+    background: rgba(255,255,255,0.5);
+     border-radius: 6px;
+    position: absolute;
+    margin-top: 540px;
+    margin-left: 50px;
+}
+#datas{
+	margin-top: 50px;
+	height: 400px;
+	border-radius: 6px;
+	float: left;
+	
+}
+.data{
+	width: 900px;
+	height: 300px;
+	
+}
+#content-right{
+	width: 50%;
+	float: right;
+	 
+}
+#g{
+	float: right;
+	width: 250px;
+	height: 230px;
+	border-radius: 16px;
+	margin-right: -650px;
+	margin-top: 33px;
+	border: 1px solid #f2f2f2;
+	background: rgba(255,255,255,0.5);
+	border-radius: 12px;
+}
+#gg{
+	float: right;
+	width: 250px;
+	height: 230px;
+	margin-right: -650px;
+	margin-top: 285px;
+	border: 1px solid #f2f2f2;
+	background: rgba(255,255,255,0.5);
+	border-radius: 16px;
+}
+#ggg{
+	float: right;
+	width: 250px;
+	height: 230px;
+	margin-right: -650px;
+	margin-top: 540px;
+	border: 1px solid #f2f2f2;
+	background: rgba(255,255,255,0.5);
+	border-radius: 16px;
+}
+.g3{
+	width: 250px;
+	height: 230px;
+}
+.g2{
+	width: 250px;
+	height: 230px;
+}
+.g1{
+	width: 250px;
+	height: 230px;
+}
+div.flickr{
+	padding:3px;
+	margin-top:490px;
+	margin-left: 350px;
+}
+div.flickr a{
+	border:#dedfde 1px solid;
+	padding:2px 6px;
+	background-position:50% bottom;
+	color:#0061de;
+	margin:0 3px 0 0;
+	text-decoration:none;
+}
+div.flickr a:hover{
+	border:#000 1px solid;
+	background-image:none;
+	color:#fff;
+	background-color:#0061de;
+}
+div.meneame a:active{
+	border:#000 1px solid;
+	background-image:none;
+	color:#fff;
+	background-color:#0061de
+}
+div.flickr span.current{
+	padding:2px 6px;
+	font-weight:bold;
+	color:#ff0084;
+	margin:0 3px 0 0;
+}
+div.flickr span.disabled{
+	padding:2px 6px;
+	color:#adaaad;
+	margin:0 3px 0 0;
+}
