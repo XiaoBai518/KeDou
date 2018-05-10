@@ -1,5 +1,6 @@
 package com.kedou.util;
 
+import java.security.GeneralSecurityException;
 import java.util.Date;
 import java.util.Properties;
 
@@ -16,6 +17,14 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import com.sun.mail.util.MailSSLSocketFactory;
+
+/**
+ *  邮件发送工具
+ *  使用方法 ： new SendEmailThread(emailAddress,code).start();
+ * @author 原源
+ *
+ */
 public class SendEmailThread extends Thread {
 
 	private String emailAddress;//邮箱地址
@@ -29,7 +38,7 @@ public class SendEmailThread extends Thread {
 	
 @Override
 public void run() {
-	
+	System.out.println("线程开始");
     //获取到用户所注册邮箱的类别
 	String[] hostName = emailAddress.split("@");
 	String hostName1 = "smtp."+hostName[1];
@@ -38,10 +47,22 @@ public void run() {
 	// 设置发送邮件的邮件服务器的属性
 	props.put("mail.smtp.host", hostName1);
 	props.put("mail.smtp.auth", "true");
+	// 开启SSL加密，否则会失败
+			MailSSLSocketFactory sf=null;
+			try {
+				sf = new MailSSLSocketFactory();
+			} catch (GeneralSecurityException e1) {
+				// TODO 自动生成的 catch 块
+				e1.printStackTrace();
+			}
+			sf.setTrustAllHosts(true);
+			props.put("mail.smtp.ssl.enable", "true");
+			props.put("mail.smtp.ssl.socketFactory", sf);
+
 	// 用session为参数定义消息对象
 	Session session = Session.getInstance(props, new Authenticator() {
         public PasswordAuthentication getPasswordAuthentication() { /* 若服务器需要身份认证，Sission会自动调用这个方法 */
-            return new PasswordAuthentication("3348958465@qq.com", "kedou20180318");
+            return new PasswordAuthentication("3348958465@qq.com", "yiqzxieijxxycjbi");
         }
     });
 	// 有了这句便可以在发送邮件的过程中在console处显示过程信息，供调试使
@@ -50,7 +71,7 @@ public void run() {
 	MimeMessage message = new MimeMessage(session);
     try {  
     	// 加载发件人地址
-    	message.setFrom(new InternetAddress("kedou@163.com"));
+    	message.setFrom(new InternetAddress("3348958465@qq.com"));
     	// 加载收件人地址
     	message.addRecipient(Message.RecipientType.TO, new InternetAddress(emailAddress));
     	// 加载标题
@@ -60,7 +81,7 @@ public void run() {
     	// 设置邮件的文本内容
     	BodyPart contentPart = new MimeBodyPart();
     	//加上"text/html; charset=utf-8"，表示支持html格式的邮件
-    	contentPart.setContent("<h1>尊敬的用户您好,请点击下面链接完成激活操作</h1><h3><a href='http://localhost:8080/KeDou/user/verify?varifyNum="+code+"'>邮箱激活链接</a></h3>", "text/html; charset=utf-8");
+    	contentPart.setContent("<h1>尊敬的用户您好,请点击下面链接完成激活操作</h1><h3><a href='http://localhost:8080/KeDou/user/verify?verifyNum="+code+"'>邮箱激活链接</a></h3>", "text/html; charset=utf-8");
     	multipart.addBodyPart(contentPart);
     	message.setContent(multipart);
     	message.setHeader("X-Mailer", "smtpsend");
@@ -69,6 +90,7 @@ public void run() {
     	message.saveChanges();
     	// 发送邮件
     	Transport.send(message);
+    	System.out.println("线程结束");
     } catch (Exception e) {
     	e.printStackTrace();
     }

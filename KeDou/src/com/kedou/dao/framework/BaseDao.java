@@ -10,12 +10,15 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.hibernate.Query;
+
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-
+@Repository
 public abstract class BaseDao<T> {
 	
 	private Class<T> entityClass;
@@ -118,6 +121,24 @@ public abstract class BaseDao<T> {
 		}
 		return query.list();
 	}
+    /**
+     * 
+     * @desc 按条件更新数据
+     * @author zhangtianrun
+     * @createDate 2018年4月11日
+     * @param hql
+     * @param params
+     * @return
+     * @throws Exception
+     */
+    public void updateByProperty(String hql, Object[] params)throws Exception {
+    	Query query=this.sessionFactory.getCurrentSession().createQuery(hql);
+		if(params!=null && params.length>0){
+			for(int i=0;i<params.length;i++)
+				query.setParameter(i, params[i]);
+		}
+		query.executeUpdate();
+    }
 	
     /**
      * 

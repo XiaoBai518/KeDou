@@ -19,16 +19,19 @@
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 	
+	<bean id="LoginFilter" class="com.kedou.util.LoginFilter">
+   		<property name="userServiceImpl" ref="userServiceImpl"></property>
+	</bean>
 	<bean id="dataSource" 
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName">
 			<value>com.mysql.jdbc.Driver</value>
 		</property>
 		<property name="url">
-			<value>jdbc:mysql://服务器IP:3306/kedou_db?useUnicode=true&amp;characterEncoding=UTF-8</value>
+			<value>jdbc:mysql://localhost:3306/kedou_db?useUnicode=true&amp;characterEncoding=UTF-8</value>
 		</property>
 		<property name="username">
-			<value>root</value>
+			<value>kedou</value>
 		</property>
 		<property name="password">
 			<value>kedou20180315</value>
@@ -44,10 +47,10 @@
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">false</prop>
 				<prop key="hibernate.useUnicode">true</prop>
+				<prop key="hibernate.connection.autocommit">true</prop>
 				<prop key="hibernate.characterEncoding">utf-8</prop>
 				<prop key="current_session_context_class">jta</prop>
 			</props>
 		</property>
 	</bean>
-	
 </beans>

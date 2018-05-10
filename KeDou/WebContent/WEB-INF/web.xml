@@ -4,7 +4,7 @@
 		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 		                      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>/welcomindex.jsp</welcome-file>
   </welcome-file-list>
   
   <context-param>
@@ -52,7 +52,16 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
   
- <!-- 错误页面配置 --> 
+  <!-- <filter>
+   <filter-name>LoginFilter</filter-name>
+   <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+ </filter>
+ <filter-mapping>
+   <filter-name>LoginFilter</filter-name>
+   <url-pattern>/*</url-pattern>
+ </filter-mapping> -->
+ 
+<!-- 错误页面配置 --> 
   <error-page>
     <exception-type>java.lang.Throwable</exception-type>
     <location>/error.jsp</location>

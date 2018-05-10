@@ -9,6 +9,11 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="collection")
+/**
+ * 收藏 实体
+ * @author zhangtianrun 
+ *
+ */
 public class Collection {
 
 	@Id

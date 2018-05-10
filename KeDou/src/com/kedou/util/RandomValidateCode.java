@@ -12,6 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * 验证码生成器
+ * 
+ * 使用方法 ：调用方法 getRandcode
+ * @author 时自虎
+ *
+ */
 public class RandomValidateCode {
 
     public static final String RANDOMCODEKEY = "RANDOMVALIDATECODEKEY";//放到session中的key
@@ -64,7 +71,6 @@ public class RandomValidateCode {
         }
         session.removeAttribute("verifyCode");
         session.setAttribute("verifyCode", randomString);
-        System.out.println(randomString);
         g.dispose();
         try {
             ImageIO.write(image, "JPEG", response.getOutputStream());//将内存中的图片通过流动形式输出到客户端
