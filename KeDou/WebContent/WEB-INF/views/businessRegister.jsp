@@ -35,7 +35,14 @@
    					if(isExist=="-1") {
    						//账户不可以注册 已被使用
    						 addWarn($('#alertwarning'),"账号已经被使用！");
+   						acountIsTrue = false;
    						$("#busAccount").addClass('input-error');
+   						next_step = false;
+   					}else if(isExist=="1") {
+   					//账户可以注册 
+  						acountIsTrue = true;
+  						$("#busAccount").removeClass('input-error');
+  						next_step = true;
    					}
    				
    			 }
@@ -87,7 +94,7 @@
 		                        	</div>
                         </c:if>
                         <c:if test="${empty info  }">
-                        		<form role="form" action="${ctx }/business/registe" method="post" class="registration-form" onsubmit="return endsubmit()">
+                        		<form role="form" action="${ctx }/business/registe" method="post" class="registration-form">
                         		
                         		<fieldset style="display: block;" >
 		                        	<div class="form-top">

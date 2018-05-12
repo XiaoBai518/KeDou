@@ -21,6 +21,7 @@
         <script src="${ctx }/js/bootstrap.min.js"></script>
         <script src="${ctx }/js/jquery.backstretch.min.js"></script>
         <script src="${ctx }/js/scripts.js"></script>
+                <script src="${ctx }/js/md5.js"></script>  
         <script type="text/javascript">
    			function refresh(obj) {
    			 	obj.src = "${ctx }/common/validatecade?"+Math.random();
@@ -39,9 +40,13 @@
       				var isTrue = xmlhttp.responseText;
       				 if(isTrue=="-1") {
    						//验证码不正确
-   						addWarn($('#alertwarning'),"验证码错误");
-   						$("#veCode").addClass('input-error');
-   										   
+   	
+   								   ifsubmit[2] = false;
+   					}else if(isTrue=="1"){
+   						//验证码正确
+
+   					   				ifsubmit[2] = true;
+   					 		 
    					}
       			 }
       		 }
@@ -70,7 +75,7 @@
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3 form-box">
                         	
-                        	<form role="form" action="" method="post" class="registration-form" onsubmit="return endsubmit()">
+                        	<form role="form" action="" method="post" class="registration-form">
                         		
                         		<fieldset style="display: block;">
 		                        	<div class="form-top">
@@ -81,11 +86,11 @@
 		                            <div class="form-bottom">
 				                    	<div class="form-group">
 				                    		<label class="sr-only" for="form-first-name">用户名</label>
-				                        	<input type="text" name="busAccount" placeholder="用户名" class="form-first-name form-control" id="form-first-name">
+				                        	<input type="text" name="busAccount" placeholder="用户名" class="form-first-name form-control" id="busAccount">
 				                        </div>
 				                        <div class="form-group">
 				                        	<label class="sr-only" for="form-last-name">密码</label>
-				                        	<input type="password" name="busPwd" placeholder="密码" class="form-last-name form-control" id="form-last-name">
+				                        	<input type="password" name="busPwd" placeholder="密码" class="form-last-name form-control" id="busPwd">
 				                        </div>
 				                        <div class="form-group">
         									<input type="text" name="randomCode" placeholder="验证码" class="form-last-name form-control" id="veCode" onblur="verifyCodeIsTrue(this.value)" ><span>&nbsp&nbsp&nbsp</span>

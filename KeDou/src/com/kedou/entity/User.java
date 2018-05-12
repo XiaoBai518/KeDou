@@ -27,6 +27,7 @@ public class User {
 		
 		private String userName="null";		//用户姓名
 		private String userPwd;				//用户密码
+		private String userAcount;          //用户账号（管理员登录用）
 		private String salt; 				//二次加密中的 salt值
 		private String userEmail;			//用户邮箱
 		private String userTel;				//用户手机号
@@ -177,6 +178,12 @@ public class User {
 		}
 		public void setLastLoginIp(String lastLoginIp) {
 			this.lastLoginIp = lastLoginIp;
+		}
+		public String getUserAcount() {
+			return userAcount;
+		}
+		public void setUserAcount(String userAcount) {
+			this.userAcount = userAcount;
 		}
 		
 		

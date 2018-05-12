@@ -55,12 +55,12 @@ function istrue(name,value) {
  **/
     function addWarn(warn,value) {
       var wtext = warn.children("strong").text();
+
         //判断提示信息是否为空
         if(wtext=="") {
-          
+
                   warn.children("strong").text(value);        
                   warn.show();
-          
         }else {
             //判断提示信息是否已经存在
 
@@ -72,24 +72,19 @@ function istrue(name,value) {
                     var preText = warn.children("strong").text();
                     warn.children("strong").text(preText+" "+value);       
                     warn.show();
-            
             }
         }
             
     }
-    //输入框数据正确性
-	istrue = new Array(-1,-1,-1);
-  /*
-   * 
-   * 登录前检测
-   */
-	  function endsubmit() {	
-        	var spwd = document.getElementById("busPwd").value;
-        	document.getElementById("inputpwd").value = md5(spwd);
-        	return true;
-        }
-	  
-	  
+  
+	
+	  //账号是否可用 
+	  acountIsTrue = true;
+	 //是否前往下一页
+	  next_step = true;
+	 //
+	  //是否提交
+	  ifsubmit = new Array(false,false,false);
 jQuery(document).ready(function() {
     /*
         Fullscreen background
@@ -112,13 +107,20 @@ jQuery(document).ready(function() {
     	$(this).removeClass('input-error');
     });
     
+   
     // next step
     $('.registration-form .btn-next').on('click', function() {
     	var parent_fieldset = $(this).parents('fieldset');
-    	var next_step = true;
+    	next_step = true;
         //清楚警告信息
-    	 var warn = parent_fieldset.find("#alertwarning");
-            warn.children("strong").text("")
+    	 var warn = parent_fieldset.find("#alertwarning");    
+            if(!acountIsTrue) {
+            	warn.children("strong").text("账号已经被使用!");
+            	$('#busAcount').addClass('input-error');
+            	next_step = false;
+            }else {
+            	warn.hide();
+            }
     	parent_fieldset.find('input[type="text"], input[type="password"], textarea').each(function() {
             //用户未输入数据
     		if( $(this).val() == "" ) {
@@ -126,8 +128,9 @@ jQuery(document).ready(function() {
                  addWarn(warn,"您有项未填写！")
     			$(this).addClass('input-error');
     			next_step = false;
+    			ifsubmit = false;
     		}else {
-                //对输入的数据进行规则验证
+                //对输入的数据进行规则验证·
                   var results =  istrue($(this).attr("id"),$(this).val());
                    //判断数据是否需要规则判断
                 if(results!=null) {
@@ -162,18 +165,61 @@ jQuery(document).ready(function() {
     	});
     });
     
+    
     // submit
+    	
     $('.registration-form').on('submit', function(e) {
     	
-    	$(this).find('input[type="text"], input[type="password"], textarea').each(function() {
-    		if( $(this).val() == "" ) {
-    			e.preventDefault();
-    			$(this).addClass('input-error');
-    		}
-    		else {
-    			$(this).removeClass('input-error');
-    		}
-    	});
+    	if($('#veCode').length > 0) {
+    	  //验证码元素存在时执行的代码
+    		  //清楚警告信息
+    		$('#alertwarning').children("strong").text("");        
+    		$('#alertwarning').hide();
+    		var index = 0;
+    		$(this).find('input[type="text"], input[type="password"], textarea').each(function() {
+  	      		if( $(this).val() == "" ) {
+  
+  	      			$(this).addClass('input-error');
+  	      			addWarn($('#alertwarning'),"您有项未填写!");
+  	      			ifsubmit[index] = false;
+  	      		index++;
+  	      		}else {
+  	      			if(index!=2) {
+  	      				ifsubmit[index] = true;
+  	      				index++;
+  	      			}else {
+  	      				if(!ifsubmit[2]) {
+  	      					addWarn($('#alertwarning'),"验证码错误");
+  	      					$("#veCode").addClass('input-error');
+  	      				}
+  	      			    index++;
+  	      			}
+  	      			
+  	      		}
+  	      	});
+    		//判断是否提交
+    		for (var i = 0; i < 3; i++) {
+				if(!ifsubmit[i]) {
+					 e.preventDefault();
+				}
+			}
+    	}else {
+    	   	$(this).find('input[type="text"], input[type="password"], textarea').each(function() {
+        		if( $(this).val() == "" ) {
+        			
+        			$(this).addClass('input-error');
+        			addWarn($('#alertwarning'),"您有项未填写!");
+        			e.preventDefault();
+        		}
+        		else {
+        		   	var spwd = $('#busPwd').val();
+        			  $('#busPwd').val(md5(spwd));
+        			$(this).removeClass('input-error');
+        		}
+        	});
+    	}  
+		  
+ 
     	
     });
     

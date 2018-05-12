@@ -29,7 +29,13 @@
         <!-- 进行拦截：/**表示拦截所有controller -->
         <mvc:mapping path="/**" />
  		<!-- 不进行拦截 -->
-        <mvc:exclude-mapping path=""/>
+         <mvc:exclude-mapping path="/**/fonts/*"/>
+         <mvc:exclude-mapping path="/**/*.css"/>
+         <mvc:exclude-mapping path="/**/*.js"/>
+         <mvc:exclude-mapping path="/**/*.png"/>
+         <mvc:exclude-mapping path="/**/*.gif"/>
+         <mvc:exclude-mapping path="/**/*.jpg"/>
+         <mvc:exclude-mapping path="/**/*.jpeg"/>
        
        <bean class="com.kedou.util.LoginInterceptor" />  
     </mvc:interceptor>  

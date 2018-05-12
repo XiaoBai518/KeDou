@@ -1,6 +1,6 @@
 package com.kedou.controller;
 
-import java.util.Date;
+
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kedou.entity.User;
-import com.kedou.service.BusinessServiceImpl;
 import com.kedou.service.UserServiceImpl;
 import com.kedou.service.common.CommonServiceImpl;
-import com.kedou.util.IpAddress;
+
 
 @Controller
 @RequestMapping("/common")

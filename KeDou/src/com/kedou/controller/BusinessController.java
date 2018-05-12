@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kedou.entity.Business;
-import com.kedou.entity.User;
 import com.kedou.service.BusinessServiceImpl;
 import com.kedou.service.common.CommonServiceImpl;
 import com.kedou.util.AutoLogin;
@@ -97,7 +96,7 @@ public class BusinessController {
 	
 	/**
 	 * 登陆
-	 * @author 杨子强
+	 * @author 张天润
 	 * @param bus
 	 * @param session
 	 * @return
@@ -107,6 +106,7 @@ public class BusinessController {
 						HttpSession session,HttpServletRequest request,HttpServletResponse response,Model model){
 		Business bu;
 		try {
+			//根据账户查找机构账号
 			bu = this.businessServiceImpl.findByAcount(bus.getBusAccount());
 		} catch (Exception e) {
 			// TODO 自动生成的 catch 块
@@ -115,6 +115,7 @@ public class BusinessController {
 		}
 		if(bu!=null) {
 			//账户存在
+				//检查密码是否正确
 				 bu = this.businessServiceImpl.login(bu,bu.getBusPwd());
 				 if(bu!=null) {
 					 //密码正确
