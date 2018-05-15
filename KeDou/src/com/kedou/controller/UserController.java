@@ -1,6 +1,7 @@
 package com.kedou.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -15,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kedou.entity.Checkbox;
+import com.kedou.entity.Collection;
+import com.kedou.entity.History;
+import com.kedou.entity.Torder;
 import com.kedou.entity.User;
 import com.kedou.service.UserServiceImpl;
 import com.kedou.util.AutoLogin;
@@ -83,20 +88,20 @@ public class UserController {
 			try {
 				userServiceImpl.registerUser(u);
 					//通知前台 注册成功 待激活
-					model.addAttribute("info", "succeed");
+					model.addAttribute("info", "registeSucceed");
 					model.addAttribute("email", u.getUserEmail());
 					return "iframe_info";
 			} catch (Exception e) {
 				e.printStackTrace();
 				//注册失败
-				model.addAttribute("info", "erro");
+				model.addAttribute("info", "registeErro");
 				return "iframe_info";
 			}
 			
 		}
 		else {
 			//参数不正确返回注册页面
-			model.addAttribute("info", "erro");
+			model.addAttribute("info", "registeErro");
 			return "iframe_info";
 			
 		}
@@ -192,7 +197,6 @@ public class UserController {
 	 */
 	@RequestMapping(value="/toiframe",method=RequestMethod.GET)
 	public String toiframe(Model model) {
-		model.addAttribute("page", "user/tologin");
 		return "userLogin";
 	}
 	/**
@@ -200,7 +204,10 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value="/tologin",method=RequestMethod.GET)
-	public String tologin(Model model) {
+	public String tologin(@RequestParam(value="error",required=false)String error,Model model) {
+		if(error!=null) {
+			model.addAttribute("error", error);
+		}
 		return "iframe_login";
 	}
 	/**
@@ -234,13 +241,13 @@ public class UserController {
 						 if(us.getState()==0) {
 							 //未激活
 							 System.out.println("未激活");	
-								model.addAttribute("error", "stateActiveErro");
-									return "登陆页面";
+								model.addAttribute("error", "?error=stateActiveErro");
+									return "userLogin";
 						 }else {
 							//已被锁定
 							 System.out.println("账号被锁定");	
-								model.addAttribute("error", "stateLockErro");
-									return "登陆页面";
+								model.addAttribute("error", "?error=stateLockErro");
+									return "userLogin";
 						 }
 						
 					 }else {
@@ -267,14 +274,14 @@ public class UserController {
 				 }else {
 					 //密码错误
 					 System.out.println("密码错误");	
-						model.addAttribute("error", "PwdErro");
-							return "登陆页面";
+						model.addAttribute("error", "?error=PwdErro");
+							return "userLogin";
 				 } 
 		}else {
 			//账户不存在
 			System.out.println("账号不存在");
-			model.addAttribute("error", "NoAcount");
-			    return "登陆页面";	
+			model.addAttribute("error", "?error=NoAcountErro");
+			    return "userLogin";	
 		}
 		
 	}
@@ -299,6 +306,322 @@ public class UserController {
 		      
 		    session.removeAttribute("loginUser");  
 		 return "index"; 
+	}
+	/**
+	 * 切换个人中心页面
+	 * 
+	 * @param session
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="person_message",method=RequestMethod.GET)
+	public String changemessageadress(@RequestParam("address") String address,Model model,HttpSession session,
+			HttpServletResponse response,HttpServletRequest request) {
+		User u=(User) session.getAttribute("loginUser");
+		int count;
+		if(address.equals("message")) {
+			User us;
+			try {
+				us = this.userServiceImpl.findByUserId(u.getUserId());
+			} catch (Exception e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+				return "数据库错误界面";
+			}
+			System.out.println(us.getUserName());
+			model.addAttribute("user", us);
+			return "person_message";
+		}else if(address.equals("history")){
+			List<Collection> list;
+			List<History> list2;
+
+			try {
+				list2 = this.userServiceImpl.findByPageHistory(1,3,u.getUserId());
+				count =(int) this.userServiceImpl.findHistoryCount(u.getUserId());
+			} catch (Exception e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+				return "数据库错误界面";
+			}
+			System.out.println("查询课程");
+			System.out.println(session.getAttribute("pagenum"));
+			model.addAttribute("pagecount",count);
+			model.addAttribute("page", "1");
+			model.addAttribute("history", list2);	
+			return "person_history";
+		}else if(address.equals("yuyue")){
+			List<Torder> list;
+
+			try {
+				list = this.userServiceImpl.findByPageYuyue(1,3,u.getUserId());
+				count =(int) this.userServiceImpl.findYuyueCount(u.getUserId());
+			} catch (Exception e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+				return "数据库错误界面";
+			}
+			System.out.println("查询课程");
+			System.out.println(session.getAttribute("pagenum"));
+			model.addAttribute("pagecount",count);
+			model.addAttribute("page", "1");
+			model.addAttribute("yuyue", list);
+			return "person_yuyue";
+		}else{
+			List<Collection> list;
+			try {
+				list = this.userServiceImpl.findByPage(1,3,u.getUserId());
+				count =(int) this.userServiceImpl.findCollectionCount(u.getUserId());
+			} catch (Exception e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+				return "数据库错误界面";
+			}
+			System.out.println("查询课程");
+			System.out.println(session.getAttribute("pagenum"));
+			model.addAttribute("pagecount",count);
+			model.addAttribute("page", "1");
+			model.addAttribute("collection", list);	
+			return "person_collect";
+		}
+	}
+	/**
+	 * 跳转到个人中心的测试页面
+	 * @param session
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="person",method=RequestMethod.GET)
+	public String text() {
+
+			return "personal";
+		
+	}
+	/**
+	 * 更改个人信息
+	 * @param 陈
+	 * @param gender
+	 * @return
+	 * @throws Exception 
+	 */
+	@RequestMapping(value="updateUserMessage",method=RequestMethod.POST)
+	public String changgemessage(@RequestParam("username") String username,@RequestParam("gender") String gender,@RequestParam("userDiscription") String userDiscription,HttpSession session){
+		User u=(User) session.getAttribute("loginUser");
+		try {
+		userServiceImpl.updateUserMessage(username, gender,userDiscription,u.getUserId());
+		System.out.println("更新数据库");
+		} catch (Exception e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		return "personal";
+	}
+	/**
+	 * 删除用户的收藏课程
+	 * @param 陈
+	 * @param gender
+	 * @return
+	 * @throws Exception 
+	 */
+	@RequestMapping(value="delete",method=RequestMethod.GET)
+	public String deletecourse(@RequestParam("courseid") int courseid,@RequestParam("page") int pagenum,
+			@RequestParam("checknum") int checknum,HttpSession session,Model model,Checkbox c) {
+		if(checknum==1){
+			List<Collection> list = null;
+			int count = 0;
+			User u=(User) session.getAttribute("loginUser");
+			try {
+				this.userServiceImpl.deleteCollectionByCourseId(courseid ,u.getUserId());
+				list = this.userServiceImpl.findByPage(pagenum ,3,u.getUserId());
+				count = (int) this.userServiceImpl.findCollectionCount(u.getUserId());
+			    System.out.println(courseid);
+			} catch (Exception e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+			}
+			 model.addAttribute("pagecount",count);
+			 model.addAttribute("collection", list);
+			 model.addAttribute("page", pagenum);
+			return "person_collect";
+		}else if(checknum==2){
+			List<History> list = null;
+			int count = 0;
+			User u=(User) session.getAttribute("loginUser");
+			try {
+				this.userServiceImpl.deleteHistoryByCourseId(courseid ,u.getUserId());
+				list = this.userServiceImpl.findByPageHistory(pagenum ,3,u.getUserId());
+				count = (int) this.userServiceImpl.findHistoryCount(u.getUserId());
+			    System.out.println(courseid);
+			} catch (Exception e) {
+				// TODO 自动生成的 catch 块
+				System.out.println("出错");
+				e.printStackTrace();
+			}
+			 System.out.println(courseid);
+			 System.out.println(u.getUserId());
+			 model.addAttribute("pagecount",count);
+			 model.addAttribute("history", list);
+			 model.addAttribute("page", pagenum);
+			 System.out.println("页码为+++"+pagenum);
+			return "person_history";
+		}
+		else {
+			List<Torder> list = null;
+			int count = 0;
+			User u=(User) session.getAttribute("loginUser");
+			try {
+				this.userServiceImpl.deleteYuyueByCourseId(courseid ,u.getUserId());
+				list = this.userServiceImpl.findByPageYuyue(pagenum ,3,u.getUserId());
+				count = (int) this.userServiceImpl.findYuyueCount(u.getUserId());
+			    System.out.println(courseid);
+			} catch (Exception e) {
+				// TODO 自动生成的 catch 块
+				System.out.println("出错");
+				e.printStackTrace();
+			}
+			 System.out.println(courseid);
+			 System.out.println(u.getUserId());
+			 model.addAttribute("pagecount",count);
+			 model.addAttribute("yuyue", list);
+			 model.addAttribute("page", pagenum);
+			 System.out.println("页码为+++"+pagenum);
+			return "person_yuyue";
+		}
+		
+	}
+	/**
+	 * 批量删除用户的收藏,预约,访问历史课程
+	 * @param 陈
+	 * @param gender
+	 * @return
+	 * @throws Exception 
+	 */
+		@RequestMapping(value="bigdelete",method=RequestMethod.POST)
+		public String changgemessage(@RequestParam("page") int pagenum,
+				@RequestParam("checknum") int checknum,HttpSession session,Model model,Checkbox c){
+			String tempString=c.getTempString();
+			// 截取字符串，获得各个checkBox的值
+			String temp[] = tempString.split(",");
+			
+			int count = 0;
+			User u=(User) session.getAttribute("loginUser");
+			if(checknum==1){
+				List<Collection> list = null;
+				try {
+					for(int i=0;i<temp.length;i++){
+						System.out.println(temp[i]);
+						this.userServiceImpl.deleteCollectionByCourseId(Integer.parseInt(temp[i]) ,u.getUserId());	
+					}
+					list = this.userServiceImpl.findByPage(pagenum ,3,u.getUserId());
+					count = (int) this.userServiceImpl.findCollectionCount(u.getUserId());
+				} catch (Exception e) {
+					// TODO 自动生成的 catch 块
+					e.printStackTrace();
+				}
+					model.addAttribute("pagecount",count);
+					model.addAttribute("collection", list);
+					model.addAttribute("page", pagenum);
+				return "person_collect";
+			}else if(checknum==2){
+				List<History> list = null;
+				try {
+					for(int i=0;i<temp.length;i++){
+						System.out.println(temp[i]);
+						this.userServiceImpl.deleteHistoryByCourseId(Integer.parseInt(temp[i]) ,u.getUserId());	
+					}
+					list = this.userServiceImpl.findByPageHistory(pagenum ,3,u.getUserId());
+					count = (int) this.userServiceImpl.findHistoryCount(u.getUserId());
+				} catch (Exception e) {
+					// TODO 自动生成的 catch 块
+					e.printStackTrace();
+				}
+					model.addAttribute("pagecount",count);
+					model.addAttribute("history", list);
+					model.addAttribute("page", pagenum);
+				return "person_history";
+			}else{
+				List<Torder> list = null;
+				try {
+					for(int i=0;i<temp.length;i++){
+						System.out.println(temp[i]);
+						this.userServiceImpl.deleteYuyueByCourseId(Integer.parseInt(temp[i]) ,u.getUserId());	
+					}
+					list = this.userServiceImpl.findByPageYuyue(pagenum ,3,u.getUserId());
+					count = (int) this.userServiceImpl.findYuyueCount(u.getUserId());
+				} catch (Exception e) {
+					// TODO 自动生成的 catch 块
+					e.printStackTrace();
+				}
+					model.addAttribute("pagecount",count);
+					model.addAttribute("yuyue", list);
+					model.addAttribute("page", pagenum);
+				return "person_yuyue";
+			}
+			
+		}
+	/**
+	 * 分页查询页码跳转
+	 * @param session
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="page",method=RequestMethod.GET)
+	public String page(@RequestParam("page") int pageNume,@RequestParam("checknum") int checknum,Model model,HttpSession session) {
+		if(checknum==1)	{
+			int pageSize = 3;
+				int count = 0;
+				User u=(User) session.getAttribute("loginUser");
+				List<Collection> list = null;
+				try {
+					list=this.userServiceImpl.findByPage(pageNume ,pageSize,u.getUserId());
+				    count = (int) this.userServiceImpl.findCollectionCount(u.getUserId());
+					System.out.println(pageNume);
+				} catch (Exception e) {
+					// TODO 自动生成的 catch 块
+					System.out.println("出错");
+					e.printStackTrace();
+				}
+				model.addAttribute("pagecount",count);
+				model.addAttribute("collection", list);
+				model.addAttribute("page", pageNume);
+				return "person_collect";
+			}else if(checknum==2){
+				int pageSize = 3;
+				int count = 0;
+				User u=(User) session.getAttribute("loginUser");
+				List<History> list = null;
+				try {
+					list=this.userServiceImpl.findByPageHistory(pageNume ,pageSize,u.getUserId());
+				    count = (int) this.userServiceImpl.findHistoryCount(u.getUserId());
+					System.out.println(pageNume);
+				} catch (Exception e) {
+					// TODO 自动生成的 catch 块
+					System.out.println("出错");
+					e.printStackTrace();
+				}
+				model.addAttribute("pagecount",count);
+				model.addAttribute("history", list);
+				model.addAttribute("page", pageNume);
+				return "person_history";
+			}else{
+				int pageSize = 3;
+				int count = 0;
+				User u=(User) session.getAttribute("loginUser");
+				List<Torder> list = null;
+				try {
+					list=this.userServiceImpl.findByPageYuyue(pageNume ,pageSize,u.getUserId());
+				    count = (int) this.userServiceImpl.findYuyueCount(u.getUserId());
+					System.out.println(pageNume);
+				} catch (Exception e) {
+					// TODO 自动生成的 catch 块
+					System.out.println("出错");
+					e.printStackTrace();
+				}
+				model.addAttribute("pagecount",count);
+				model.addAttribute("yuyue", list);
+				model.addAttribute("page", pageNume);
+				return "person_yuyue";
+			}
+		
 	}
 
 }

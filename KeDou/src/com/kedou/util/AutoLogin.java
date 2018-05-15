@@ -17,8 +17,8 @@ public class AutoLogin<T> {
 	 * @param time 单位秒
 	 * @param response
 	 */
-	public  void autoLogin(T entity,String acount,String pwd,int time,HttpServletResponse response,HttpSession session) {
-		  Cookie cookie1 = new Cookie("userAcount",acount);
+	public  void autoLogin(T entity,String account,String pwd,int time,HttpServletResponse response,HttpSession session) {
+		  Cookie cookie1 = new Cookie("userAccount",account);
 		  cookie1.setMaxAge(time);//设置有效期
 		  cookie1.setPath("/");//可在同一应用服务器内共享方法
 		  

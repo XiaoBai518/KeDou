@@ -27,7 +27,7 @@
   			
 					if(isTrue=="-1") {
 						//发送失败
-						alert("发送失败")
+						alert("发送失败");
 					}
   			 }
   		 }
@@ -40,15 +40,19 @@
 <body>
       <div id="two_ifr">
       <div id="logo"><img src="${ctx }/img/logo.jpg"></div><!--logo的位置-->
-       <c:if test="${info eq 'succeed' }">
+       <c:if test="${info eq 'registeSucceed' }">
                       <h2>注册成功</h2></br>
 			<h3>我们已将邮件发送到您的邮箱，请前往邮箱${email }进行激活</h3>
 			<button onclick="resend(${email})">未收到</button>
            </c:if>
-       <c:if test="${info  eq 'erro' }">
+       <c:if test="${info  eq 'registeErro' }">
                       <h2>注册失败</h2></br>
 			<h3>请再次进行注册</h3><a href="${ctx }/iframe_registe.jsp"></a>
-           </c:if>
+       </c:if>
+       <c:if test="${info  eq 'registeErro' }">
+                      <h2>注册失败</h2></br>
+			<h3>请再次进行注册</h3><a href="${ctx }/iframe_registe.jsp"></a>
+       </c:if>
 			
 			
 	</div>

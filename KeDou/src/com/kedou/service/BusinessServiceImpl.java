@@ -6,19 +6,18 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import org.hibernate.exception.ConstraintViolationException;
+
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kedou.dao.BusinessCourseTypeRelationDaoImpl;
 import com.kedou.dao.BusinessDaoImpl;
 import com.kedou.entity.Business;
-import com.kedou.entity.User;
+import com.kedou.entity.CourseType;
 import com.kedou.service.common.CommonServiceImpl;
 import com.kedou.util.BCrypt;
-import com.kedou.util.IpAddress;
 
 @Service
 @Transactional(readOnly=false)
@@ -28,6 +27,7 @@ public class BusinessServiceImpl {
 	private BusinessDaoImpl businessDaoImpl;
 	@Resource
 	private CommonServiceImpl commonServiceImpl;//公共的方法实现
+
 	
 	/**
 	 * 
@@ -75,11 +75,8 @@ public class BusinessServiceImpl {
 	public Business findByAcount(String busacount) throws Exception{
 		String [] params = {busacount};
 		String hql = " from Business  where busAccount=?";
-		List<Business> bl = this.businessDaoImpl.findByProperty(hql, params);
-		if(bl.size()!=0) {
-			return bl.get(0);		
-		}
-			return null;
+		Business b = this.businessDaoImpl.findOne(hql, params);
+			return b;
 	}
 	/**
 	 * 
@@ -160,16 +157,30 @@ public class BusinessServiceImpl {
 	}
 	/**
 	 * 商家登陆
-	 * @author 杨子强
+	 * @author 张天润
 	 * @param busAccount
-	 * @param busPwd
+	 * @param busPwd (由前台传来的 用户输入的密码)
 	 * @param session
 	 * @return
 	 */
 	public Business login(Business bus,String busPwd){
-		
-		
-		return null;
+		String salt = bus.getSalt();
+		//判断账户状态是否为 可登陆状态
+		if(bus.getState()!=1) {
+			return bus;
+		}else {
+			if(BCrypt.checkpw(busPwd+salt,bus.getBusPwd())){
+				 //设置登录次数
+				     bus.setLoginCount(bus.getLoginCount()+1);
+				 //设置用户上次登录时间
+				     bus.setLastLoginTime(bus.getLoginTime());
+				 //设置用户登录时间
+				     bus.setLoginTime(new Date());
+				return bus;//可以登陆
+			}else{
+				return null;//密码错误
+			}
+		}
 	}
 
 }

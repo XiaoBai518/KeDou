@@ -14,8 +14,8 @@
 </head>
 <body>
 	<div id="est_cn">
-		<a href="${ctx }/user/switchMode?mode='minimalist'"><div id="minimalist" class="est_selected">极&nbsp&nbsp简</div></a>
-		<a href="${ctx }/user/switchMode?mode='optional'"><div id="optional" class="est_unselected">自&nbsp&nbsp选</div></a>
+		<a href="${ctx }/user/switchMode?mode=minimalist"><div id="minimalist" class="est_unselected">极&nbsp&nbsp简</div></a>
+		<a href="${ctx }/user/switchMode?mode=optional"><div id="optional" class="est_selected">自&nbsp&nbsp选</div></a>
 	</div>
 	 <form class="bs-example bs-example-form" role="form" id="search">
             <div class="row">
@@ -27,9 +27,9 @@
                            <span class="glyphicon glyphicon-search"></span>
                         </button>
                      </span>
-                  </div><!-- /input-group -->
-               </div><!-- /.col-lg-6 -->
-            </div><!-- /.row -->
+                  </div>
+               </div>
+            </div>
          </form>
 </body>
 </html>

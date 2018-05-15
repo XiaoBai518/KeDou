@@ -1,6 +1,7 @@
 package com.kedou.service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -10,6 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kedou.dao.UserDaoImpl;
+import com.kedou.entity.Collection;
+import com.kedou.entity.History;
+import com.kedou.entity.Torder;
 import com.kedou.entity.User;
 import com.kedou.entity.UserRoleRelation;
 import com.kedou.service.common.CommonServiceImpl;
@@ -116,6 +120,17 @@ public class UserServiceImpl {
 		
 	}
 	/**
+	 * 更新用户信息(用户更改信息)
+	 * @param state
+	 * @throws Exception 
+	 */
+	@Transactional
+	public void updateUserMessage(String username,String gender,String userDiscription,int id) throws Exception{
+		Object params[] = {username,gender,userDiscription,id};
+		String hql = "update User as u set u.userName= ? , u.gender=?,u.userDiscription=? where u.userId =?";
+		this.userDaoImpl.updateByProperty(hql, params);
+	}
+	/**
 	 * 更改登陆状态
 	 * @param state
 	 */
@@ -137,7 +152,6 @@ public class UserServiceImpl {
 	 * @param u
 	 * @return 更新成功 返回 用户ID 否则 返回 -1
 	 */
-	@Transactional
 	public int updateLoginInfo(User u) throws Exception{
 		Object [] params = {u.getLoginTime(),u.getLastLoginTime(),u.getLoginCount(),u.getLastLoginIp(),u.getUserIp(),u.getUserId()};
 		for(Object s: params) {
@@ -199,4 +213,146 @@ public class UserServiceImpl {
 				}
 			}
 	}
+	/**
+	 * 
+	 * @desc 通过用户ID查找用户
+	 * @author 陈
+	 * @createDate 
+	 * @return User
+	 */
+	public User findByUserId(int userid)throws Exception  {
+		
+			return this.userDaoImpl.findByUserId(userid);
+		
+	}
+	/**
+	 * @desc 通过用户ID查找收藏课程
+	 * @author 陈
+	 * @createDate 
+	 * @return 
+	 */
+	public List<Collection> findCollectionByUserId(int userid)throws Exception  {
+		
+			return this.userDaoImpl.findCollectionByUserId(userid);
+		
+	}
+	/**
+	 * @desc 通过用户ID查找预约课程
+	 * @author 陈
+	 * @createDate 
+	 * @return 
+	 */
+	public List<Torder> findYuyueByUserId(int userid)throws Exception  {
+		
+			return this.userDaoImpl.findYuyueByUserId(userid);
+		
+	}
+	/**
+	 * @desc 通过用户ID查找访问历史课程
+	 * @author 陈
+	 * @createDate 
+	 * @return 
+	 */
+	public List<History> findHistoryByUserId(int userid)throws Exception  {
+		
+			return this.userDaoImpl.findHistoryByUserId(userid);
+		
+	}
+	/**
+	 * @desc 通过用户ID和课程ID删除收藏课程
+	 * @author 陈
+	 * @createDate 
+	 * @return User
+	 */
+	public void deleteCollectionByCourseId(int courseid,int userid)throws Exception  {
+		
+			this.userDaoImpl.deleteCollectionByCourseId(courseid,userid);
+		
+	}
+	/**
+	 * @desc 通过用户ID和课程ID删除预约课程
+	 * @author 陈
+	 * @createDate 
+	 * @return User
+	 */
+	public void deleteYuyueByCourseId(int courseid,int userid)throws Exception  {
+		
+			this.userDaoImpl.deleteYuyueByCourseId(courseid,userid);
+		
+	}
+	/**
+	 * @desc 通过用户ID和课程ID删除访问历史课程
+	 * @author 陈
+	 * @createDate 
+	 * @return User
+	 */
+	public void deleteHistoryByCourseId(int courseid,int userid)throws Exception  {
+		
+			this.userDaoImpl.deleteHistoryByCourseId(courseid,userid);
+		
+	}
+	/**
+	 * @desc 通过用户ID分页查找收藏课程
+	 * @author 陈
+	 * @createDate 
+	 * @return User
+	 */
+	public List<Collection> findByPage(int pageNum, int pageSize,int userid)throws Exception  {
+		
+			return this.userDaoImpl.findByPage(pageNum,pageSize,userid);
+		
+	}
+	/**
+	 * @desc 通过用户ID查找分页预约课程
+	 * @author 陈
+	 * @createDate 
+	 * @return User
+	 */
+	public List<Torder> findByPageYuyue(int pageNum, int pageSize,int userid)throws Exception  {
+		
+			return this.userDaoImpl.findByPageYuyue(pageNum,pageSize,userid);
+		
+	}
+	/**
+	 * @desc 通过用户ID查找分页访问历史课程
+	 * @author 陈
+	 * @createDate 
+	 * @return User
+	 */
+	public List<History> findByPageHistory(int pageNum, int pageSize,int userid)throws Exception  {
+		
+			return this.userDaoImpl.findByPageHistory(pageNum,pageSize,userid);
+		
+	}
+	/**
+	 * 
+	 * @desc 根据用户id查询其收藏课程的总数
+	 * @author 陈
+	 * @createDate 
+	 * @return count
+	 */
+	public long findCollectionCount(int userid)throws Exception{
+		return this.userDaoImpl.findCollectCount(userid);
+	}
+	/**
+	 * 
+	 * @desc 根据用户id查询其预约课程的总数
+	 * @author 陈
+	 * @createDate 
+	 * @return count
+	 */
+	public long findYuyueCount(int userid)throws Exception{
+		return this.userDaoImpl.findYuyueCount(userid);
+	}
+	/**
+	 * 
+	 * @desc 根据用户id查询其访问历史课程的总数
+	 * @author 陈
+	 * @createDate 
+	 * @return count
+	 */
+	public long findHistoryCount(int userid)throws Exception{
+		return this.userDaoImpl.findHistoryCount(userid);
+	}
+	
 }

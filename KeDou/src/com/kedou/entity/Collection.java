@@ -1,5 +1,7 @@
 package com.kedou.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,7 +24,7 @@ public class Collection {
 	private int id;
 	private int userId;//用户ID
 	private int courseId;//课程ID
-    private String timestamp;//收藏时间
+    private Date timestamp;//收藏时间
 	public int getId() {
 		return id;
 	}
@@ -41,12 +43,13 @@ public class Collection {
 	public void setCourseId(int courseId) {
 		this.courseId = courseId;
 	}
-	public String getTimestamp() {
+	public Date getTimestamp() {
 		return timestamp;
 	}
-	public void setTimestamp(String timestamp) {
+	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
 	}
+	
     
     
     

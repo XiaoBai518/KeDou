@@ -19,9 +19,9 @@
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 	
-	<bean id="LoginFilter" class="com.kedou.util.LoginFilter">
+	<!--  <bean id="LoginFilter" class="com.kedou.util.LoginFilter">
    		<property name="userServiceImpl" ref="userServiceImpl"></property>
-	</bean>
+	</bean>-->
 	<bean id="dataSource" 
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName">

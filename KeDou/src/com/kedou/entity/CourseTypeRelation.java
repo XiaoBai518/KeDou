@@ -8,31 +8,26 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="businessclass")
+@Table(name="coursetyperelation")
 /**
- * 商家课程表  实体
- * @author zhangtianrun
+ * 商品类型联系 实体
+ * @author 张天润	
  *
  */
-public class BusinessClass {
+public class CourseTypeRelation {
 
 	@Id
 	@GeneratedValue(generator="increment_generator")
 	@GenericGenerator(name="increment_generator", strategy="increment")
-	private int bcId;
-	private int businessId;//商家Id
-	private int courseId;//课程Id
-	public int getBcId() {
-		return bcId;
+	private int id;
+	
+	private int courseId;        //课程ID
+	private int buscourtypeId;   //商家课程类型联系Id            
+	public int getId() {
+		return id;
 	}
-	public void setBcId(int bcId) {
-		this.bcId = bcId;
-	}
-	public int getBusinessId() {
-		return businessId;
-	}
-	public void setBusinessId(int businessId) {
-		this.businessId = businessId;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public int getCourseId() {
 		return courseId;
@@ -40,7 +35,10 @@ public class BusinessClass {
 	public void setCourseId(int courseId) {
 		this.courseId = courseId;
 	}
-	
-	
-	
+	public int getBuscourtypeId() {
+		return buscourtypeId;
+	}
+	public void setBuscourtypeId(int buscourtypeId) {
+		this.buscourtypeId = buscourtypeId;
+	}
 }

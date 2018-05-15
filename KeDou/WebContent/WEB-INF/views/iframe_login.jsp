@@ -29,7 +29,6 @@
     				var isTrue = xmlhttp.responseText;
     				if(isTrue=="1"){
  						//验证码正确
- 						document.getElementById("verifyCode").innerHTML = '验证码正确！';
  						istrue[2]=0
  					}else if(isTrue=="-1") {
  						//验证码不正确
@@ -42,24 +41,59 @@
     		 xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
     		 xmlhttp.send();
          }
+		function keyDown(e) {
+			var keynum;
+			keynum = window.event?e.keyCode:e.which;
+			if(keynum ==13) {
+				return false;
+			}
+					}
 		</script>
 </head>
 <body>
       <div id="two_ifr">
-			<div id="logo"><img src="${ctx }/img/logo.jpg"></div><!--logo的位置-->
-			<div id="input">
-				<div>&nbsp;</div>
-				<form name="myform" action="${ctx }/user/login" method="post" onsubmit="return endsubmit()" target="_top">
-				<div><input type="text" name="acount" placeholder="请输入账号" class="input_size" onblur="textEmpty(this,'email')" onfocus="textfocus('email')"/></div><!--账号密码的位置-->
-				<span style="font-size:15px;color:darkred;" id="emailmsg"></span><span style="font-size:15px;color:darkgreen;" id="email"></span></br>
-				<div><input type="password" name="userpwd" placeholder="请输入密码" onblur="textblur(this,'pwd')" onfocus="textfocus('pwd')" class="input_size" id="inputpwd"/></div><!--账号密码的位置-->
-				<span style="font-size:15px;color:darkred;" id="pwdmsg"></span><span style="font-size:15px;color:darkgreen;" id="pwd"></span></br>
+		<div id="logo"><img src="${ctx }/img/logo.jpg"></div><!--logo的位置-->
+		   <div id="input">
+			 <div>&nbsp;</div>
+				<form name="myform" action="${ctx }/user/login" method="post" onkeydown="return keyDown(event)" onsubmit="return endsubmit()" target="_top">
+					<div>
+						<input type="text" name="acount" placeholder="请输入账号" class="input_size" onblur="textEmpty(this,'email')" onfocus="textfocus('email')"/>
+					</div><!--账号密码的位置-->
+					<!-- 账号错误信息提示位置 -->
+					<span style="font-size:15px;color:darkred;" id="emailmsg">
+						<c:if test="${error eq 'stateAtiveErro' }">
+							账号未激活
+						</c:if>
+						<c:if test="${error eq 'stateLockErro' }">
+							账号被锁定
+						</c:if>
+						<c:if test="${error eq 'NoAcountErro' }">
+							账号不存在
+						</c:if>
+					
+					</span>
+					<span style="font-size:15px;color:darkgreen;" id="email"></span></br><!-- 账号信息提示位置 -->
+					
+					<div>
+						<input type="password" name="userpwd" placeholder="请输入密码" onblur="textEmpty(this,'pwd')" onfocus="textfocus('pwd')" class="input_size" id="inputpwd"/>
+					</div><!--账号密码的位置-->
+					
+					<span style="font-size:15px;color:darkred;" id="pwdmsg">
+					<c:if test="${error eq 'PwdErro'}">
+						密码错误
+					</c:if>
+					</span><!-- 密码信息提示位置 -->
+					<span style="font-size:15px;color:darkgreen;" id="pwd"></span></br><!-- 密码信息提示位置 -->
+					
 					<div id="input_size2">
-						<div><input type="text"  placeholder="请输入验证码" id="input_size1" onfocus="textfocus('verifyCode')" onblur="verifyCodeIsTrue(this.value)"/>
-						<!--验证码码输入的位置-->
-						<div id="span_position"><img  onclick="javascript:refreshImg(this);" src="${ctx }/common/validatecade"></div><!--验证码图片的位置-->
+						<div>
+						   <input type="text"  placeholder="请输入验证码" id="input_size1" onfocus="textfocus('verifyCode')" onblur="verifyCodeIsTrue(this.value)"/><!--验证码码输入的位置-->
+						   <div id="span_position">
+							  <img  onclick="javascript:refreshImg(this);" src="${ctx }/common/validatecade">
+						  </div><!--验证码图片的位置-->
 						</div>
 					</div>
+					
 					<span style="font-size:15px;color:darkred;" id="verifyCodemsg"></span><span style="font-size:15px;color:darkgreen;" id="verifyCode"></span></br>
 					<span ><input type="checkbox" id="al" onclick="autoLogin()" checked="checked" >7天自动登录</span></br>
 					<input type="hidden" id="autologin" name="autologin" value="true">

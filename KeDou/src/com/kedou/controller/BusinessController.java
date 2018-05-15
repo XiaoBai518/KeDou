@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kedou.entity.Business;
 import com.kedou.service.BusinessServiceImpl;
-import com.kedou.service.common.CommonServiceImpl;
-import com.kedou.util.AutoLogin;
 import com.kedou.util.IpAddress;
 
 @Controller
@@ -26,11 +24,11 @@ import com.kedou.util.IpAddress;
 public class BusinessController {
 	@Resource
 	private BusinessServiceImpl businessServiceImpl;
-	@Resource
-	private CommonServiceImpl commonServiceImpl;//公共的方法实现
+
 	
 	/**
 	 * 前往机构入驻页面
+	 * @author 张天润
 	 * @return
 	 */
 	@RequestMapping(value="/toregiste",method=RequestMethod.GET)
@@ -40,7 +38,7 @@ public class BusinessController {
 
 	/**
 	 * 机构注册平台账号
-	 * @author 杨子强
+	 * @author 张天润
 	 * @param busAccount
 	 * @param busPwd
 	 * @param randomCode
@@ -49,6 +47,7 @@ public class BusinessController {
 	 */
 	@RequestMapping(value="/registe",method=RequestMethod.POST)
 	public String registe(Business bus,Model model,HttpServletRequest request){
+		System.out.println(bus.getBusPwd());
 		 //将商家注册信息插入数据库
 			//获取商家真实IP
 				String IP = IpAddress.getIpAddress(request);
@@ -66,6 +65,7 @@ public class BusinessController {
 	}
 	/**
 	 * 检测账号是否存在
+	 * @author 张天润
 	 * @param username
 	 * @return 存在返回 -1  不存在 返回 1
 	 */
@@ -87,6 +87,7 @@ public class BusinessController {
 	}
 	/**
 	 * 前往机构登录页面
+	 * @author 张天润
 	 * @return
 	 */
 	@RequestMapping(value="/tologin",method=RequestMethod.GET)
@@ -102,21 +103,20 @@ public class BusinessController {
 	 * @return
 	 */
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public String login(Business bus,@RequestParam("autologin") String isAuto,
+	public String login(Business bus,
 						HttpSession session,HttpServletRequest request,HttpServletResponse response,Model model){
 		Business bu;
 		try {
 			//根据账户查找机构账号
 			bu = this.businessServiceImpl.findByAcount(bus.getBusAccount());
 		} catch (Exception e) {
-			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 			return "数据库错误界面";
 		}
 		if(bu!=null) {
 			//账户存在
 				//检查密码是否正确
-				 bu = this.businessServiceImpl.login(bu,bu.getBusPwd());
+				 bu = this.businessServiceImpl.login(bu,bus.getBusPwd());
 				 if(bu!=null) {
 					 //密码正确
 					 if(bu.getState()!=1) {
@@ -124,12 +124,12 @@ public class BusinessController {
 							 //未激活
 							 System.out.println("未激活");	
 								model.addAttribute("error", "stateActiveErro");
-									return "登陆页面";
+									return "businessLogin";
 						 }else{
 							//已被锁定
 							 System.out.println("账号被锁定");	
 								model.addAttribute("error", "stateLockErro");
-									return "登陆页面";
+									return "businessLogin";
 						 }
 						
 					 }else {
@@ -139,33 +139,26 @@ public class BusinessController {
 					       	   //设置机构上次登陆IP
 					       	 	bu.setLastLoginIp(bu.getBusIp());
 					       	   //设置机构IP
-					       	 	bu.setBusIp(IP);
-					    //用户自动登录类
-						 AutoLogin<Business> autologin = new AutoLogin<Business>();
-						 
-						 if(isAuto.equals("true")) {
-							 //自动登陆
-							 autologin.autoLogin(bu,bu.getBusAccount(),bu.getBusPwd(), 7*24*60*60, response, session);
-						 }else {
+					       	 	bu.setBusIp(IP);	
 							 //不自动登录
-							 autologin.autoLogin(bu,bu.getBusAccount(),bu.getBusPwd(), -1, response, session);
-						 }
+						 session.setAttribute("loginBusiness", bu);
 						 System.out.println("登陆成功");
-						 return "index";
+						 return "redirect:/course/toBusinessHomes?businessId="+bu.getBusId();
 					 }
 				 }else {
 					 //密码错误
 					 System.out.println("密码错误");	
 						model.addAttribute("error", "PwdErro");
-							return "登陆页面";
+							return "businessLogin";
 				 } 
 		}else {
 			//账户不存在
 			System.out.println("账号不存在");
-			model.addAttribute("error", "NoAcount");
-			    return "登陆页面";	
+			model.addAttribute("error", "NoAcountErro");
+			    return "businessLogin";	
 		}
 	}
+	
 	/**
 	 * 审核机构
 	 * @author 原源

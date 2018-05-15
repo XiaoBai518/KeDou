@@ -30,6 +30,7 @@ public class User {
 		private String userAcount;          //用户账号（管理员登录用）
 		private String salt; 				//二次加密中的 salt值
 		private String userEmail;			//用户邮箱
+		private String gender;				//用户性别
 		private String userTel;				//用户手机号
 		private String userIdNum;			//用户身份证号
 		@Transient
@@ -184,6 +185,12 @@ public class User {
 		}
 		public void setUserAcount(String userAcount) {
 			this.userAcount = userAcount;
+		}
+		public String getGender() {
+			return gender;
+		}
+		public void setGender(String gender) {
+			this.gender = gender;
 		}
 		
 		

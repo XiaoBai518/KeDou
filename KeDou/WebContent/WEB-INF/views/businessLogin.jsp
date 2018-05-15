@@ -23,9 +23,34 @@
         <script src="${ctx }/js/scripts.js"></script>
                 <script src="${ctx }/js/md5.js"></script>  
         <script type="text/javascript">
+        $(window).load(function() {
+        	var error = "${error}";
+        	
+          	if(error!=null&&error!="") {
+          		alert(error)
+        		if(error=="NoAcountErro") {
+        			ifsubmit[0] = false;
+              	  addWarn($('#alertwarning'),"账号不存在！")
+        		}else if(error=="PwdErro") {
+        			ifsubmit[1] = false;
+              	  	 addWarn($('#alertwarning'),"密码错误！")
+        		}
+        		
+        	}
+        	
+            
+          });
+        
    			function refresh(obj) {
    			 	obj.src = "${ctx }/common/validatecade?"+Math.random();
     		}
+   			function keyDown(e) {
+   				var keynum;
+   				keynum = window.event?e.keyCode:e.which;
+   				if(keynum ==13) {
+   					return false;
+   				}
+   			}
    			
    		//验证码是否正确
   		  function verifyCodeIsTrue(verifyCode) {
@@ -40,12 +65,10 @@
       				var isTrue = xmlhttp.responseText;
       				 if(isTrue=="-1") {
    						//验证码不正确
-   	
-   								   ifsubmit[2] = false;
+   						   ifsubmit[2] = false;
    					}else if(isTrue=="1"){
    						//验证码正确
-
-   					   				ifsubmit[2] = true;
+							ifsubmit[2] = true;
    					 		 
    					}
       			 }
@@ -74,8 +97,31 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3 form-box">
-                        	
-                        	<form role="form" action="" method="post" class="registration-form">
+                        	<c:if test="${info eq 'stateActiveErro' }">
+                        			<div class="form-top">
+		                        		<div class="form-top-left">
+		                        			<h3>账号未激活</h3>
+		                        		</div>
+		                        	</div>
+		                        	<div class="form-bottom">
+		                        		<h4>请耐心等待审核...</h4>
+		                        		<button type="button" class="btn" onclick="window.location='${ctx}/common/toindex'">返回首页</button>
+		                        	</div>
+                        	</c:if>
+                        	   	<c:if test="${info eq 'stateLockErro' }">
+                        			<div class="form-top">
+		                        		<div class="form-top-left">
+		                        			<h3>账号已被锁定</h3>
+		                        		</div>
+		                        	</div>
+		                        	<div class="form-bottom">
+		                        		<h4>请与客服联系...</h4>
+		                        		<button type="button" class="btn" onclick="window.location='${ctx}/common/toindex'">返回首页</button>
+		                        	</div>
+                        		</c:if>
+                        		
+                        	<c:if test="${empty info  }">
+                        	<form role="form" action="${ctx }/business/login" method="post" onkeydown="return keyDown(event)" class="registration-form">
                         		
                         		<fieldset style="display: block;">
 		                        	<div class="form-top">
@@ -106,6 +152,7 @@
 				                    </div>
 			                    </fieldset>
 		                    </form>
+		                   </c:if>
 						</div>
 					</div>
 				</div>

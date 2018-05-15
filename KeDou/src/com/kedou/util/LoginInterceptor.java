@@ -11,6 +11,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kedou.entity.User;
+import com.kedou.service.BusinessServiceImpl;
 import com.kedou.service.UserServiceImpl;
 
 
@@ -18,6 +19,8 @@ public class LoginInterceptor implements HandlerInterceptor {
     
     @Resource    
     private UserServiceImpl userServiceImpl;  
+    @Resource
+    private BusinessServiceImpl BusinessServiceImpl;
       
     /**  
      * preHandle方法是进行处理器拦截用的，该方法将在Controller处理之前进行调用，SpringMVC中的Interceptor拦截器是链式的，可以同时存在  
@@ -29,11 +32,12 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request,  
             HttpServletResponse response, Object handler) throws Exception {  
     	System.out.println("拦截器开始");
-        User loginUser = (User) request.getSession().getAttribute("loginUser");  
+    	User loginUser =  (User)request.getSession().getAttribute("loginUser");  
+        System.out.println(request.getRequestURI());
+
         
         if(loginUser == null){  
-        	System.out.println("");
-        	System.out.println(request.getRequestURI());
+        	
             String loginCookieUserName = "";  
             String loginCookiePassword = "";  
           
@@ -41,7 +45,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             if(cookies!=null&&cookies.length>0){    
                 for(Cookie cookie : cookies){    
                     //if("/".equals(cookie.getPath())){ //getPath为null  
-                        if("userAcount".equals(cookie.getName())){  
+                        if("userAccount".equals(cookie.getName())){  
                         	System.out.println(cookie.getValue());
                             loginCookieUserName = cookie.getValue();  
                         }else if("userPwd".equals(cookie.getName())){  
@@ -54,7 +58,6 @@ public class LoginInterceptor implements HandlerInterceptor {
                 if(!"".equals(loginCookieUserName) && !"".equals(loginCookiePassword)){  
                 	
                     User user = userServiceImpl.findByAcount(loginCookieUserName);
-                   
         			if(MD5.Md5(user.getUserPwd()).equals(loginCookiePassword)){
         				System.out.println("进行自动登陆");
         				//获取当前用户IP
@@ -84,9 +87,7 @@ public class LoginInterceptor implements HandlerInterceptor {
                    }  
                 }  
             }   
-        } else {
-        	 System.out.println(loginUser.getUserEmail());
-        } 
+        }
         System.out.println("拦截器结束");
         return true;  
     }  

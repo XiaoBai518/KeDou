@@ -79,7 +79,7 @@
 		                        	</div>
 		                        	<div class="form-bottom">
 		                        		<h4>请耐心等待审核...</h4>
-		                        		<button type="submit" class="btn">返回首页</button>
+		                        		<button type="button" class="btn" onclick="window.location='${ctx}/common/toindex'">返回首页</button>
 		                        	</div>
                         </c:if>
                          <c:if test="${info eq 'bad' }">

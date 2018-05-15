@@ -1,5 +1,7 @@
 package com.kedou.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,16 +21,18 @@ public class Torder {
 	@GeneratedValue(generator="increment_generator")
 	@GenericGenerator(name="increment_generator", strategy="increment")
 	private int id;//订单ID
+	private int userId;//用户ID
 	private String userName;//用户姓名
 	private String userTel;//用户电话
-	private int catId;//商品编号
-	private String catName;//商品名称
+	private int courseId;//商品编号
+	private String courseName;//商品名称
 	private int busId;
 	private String busName;
-	private int catNum;//预约人数
-	private int catPrice;//价格
+	private int reserveNum;//预约人数
+	private int price;//价格
 	private int orderState;//订单状态
 	private String userNote;//用户备注
+	private Date orderCreateTime; 
 	public int getId() {
 		return id;
 	}
@@ -59,29 +63,26 @@ public class Torder {
 	public void setUserTel(String userTel) {
 		this.userTel = userTel;
 	}
-	public int getCatId() {
-		return catId;
+
+	public String getCourseName() {
+		return courseName;
 	}
-	public void setCatId(int catId) {
-		this.catId = catId;
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
 	}
-	public String getCatName() {
-		return catName;
+	
+	public int getReserveNum() {
+		return reserveNum;
 	}
-	public void setCatName(String catName) {
-		this.catName = catName;
+	public void setReserveNum(int reserveNum) {
+		this.reserveNum = reserveNum;
 	}
-	public int getCatNum() {
-		return catNum;
+
+	public int getPrice() {
+		return price;
 	}
-	public void setCatNum(int catNum) {
-		this.catNum = catNum;
-	}
-	public int getCatPrice() {
-		return catPrice;
-	}
-	public void setCatPrice(int catPrice) {
-		this.catPrice = catPrice;
+	public void setPrice(int price) {
+		this.price = price;
 	}
 	public int getOederState() {
 		return orderState;
@@ -95,7 +96,31 @@ public class Torder {
 	public void setUserNote(String userNote) {
 		this.userNote = userNote;
 	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	public int getCourseId() {
+		return courseId;
+	}
+	public void setCourseId(int courseId) {
+		this.courseId = courseId;
+	}
+	public int getOrderState() {
+		return orderState;
+	}
+	public void setOrderState(int orderState) {
+		this.orderState = orderState;
+	}
+	public Date getOrderCreateTime() {
+		return orderCreateTime;
+	}
+	public void setOrderCreateTime(Date orderCreateTime) {
+		this.orderCreateTime = orderCreateTime;
+	}
 	
-	
+
 }
 

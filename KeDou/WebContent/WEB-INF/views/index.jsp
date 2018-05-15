@@ -14,7 +14,6 @@
    <script src="${ctx }/js/index.js"></script>
 </head>
 <body>
-	<h1>${sessionScope.loginUser.userEmail }</h1>
       <div id="myCarousel" class="carousel slide">
          <!-- 轮播（Carousel）指标 -->
          <ol class="carousel-indicators">
@@ -47,15 +46,20 @@
       <div id="center-search">
          <!-- logo -->
          <img src="${ctx }/img/logo.png" id="logo">
-         <iframe src="${ctx }/user/switchMode?mode='jijian'" frameborder="0" name="search_box"></iframe>
+         <iframe src="${ctx }/user/switchMode?mode=optional" frameborder="0" name="search_box"></iframe>
       </div>
       <!-- 右下角导航 -->
       <div id="navigation">
          <a href="#" id="index-nav">
             <img src="${ctx }/img/indexball.png" id="indexball"></a>
             
-            <div id="nav_div" style="bottom: 0px;right:0px;"><a href="${ctx }/user/toiframe"><img src="${ctx }/img/login.png" class="nav"></a>
-            	<span>${sessionScope.loginUser.userEmail }</span>
+            <div id="nav_div" style="bottom: 0px;right:0px;">
+            <c:if test="${ not empty sessionScope.loginUser}">
+              <a href="${ctx }/user/person"><img src="${ctx }/img/user.png" class="nav"></a>
+            </c:if>
+             <c:if test="${ empty sessionScope.loginUser  }">
+              <a href="${ctx }/user/toiframe"><img src="${ctx }/img/login.png" class="nav"></a>
+            </c:if>
             </div>
             <div id="nav_div" style="bottom: 0px;right:0px;"><a href="${ctx }/business/tologin"><img src="${ctx }/img/business.png" class="nav"></a></div>
             <div id="nav_div" style="bottom: 0px;right:0px;"><a href="${ctx }/user/logout"><img src="${ctx }/img/qrcode.png" class="nav"></a></div>

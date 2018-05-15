@@ -201,8 +201,14 @@ jQuery(document).ready(function() {
     		for (var i = 0; i < 3; i++) {
 				if(!ifsubmit[i]) {
 					 e.preventDefault();
+					 return;
+				}
+				if(i==2) {
+					var spwd = $('#busPwd').val();
+					  $('#busPwd').val(md5(spwd));
 				}
 			}
+    		
     	}else {
     	   	$(this).find('input[type="text"], input[type="password"], textarea').each(function() {
         		if( $(this).val() == "" ) {
@@ -212,11 +218,13 @@ jQuery(document).ready(function() {
         			e.preventDefault();
         		}
         		else {
-        		   	var spwd = $('#busPwd').val();
-        			  $('#busPwd').val(md5(spwd));
+        		   
         			$(this).removeClass('input-error');
         		}
+        		
         	});
+    		var spwd = $('#busPwd').val();
+			  $('#busPwd').val(md5(spwd));
     	}  
 		  
  

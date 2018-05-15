@@ -1,0 +1,155 @@
+*{
+	font-family: 'Microsoft Yahei',Verdana, sans-serif;
+	color: gray;
+	margin:0;
+	padding: 0;
+}
+html,body{
+	width: 100%;
+	height: 100%;
+}
+ul, li{
+	list-style: none;
+}
+address, cite, dfn, em, var {
+	font-style: normal;
+}
+img{
+	display: block;
+	overflow: hidden;
+	width: 100%;
+	height:100%;
+}
+
+/*商家首页样式*/
+#shop_banner{
+	height: 120px;
+}
+#shop_navigation{
+	height: 40px;
+	background-color: #00AF2E;
+}
+#pro_category{
+	position: relative;
+	left: 10%;
+	width: 130px;
+	height: 40px;
+	float: left;
+	background-color: #9DDD3D;
+	text-align: center;
+	line-height: 40px;
+	color: white;
+}
+.nav_item{
+	position: relative;
+	left: 14%;
+	height: 40px;
+	width: 80px;
+	float: left;
+	background-color: #00AF2E;
+	text-align: center;
+	line-height: 40px;
+	color: white;
+}
+.nav_item:hover{
+	background-color: #9DDD3D;
+}
+.pro_head{
+	height: 40px;
+	background-color: #9DDD3D;
+}
+.pro_title{
+	position: relative;
+	left: 2%;
+	width: 100px;
+	height: 40px;
+	float: left;
+	background-color: #9DDD3D;
+	text-align: center;
+	line-height: 30px;
+}
+.more{
+	width: 40px;
+	height: 40px;
+	position: relative;
+	left: 85%;
+	float: left;
+	color: white;
+	text-align: center;
+	line-height: 40px;
+}
+#pro_content{
+	position: relative;
+	background-color: #F0F5D5;
+	margin-bottom: 20px;
+	padding-bottom: 10px;
+	overflow: auto; 
+}
+.prolist{
+}
+.pro{
+	position: relative;
+	overflow: auto;
+	width: 278px;
+	margin-left: 5px;
+	margin-top: 10px;
+	float: left;
+	padding: 8px;
+	border-radius: 8px;
+	box-shadow: #E5E4E1 2px 2px 12px;
+}
+.pro:hover{
+	border-radius: 8px;
+	box-shadow: #E5E4E1 2px 2px 80px;
+	opacity:0.9;
+}
+.proPicture{
+	width: 263px;
+	height: 325px;
+	padding: 8px;
+}
+.proWords{
+	margin-left: 20px;
+}
+.price{
+	float: left;
+	margin-top: 10px;
+	width:80px;
+	height: 30px;
+	color: black;
+}
+.sell_count{
+	float: left;
+	margin-top: 7px;
+	width: 140px;
+	height: 30px;
+	font-size: 13px;
+	line-height: 30px;
+}
+.proName{
+	float: left;
+	width: 250px;
+	height: 40px;
+}
+.proInfo{
+	float: left;
+	margin-top: -15px;
+	width: 250px;
+	height: 40px;
+	word-break:break-all;
+ 	display:-webkit-box;
+ 	-webkit-line-clamp:2;
+ 	-webkit-box-orient:vertical;
+ 	overflow:hidden;
+
+}
+.pro_order{
+	float: left;
+	height: 27px;
+	width: 120px;
+	background-color: #9DDD3D;
+	text-align: center;
+	line-height: 27px;
+	margin-top:5px;
+	color: white;
+}

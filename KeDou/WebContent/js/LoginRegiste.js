@@ -1,10 +1,4 @@
-window.onload=function(){
-				var str = document.myform.acount.value;
-//				if(str.length==0){
-//					document.getElementById('id').disabled=true;
-//				}
-				 
-			}
+
 	istrue = new Array(-1,-1,-1);
 	//判断输入信息
 		function textblur(a,name) {
