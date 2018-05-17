@@ -126,4 +126,102 @@ public class CourseDaoImpl extends BaseDao<Course> {
 			String hql = " from Course  where courseId = ?";
 			return  this.findByProperty(hql, params);
 	}
+	
+	/**
+	 * 
+	 * @desc 通过搜索内容查询课程列表
+	 * @author 原源
+	 * @createDate 2018年5月10日
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Course> findBySearchSentencePage(int pageNum,int pageSize,String searchSentence){
+		String hql = " from Course  where courseName like ?";
+		Query query=this.sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter(0, "%"+searchSentence+"%");
+		query.setFirstResult((pageNum-1)*pageSize);
+		query.setMaxResults(pageSize);
+		return query.list();
+	}
+	
+	/**
+	 * 
+	 * @desc 通过搜索内容查询课程列表（升序）
+	 * @author 原源
+	 * @createDate 2018年5月10日
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Course> findBySearchSentencePageAsc(int pageNum,int pageSize,String searchSentence){
+		String hql = " from Course  where courseName like ? order by coursePrice asc";
+		Query query=this.sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter(0, "%"+searchSentence+"%");
+		query.setFirstResult((pageNum-1)*pageSize);
+		query.setMaxResults(pageSize);
+		return query.list();
+	}
+	
+	/**
+	 * 
+	 * @desc 通过搜索内容查询课程列表(降序)
+	 * @author 原源
+	 * @createDate 2018年5月10日
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Course> findBySearchSentencePageDesc(int pageNum,int pageSize,String searchSentence){
+		String hql = " from Course  where courseName like ? order by coursePrice desc";
+		Query query=this.sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter(0, "%"+searchSentence+"%");
+		query.setFirstResult((pageNum-1)*pageSize);
+		query.setMaxResults(pageSize);
+		return query.list();
+	}
+	
+	/**
+	 * 
+	 * @desc 通过搜索内容查询课程列表(首页)
+	 * @author 原源
+	 * @createDate 2018年5月10日
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Course> findBySearchSentence(String searchSentence){
+		String hql = " from Course  where courseName like ?";
+		Query query=this.sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter(0, '%'+searchSentence+'%');
+		query.setMaxResults(3);
+		return query.list();
+	}
+	
+	/**
+	 * 
+	 * @desc 通过搜索内容查询课程列表(所有)
+	 * @author 原源
+	 * @createDate 2018年5月10日
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Course> findAllBySearchSentence(String searchSentence){
+		String hql = " from Course  where courseName like ?";
+		Query query=this.sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter(0, "%"+searchSentence+"%");
+		return query.list();
+	}
+	
+	/**
+	 * 
+	 * @desc 通过搜索内容查询课程列表(广告位)
+	 * @author 原源
+	 * @createDate 2018年5月10日
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Course> findBySearchSentenceAd(String searchSentence){
+		String hql = " from Course  where courseName like ? and hot = 1";
+		Query query=this.sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter(0, "%"+searchSentence+"%");
+		query.setMaxResults(3);
+		return query.list();
+	}
 }

@@ -43,7 +43,7 @@
 		</table>
 	</form>	
 		<div class="page">
-			<ul id="myPager" class="pager" data-ride="pager" data-page="${page}" data-rec-Total="${pagecount }" data-rec-Per-Page="3" data-link-creator="${ctx }/user/page?page={page}&totalCount={recTotal}&checknum=1" ></ul>
+			<ul id="myPager" class="pager"  data-ride="pager" data-page="${page}" data-rec-Total="${pagecount }" data-rec-Per-Page="3" data-link-creator="${ctx }/user/page?page={page}&totalCount={recTotal}&checknum=1" ></ul>
 		</div>
 		<script>
 		ischeck=0;
