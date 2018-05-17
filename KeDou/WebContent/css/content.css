@@ -1,0 +1,137 @@
+*{
+	margin:0;
+	padding:0;
+}
+body{
+	width: 100%;
+}
+img{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+/*网页头部*/
+#header{
+	width: 100%;
+}
+#logo{
+	width: 200px;
+	height: 100px;
+	margin-top: 2%;
+	margin-bottom: 1%;
+	position: relative;
+	left: 10%;
+	float: left;
+}
+#find{
+	width: 500px;
+	position: relative;
+	float: left;
+	margin-left: 35%;
+	margin-top: 5%;
+}
+#navigation{
+	float: left;
+	width: 100%;
+	overflow: auto;
+	height: 40px;
+	padding-left: 120px;
+	background-color: #EDEEF0;
+	border-top: 1px solid #DEDDDE;
+}
+
+/*网页中部*/
+#content{
+	height: 800px;
+}
+#content-left{
+	margin-left: 4%;
+	float: left;
+	width: 65%;
+}
+#content-left-top{
+	
+	
+}
+#content-nav{
+	margin-top: 3%;
+}
+/*课程列表*/
+.course{
+	width: 100%;
+	height: 200px;
+	border-radius: 8px;
+	box-shadow: #E5E4E1 2px 2px 12px;
+	margin-top: 20px;
+	padding: 18px;
+}
+.course:hover{
+	border-radius: 8px;
+	box-shadow: #E5E4E1 2px 2px 40px;
+}
+.course-img{
+	float: left;
+	width: 215px;
+	height: 160px;
+}
+.course-img:hover{
+	opacity:0.8;
+}
+.course-info{
+	width: 65%;
+	margin-left: 34%;
+
+	color: #666560;
+}
+.course-name{
+	font-size: 14px;
+}
+.course-abstract{
+	margin-top: 3%;
+	height:86px;
+	overflow:hidden;
+}
+.sourse-price{
+	width: 50px;
+	height: 30px;
+	margin-top: 13%;
+	font: bold 14px 'Microsoft Yahei';
+	color: #c00;
+}
+.sourse-order{
+	float: right;
+	position:absolut;
+	margin-top: -8%;
+	margin-left:8%;
+}
+/*数据对比*/
+#content-left-bottom{
+	float: left;
+	margin-top: 3%;
+	width: 100%;
+	height: 400px;
+}
+
+/*分页*/
+#content-left-paging{
+	width: 100%;
+	float: left;
+	text-align: center;
+}
+
+/*广告或猜你喜欢*/
+#content-right-top{
+	float: right;
+	position: relative;
+	right: 4%;
+	margin-top: 4%;
+	width: 25%;
+}
+
+/*页面footer*/
+#footer{
+	height: 50px;
+	left: 10%;
+	padding-left: 75px;
+}
+

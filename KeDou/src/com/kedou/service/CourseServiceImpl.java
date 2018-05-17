@@ -212,4 +212,76 @@ public class CourseServiceImpl {
 		int id = this.businessCourseTypeRelationDaoImpl.findOne(hql, param).getId();
 		return id;
 	}
+	
+	/**
+	 * 
+	 * @desc 通过搜索内容查询课程(第2页之后)
+	 * @author 原源
+	 * @createDate 2018年5月10日
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Course> findBySearchPage(int pageNum,int pageSize,String searchSentence){
+		return this.courseDaoImpl.findBySearchSentencePage(pageNum, pageSize, searchSentence);
+	}
+	
+	/**
+	 * 
+	 * @desc 通过搜索内容查询课程(升序)
+	 * @author 原源
+	 * @createDate 2018年5月10日
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Course> findBySearchPageAsc(int pageNum,int pageSize,String searchSentence){
+		return this.courseDaoImpl.findBySearchSentencePageAsc(pageNum, pageSize, searchSentence);
+	}
+	
+	/**
+	 * 
+	 * @desc 通过搜索内容查询课程(降序)
+	 * @author 原源
+	 * @createDate 2018年5月10日
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Course> findBySearchPageDesc(int pageNum,int pageSize,String searchSentence){
+		return this.courseDaoImpl.findBySearchSentencePageDesc(pageNum, pageSize, searchSentence);
+	}
+	
+	/**
+	 * 
+	 * @desc 通过搜索内容查询课程(首页)
+	 * @author 原源
+	 * @createDate 2018年5月10日
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Course> findBySearch(String searchSentence){
+		return this.courseDaoImpl.findBySearchSentence(searchSentence);
+	}
+	
+	/**
+	 * 
+	 * @desc 通过搜索内容查询课程(广告位)
+	 * @author 原源
+	 * @createDate 2018年5月10日
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Course> findBySearchAd(String searchSentence){
+		return this.courseDaoImpl.findBySearchSentenceAd(searchSentence);
+	}
+	
+	/**
+	 * 
+	 * @desc 通过搜索内容查询课程(所有)
+	 * @author 原源
+	 * @createDate 2018年5月10日
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Course> findAllBySearch(String searchSentence){
+		return this.courseDaoImpl.findAllBySearchSentence(searchSentence);
+	}
 }
