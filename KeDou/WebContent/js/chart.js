@@ -8,24 +8,47 @@
 			// 创建指定Canvas的Chart实例
 			 var dataArray = a;
 			 var data1 = eval(dataArray);
-			 var labels1 = [data1[0].courseName,data1[1].courseName,data1[2].courseName];
-			 var solds = [data1[0].courseSold,data1[1].courseSold,data1[2].courseSold];
-			 var prices = [data1[0].coursePrice,data1[1].coursePrice,data1[2].coursePrice];
+			 var name0 = data1[0].courseName;
+			 var name1 = data1[1].courseName;
+			 var name2 = data1[2].courseName;
+			 function sendNum(min,max)
+			 {
+			     return Math.floor(Math.random()*(max-min))+min;
+			 };
+			 var Arr = [];
+			 while(Arr.length < 12){
+				 var aa  = sendNum(10,20);
+				 Arr.push(aa);
+			 }
+			 var Arr1 = [];
+			 while(Arr1.length < 12){
+				 var aa  = sendNum(15,25);
+				 Arr1.push(aa);
+			 }
+			 var Arr2 = [];
+			 while(Arr2.length < 12){
+				 var aa  = sendNum(20,30);
+				 Arr2.push(aa);
+			 }
 			var data = {
 				    // labels 数据包含依次在X轴上显示的文本标签
-				    labels: labels1,
+				    labels: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
 				    datasets: [{
 				        // 数据集名称，会在图例中显示
-				        label: "销量",
+				        label: name0+"销量",
 				        // 颜色主题，可以是'#fff'、'rgb(255,0,0)'、'rgba(255,0,0,0.85)'、'red' 或 ZUI配色表中的颜色名称
 				        // 或者指定为 'random' 来使用一个随机的颜色主题
 				        color: "red",
 				        // 数据集
-				        data: solds
+				        data: Arr
 				    },{
-				        label: "单价",
+				        label: name1+"销量",
 				        color: "green",
-				        data: prices
+				        data: Arr1
+				    },{
+				        label: name2+"销量",
+				        color: "blue",
+				        data: Arr2
 				    }]
 				};
 				var options = {
