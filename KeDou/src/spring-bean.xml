@@ -22,8 +22,8 @@
 	<!--  <bean id="LoginFilter" class="com.kedou.util.LoginFilter">
    		<property name="userServiceImpl" ref="userServiceImpl"></property>
 	</bean>-->
-	<bean id="dataSource" 
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<!-- bean id="dataSource" 
+		class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClassName">
 			<value>com.mysql.jdbc.Driver</value>
 		</property>
@@ -31,12 +31,28 @@
 			<value>jdbc:mysql://localhost:3306/kedou_db?useUnicode=true&amp;characterEncoding=UTF-8</value>
 		</property>
 		<property name="username">
-			<value>kedou</value>
+			<value>root</value>
 		</property>
 		<property name="password">
-			<value>kedou20180315</value>
+			<value></value>
 		</property>
+	</bean-->
+	<bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/kedou_db?useUnicode=true&amp;characterEncoding=UTF-8" />
+		<property name="username" value="kedou"/>
+		<property name="password" value="kedou20180315" />  			
+		<property name="idleConnectionTestPeriod" value="240" />			<!--设置测试connection的间隔时间  -->
+		<property name="idleMaxAge" value="60" />						<!-- 设置connection的空闲存活时间 -->
+		<property name="maxConnectionsPerPartition" value="30" />		<!-- 设置每个分区含有connection最大个数 -->
+		<property name="minConnectionsPerPartition" value="10" />		<!-- 设置每个分区含有connection最小个数 -->
+		<property name="partitionCount" value="3" />					<!-- 设置分区个数 -->
+		<property name="acquireIncrement" value="5" />					<!-- 设置分区中的connection增长数量 -->
+		<property name="statementsCacheSize" value="100"/>
+		<property name="releaseHelperThreads" value="3" />				<!-- 设置connection助手线程个数。这个参数默认为3。 -->
+		<property name="connectionTimeout" value="5000"></property>		<!-- 设置获取connection超时的时间 -->
 	</bean>
+	
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />

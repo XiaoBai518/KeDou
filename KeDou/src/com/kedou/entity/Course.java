@@ -28,9 +28,9 @@ public class Course {
 	private Date courseStartTime;	//课程开始时间
 	private Date courseEndTime;		//课程结束时间
 	private double coursePrice;		//课程价格
-	private int courseSold;//课程已售数量
-	private String courseImg;//课程图片
-	private int hot;//是否热门
+	private int courseSold;			//课程已售数量
+	private String courseImg;		//课程图片
+	private int hot;				//是否热门
 	public int getCourseId() {
 		return courseId;
 	}

@@ -126,7 +126,6 @@ public class CourseDaoImpl extends BaseDao<Course> {
 			String hql = " from Course  where courseId = ?";
 			return  this.findByProperty(hql, params);
 	}
-	
 	/**
 	 * 
 	 * @desc 通过搜索内容查询课程列表

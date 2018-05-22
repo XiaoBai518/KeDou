@@ -20,19 +20,19 @@ public class Torder {
 	@Id
 	@GeneratedValue(generator="increment_generator")
 	@GenericGenerator(name="increment_generator", strategy="increment")
-	private int id;//订单ID
-	private int userId;//用户ID
-	private String userName;//用户姓名
-	private String userTel;//用户电话
-	private int courseId;//商品编号
-	private String courseName;//商品名称
-	private int busId;
-	private String busName;
-	private int reserveNum;//预约人数
-	private int price;//价格
-	private int orderState;//订单状态
-	private String userNote;//用户备注
-	private Date orderCreateTime; 
+	private int id;						//订单ID
+	private int userId;					//用户ID
+	private String userName;			//用户姓名
+	private String userTel;				//用户电话
+	private int courseId;				//商品编号
+	private String courseName;			//商品名称
+	private int busId;					//商家ID
+	private String busName;				//商家名称
+	private int reserveNum;				//预约人数
+	private int price;					//价格
+	private int orderState;				//订单状态
+	private String userNote;			//用户备注
+	private Date orderCreateTime; 		//订单创建时间
 	public int getId() {
 		return id;
 	}

@@ -17,13 +17,13 @@
 		<a href="${ctx }/user/switchMode?mode=minimalist"><div id="minimalist" class="est_selected">极&nbsp&nbsp简</div></a>
 		<a href="${ctx }/user/switchMode?mode=optional"><div id="optional" class="est_unselected">自&nbsp&nbsp选</div></a>
 	</div>
-	 <form class="bs-example bs-example-form" role="form" id="search">
+	 <form class="bs-example bs-example-form" action="${ctx }/course/searchFirstCourseList" method="get" role="form" id="search" target="_top">
             <div class="row">
                <div class="col-lg-6">
                   <div class="input-group">
-                     <input type="text" class="form-control">
+                     <input type="text"  name="search"class="form-control">
                      <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">
+                        <button class="btn btn-default" type="submit">
                            <span class="glyphicon glyphicon-search"></span>
                         </button>
                      </span>

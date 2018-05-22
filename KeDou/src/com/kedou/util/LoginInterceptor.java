@@ -85,7 +85,10 @@ public class LoginInterceptor implements HandlerInterceptor {
         				 request.getSession().setAttribute("loginUser", user);  
         				 System.out.println("自动登陆结束");
                    }  
-                }  
+                }  else {
+                	// 没有相应Cookie
+                	
+                }
             }   
         }
         System.out.println("拦截器结束");

@@ -1,6 +1,7 @@
 package com.kedou.controller;
 
-
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -8,11 +9,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+import com.kedou.entity.Course;
+import com.kedou.entity.User;
 import com.kedou.service.UserServiceImpl;
 import com.kedou.service.common.CommonServiceImpl;
 
@@ -25,7 +30,8 @@ public class CommonController {
 	private CommonServiceImpl commonServiceImpl;
 	@Resource
 	private UserServiceImpl userServiceImpl;
-	
+
+
 	/**
 	 * 获取验证码
 	 * @param request
@@ -65,6 +71,26 @@ public class CommonController {
 	public String toIndex() {
 		return "index";
 	}
+	@RequestMapping(value="/ajaxtest", method=RequestMethod.GET,produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public String test() {
+		System.out.println("数据来了");
+	
+		Map<Course, User> course = new HashMap<>();
+		Course c = new Course();
+		c.setCourseId(1);
+		c.setCourseName("啦啦啦");
+		
+		User u = new User();
+		u.setUserId(2);
+		u.setUserName("哈哈");
+		course.put(c, u);
+		
+		Gson g = new Gson();
+		return g.toJson(course);
+		
+	}
+	
 
 
 }

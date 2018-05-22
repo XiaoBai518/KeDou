@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.kedou.entity.Business;
+import com.kedou.entity.Course;
 import com.kedou.service.BusinessServiceImpl;
 import com.kedou.util.IpAddress;
 
@@ -60,6 +62,7 @@ public class BusinessController {
 		}catch(Exception e){
 			e.printStackTrace();
 			model.addAttribute("info", "bad");
+				
 			return "businessRegister";
 		}
 	}
@@ -235,5 +238,6 @@ public class BusinessController {
 		session.setAttribute("bl", bl);
 		return "机构列表";
 	}
+	
 
 }

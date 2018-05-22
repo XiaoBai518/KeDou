@@ -8,6 +8,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body onload="javascript:window.location='${ctx}/course/searchFirstCourseList?search=考研'">
+<body onload="javascript:window.location='${ctx}/common/toindex'">
 </body>
 </html>

@@ -18,9 +18,8 @@
 </head>
 <body>
 	<div class="satic-area">
-		<div class="dynamic-area1"></div>
-		<div class="dynamic-area2"></div>
-		<div id="clearfix">
+		<div class="dynamic-area1">
+			<div id="clearfix">
 			<button class="select">&nbsp;</button>
 			<span>选择出适合你的标签</span>
 	  		 <button class="send " data-counter="0"  onClick="subLabel();">&#10004;</button>
@@ -30,6 +29,8 @@
 				</c:forEach>
 			</div>
 		</div>
+		</div>
+		
 	</div>
 	<script src="${ctx }/js/jquery-1.11.1.min.js"></script>
 	<script src="${ctx }/js/label.js"></script>
@@ -62,6 +63,7 @@
     		}
     	});
 	}
-	</script>
+	</script>	
 </body>
+
 </html>

@@ -36,7 +36,7 @@ public class CourseController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/toBusinessHomes", method=RequestMethod.GET)
-	public String  toBusinessHomes(@RequestParam("businessId") int id,HttpServletRequest request) throws Exception {
+	public String  toBusinessHomes(@RequestParam("businessId") int id,Model model) throws Exception {
 		
 		//获得某机构类型列表
 		List<BusinessCourseTypeRelation> bct = this.courseServiceImpl.findTypeByBusinessId(id);
@@ -47,9 +47,9 @@ public class CourseController {
 		//根据商家课程类型关系 ID 查找课程类型列表
 		List<CourseType> courseTypeList  = this.courseServiceImpl.findByIdList(bct);
 		
-		request.setAttribute("courseList", courseList);
-		request.setAttribute("courseTypeList", courseTypeList);
-		request.setAttribute("businessId", id);
+		model.addAttribute("courseList", courseList);
+		model.addAttribute("courseTypeList", courseTypeList);
+		model.addAttribute("businessId", id);
 		
 		return "bushomepage";
 	}
@@ -63,7 +63,7 @@ public class CourseController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/TypeCoursemore", method=RequestMethod.GET)
-	public String  courseListByType(@RequestParam("businessId") int id,@RequestParam("courseTypeId") int courseTypeId,HttpServletRequest request) throws Exception {
+	public String  courseListByType(@RequestParam("businessId") int id,@RequestParam("courseTypeId") int courseTypeId,Model model) throws Exception {
 		
 		//获得某机构类型列表(id,typeId,busId)
 		List<BusinessCourseTypeRelation> bct = this.courseServiceImpl.findTypeByBusinessId(id);
@@ -74,17 +74,16 @@ public class CourseController {
 		if(courseTypeId == 0){
 			//获得热门课程列表
 			Map<CourseType, List<Course>> hotCourse = this.courseServiceImpl.gethotCourseLists(id);
-			request.setAttribute("courseList", hotCourse);
+			model.addAttribute("courseList", hotCourse);
 		}else{
 			//获得指定类型下的课程列表
 			Map<CourseType, List<Course>> courseList = this.courseServiceImpl.courseListsByCourseType(courseTypeId,id);
-			request.setAttribute("courseList", courseList);
+			model.addAttribute("courseList", courseList);
 		}
-		request.setAttribute("courseTypeList", courseTypeList);
-		request.setAttribute("businessId", id);
+		model.addAttribute("courseTypeList", courseTypeList);
+		model.addAttribute("businessId", id);
 		return "bushomepage";
 	}
-	
 	/**
 	 * 搜索后课程列表页(首页)
 	 * @param id

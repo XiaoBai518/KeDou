@@ -12,6 +12,7 @@
 		<script src="${ctx }/js/jquery-1.11.1.min.js"></script>
 		<script src="${ctx }/js/LoginRegiste.js"></script>
 		<script src="${ctx }/js/md5.js"></script>
+		<script src="${ctx }/js/common.js"></script>
 		<script type="text/javascript">
 		 function refreshImg(obj) {
 			 obj.src = "${ctx }/common/validatecade?"+Math.random();
@@ -41,13 +42,6 @@
     		 xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
     		 xmlhttp.send();
          }
-		function keyDown(e) {
-			var keynum;
-			keynum = window.event?e.keyCode:e.which;
-			if(keynum ==13) {
-				return false;
-			}
-					}
 		</script>
 </head>
 <body>

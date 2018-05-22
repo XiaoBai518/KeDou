@@ -7,7 +7,8 @@
 	<head>
 		<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
 		<!-- ZUI Javascript 依赖 jQuery -->
-		<script src="${ctx }/js/jquery.js"></script>
+		<script src="${ctx }/js/jquery.zui.js"></script>
+		<link rel="stylesheet" type="text/css" href="${ctx }/css/banner.css">
 		<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
 		<script src="${ctx }/js/jquery.zui.js"></script>
 		<link rel="stylesheet" type="text/css" href="${ctx }/css/content.css">
@@ -18,11 +19,11 @@
     	<script type="text/javascript" src="${ctx }/js/chart.js"></script>
 	</head> 
 	<body style="">
-		<div class="container-fluid" style="background-color: #F9F8F7;">
+				<div class="container-fluid" style="background-color: #F9F8F7;">
 			<div id="header">
 				<!--logo-->
 				<div id="logo">
-					<img src="${ctx }/img/logo.png"/>
+					<img src="${ctx }/img/logo2.png"/>
 				</div>
 				<!--搜索框-->
 				<div id="find">
@@ -31,7 +32,7 @@
 							<div class="input-control search-box search-box-circle has-icon-left has-icon-right search-example" id="searchboxExample">
 								<input id="inputSearchExample3" type="search" class="form-control search-input" placeholder="搜索"/>
 								<label for="inputSearchExample3" class="input-control-icon-left search-icon">
-									<i class="icon icon-search"></i>
+									<i class="icon icon-search" style="line-height: 2;"></i>
 								</label>
 							</div>
 							<span class="input-group-btn">
@@ -40,18 +41,58 @@
 						</div>
 					</form>					
 				</div>
-				<br/>
+				<!--定位-->
+				<div id="locate">
+					<i class="icon icon-map-marker icon-2x" ></i>
+					<p id="address">[<a href="#" style="color:#3280fc; text-decoration: none;">切换地址</a>]</p>
+				</div>
+				<!--个人头像-->
+				<div id="userPad">
+					<div id="myPhoto">
+						<img src="${ctx }/img/login.png"/>
+					</div>
+					<div class="popover bottom" id="myPopover">
+						<div class="arrow"></div>
+							<h3 class="popover-title"><a href="#"><i class="icon icon-home"></i>&nbsp&nbsp个人中心</a></h3>
+							<div class="popover-content">
+								<ul>
+									<li class="menu-li"><a href="#"><i class="icon icon-envelope"></i>&nbsp&nbsp我的消息</a></li>
+									<li class="menu-li"><a href="#"><i class="icon icon-history"></i>&nbsp&nbsp我的足迹</a></li>
+									<li class="menu-li"><a href="#"><i class="icon icon-check-board"></i>&nbsp&nbsp我的预约</a></li>
+									<li class="menu-li"><a href="#"><i class="icon icon-star"></i>&nbsp&nbsp我的收藏</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				
 				<!--导航条-->
 				<div id="navigation">
 					<ul class="nav nav-secondary">
-						<li><a href="#">首页</a></li>
-						<li><a href="#">动态 <span class="label label-badge label-success">4</span></a></li>
-						<li><a href="#">项目 </a></li>
-						<li><a href="#">哈哈</a></li>
+						<li><a href="#" class="nav-a">首页</a></li>
+						<li><a href="#" class="nav-a">动态 <span class="label label-badge label-success">4</span></a></li>
+						<li><a href="#" class="nav-a">项目 </a></li>
+						<li><a href="#" class="nav-a">哈哈</a></li>
 					</ul>
 				</div>
 			</div> 
 		</div>
+		<script>
+			 $(document).ready(function(){
+		         $("#myPhoto").hover(function(){
+		            $("#myPopover").toggle();
+		         });
+		      });
+		      $(document).ready(function(){
+		         $("#myPopover").hover(function(){
+		            $("#myPopover").show();
+		         });
+		         $("#myPopover").mouseleave(function(){
+		            $("#myPopover").hide();
+		         });
+		      });
+			
+		</script>
 		<div style="background-color: #F9F8F7;width: 100%;height: 100%;">
 			<div class="container" style="background-color: white;">
 				<div id="content">

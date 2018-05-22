@@ -98,7 +98,7 @@
 					<input type="submit" value="注册"  id="id" class="input_position" />
 				</div>
 				</form >
-		 <div id="fond_style">已账号:&nbsp;<a href="${ctx }/iframe_login.jsp" target="box">登录</a></div>
+		 <div id="fond_style">已账号:&nbsp;<a href="${ctx }/user/tologin" target="box">登录</a></div>
 	</div>
 	</div>
 </body>

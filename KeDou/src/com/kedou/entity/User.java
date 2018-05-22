@@ -25,25 +25,28 @@ public class User {
 		@GenericGenerator(name="increment_generator", strategy="increment")
 		private int userId;
 		
-		private String userName="null";//用户姓名
-		private String userPwd;//用户密码
-		private String salt; //二次加密中的 salt值
-		private String userEmail;//用户邮箱
-		private String userTel;//用户手机号
-		private String userIdNum;//用户身份证号
+		private String userName="null";		//用户姓名
+		private String userPwd;				//用户密码
+		private String userAcount;          //用户账号（管理员登录用）
+		private String salt; 				//二次加密中的 salt值
+		private String userEmail;			//用户邮箱
+		private String gender;				//用户性别
+		private String userTel;				//用户手机号
+		private String userIdNum;			//用户身份证号
 		@Transient
-		private Set<String> address;//用户地址
-		private String userIp; //用户IP
-		private String userRealName;//真实姓名
-		private String userDiscription;//个人描述
-		private String userTag;//个人标签
-		private int state=0;//状态 0为未激活状态，1为正常状态，2为锁定状态
-		private String verifyNum;//激活验证码
-		private Date createTime; //创建时间
-		private Date loginTime;//登录时间
-		private Date lastLoginTime;//上一次登录时间
-		private int loginCount;//登录次数
-		private String userIcon;//用户头像
+		private Set<String> address;		//用户地址
+		private String userIp; 				//用户IP
+		private String userRealName;		//真实姓名
+		private String userLabel;           //用户个人标签ID
+		private String userDiscription;		//个人描述
+		private int state=0;				//状态 0为未激活状态，1为正常状态，2为锁定状态
+		private String verifyNum;			//激活验证码
+		private Date createTime; 			//创建时间
+		private Date loginTime;				//登录时间
+		private Date lastLoginTime;			//上一次登录时间
+		private String lastLoginIp;	        //上一次登陆IP
+		private int loginCount;				//登录次数
+		private String userIcon;			//用户头像
 		
 		public User (String username,String pwd) {
 			if(username.contains("@")){
@@ -172,13 +175,32 @@ public class User {
 		public void setLoginTime(Date loginTime) {
 			this.loginTime = loginTime;
 		}
-		public String getUserTag() {
-			return userTag;
+		public String getLastLoginIp() {
+			return lastLoginIp;
 		}
-		public void setUserTag(String userTag) {
-			this.userTag = userTag;
+		public void setLastLoginIp(String lastLoginIp) {
+			this.lastLoginIp = lastLoginIp;
 		}
-				
+		public String getUserAcount() {
+			return userAcount;
+		}
+		public void setUserAcount(String userAcount) {
+			this.userAcount = userAcount;
+		}
+		public String getGender() {
+			return gender;
+		}
+		public void setGender(String gender) {
+			this.gender = gender;
+		}
+		public String getUserLabel() {
+			return userLabel;
+		}
+		public void setUserLabel(String userLabel) {
+			this.userLabel = userLabel;
+		}
+		
+		
 }
 		
 		

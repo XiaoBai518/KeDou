@@ -212,7 +212,6 @@ public class CourseServiceImpl {
 		int id = this.businessCourseTypeRelationDaoImpl.findOne(hql, param).getId();
 		return id;
 	}
-	
 	/**
 	 * 
 	 * @desc 通过搜索内容查询课程(第2页之后)

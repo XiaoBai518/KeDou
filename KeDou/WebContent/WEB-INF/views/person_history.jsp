@@ -20,11 +20,11 @@
 				<th class="tr-th3" style="display:table-cell; vertical-align:middle">
 				<input type="checkbox" style="margin-right: 20px;zoom:80%;"id="allCheckBox"  value="全选" onclick="selectAll()"/>
 				</th>			
-				<th class="tr-th1" >课程名</th>
-				<th class="tr-th1">课程机构</th>
-				<th class="tr-th1">价格</th>
-				<th class="tr-th1">时间</th>
-				<th class="tr-th2">操作</th>
+				<th class="tr-th1" style="vertical-align:middle;">课程名</th>
+				<th class="tr-th1" style="vertical-align:middle;">课程机构</th>
+				<th class="tr-th1" style="vertical-align:middle;">价格</th>
+				<th class="tr-th1" style="vertical-align:middle;">时间</th>
+				<th class="tr-th2" style="vertical-align:middle;">操作</th>
 			</tr>
 			<c:forEach items="${history }" var="p">
 			<tr class="test" id="${p.courseId }">
