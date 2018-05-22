@@ -129,6 +129,7 @@ public class CourseController {
 		model.addAttribute("searchSentence", searchSentence);
 		Gson g = new Gson();
 		model.addAttribute("gsonCourseList",g.toJson(courseList));
+		
 		return "content";
 	}
 	
