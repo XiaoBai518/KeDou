@@ -137,8 +137,6 @@ public class UserServiceImpl {
 		String hql = "update User as u set u.userName= ?,u.gender=?,u.userDiscription=? where u.userId =?";
 		
 		this.userDaoImpl.updateByProperty(hql, params);
-		
-		int a = 10/0;
 	}
 	/**
 	 * 更改登陆状态
