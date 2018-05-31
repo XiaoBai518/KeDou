@@ -36,6 +36,7 @@ import com.kedou.entity.User;
 import com.kedou.service.user.UserServiceImpl;
 import com.kedou.shiro.UsernamePasswordByUserTypeToken;
 import com.kedou.util.SessionUtil;
+import com.kedou.util.UpLoadUtil;
 import com.kedou.util.Constants;
 import com.kedou.util.IpAddress;
 
@@ -245,7 +246,6 @@ public class UserController {
 	public String login(@RequestParam("acount")String username,@RequestParam("userpwd")String pwd,@RequestParam("autologin") String isAuto,
 			Model model,HttpSession session,HttpServletResponse response,HttpServletRequest request) throws Exception{
 		
-		System.out.println("用户输入的密码："+pwd);
 		UsernamePasswordByUserTypeToken token = new UsernamePasswordByUserTypeToken(username, pwd,"1");
 		token.setRememberMe(true);
 		
@@ -363,14 +363,11 @@ public class UserController {
     	//如果文件不为空，写入上传路径
     	if(!file.isEmpty()) {
     		//开始写入文件
-    		String uploadResult = this.userServiceImpl.uploadUserIcon(file);
+    		String uploadResult = UpLoadUtil.uploadImg(file, "user");
     		if(!uploadResult.equals("-1")) {
     			//写入文件成功
     			//更新用户持久层
-    	           Object object = session.getAttribute("loginUser");
-    	           User u;
-    	           if (object instanceof User) {
-    	   			 u = (User)object;
+    			User u = (User)session.getAttribute("loginUser");
     	   			 u.setUserIcon(uploadResult);
     	   			 try {
     					this.userServiceImpl.updateUserIcon(u);
@@ -384,11 +381,6 @@ public class UserController {
     					model.addAttribute("error", "DBError");
     					return "redirect:/user/person";
     	   			 }	
-    		      }else {
-    		    	  //loginUser 不是 User 的实例
-    		    	  model.addAttribute("error", "DBError");
-    		    	  return "redirect:/user/person";
-    		      }
      		}else {
      			//写入文件不成功
      			 model.addAttribute("error", "upLoadFileErro");

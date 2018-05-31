@@ -22,6 +22,8 @@ public final class Constants {
     public static final int BUSINESS_STATE_ACTIVE = 1;
     /**机构账号被锁定状态*/
     public static final int BUSINESS_STATE_LOCK = 2;
+    /**默认的课程图片上传地址*/
+    public static final String UPLOADURL_COURSE="D:\\KedouImg\\course";
     
     /**用户账号未激活状态*/
     public static final int USER_STATE_NOACTIVE = 0;

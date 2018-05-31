@@ -16,6 +16,7 @@ import com.kedou.dao.business.BusinessDaoImpl;
 import com.kedou.dao.course.BusinessCourseTypeRelationDaoImpl;
 import com.kedou.entity.Business;
 import com.kedou.entity.CourseType;
+import com.kedou.entity.User;
 import com.kedou.service.common.CommonServiceImpl;
 import com.kedou.util.BCrypt;
 import com.kedou.util.Constants;
@@ -132,7 +133,6 @@ public class BusinessServiceImpl {
 				    bus.setCreateTime(new Date());
 				 //设置用户登录次数为 0
 				    bus.setLoginCount(0);
-				  
 			businessDaoImpl.save(bus);
 			int a=bus.getBusId();
 			return a;
@@ -145,25 +145,28 @@ public class BusinessServiceImpl {
 	 * @param busPwd (由前台传来的 用户输入的密码)
 	 * @param session
 	 * @return
+	 * @throws Exception 
 	 */
-	public Business login(Business bus,String busPwd){
-		String salt = bus.getSalt();
-		//判断账户状态是否为 可登陆状态
-		if(bus.getState()!=1) {
-			return bus;
-		}else {
-			if(BCrypt.checkpw(busPwd+salt,bus.getBusPwd())){
+	public Business login(Business bus) throws Exception{
 				 //设置登录次数
 				     bus.setLoginCount(bus.getLoginCount()+1);
 				 //设置用户上次登录时间
 				     bus.setLastLoginTime(bus.getLoginTime());
 				 //设置用户登录时间
 				     bus.setLoginTime(new Date());
+				 this.updateLoginInfo(bus);	
 				return bus;//可以登陆
-			}else{
-				return null;//密码错误
-			}
-		}
+		
+	}
+	/**
+	 * 更新用户登录信息 （登陆时间 上次登录时间 登录次数）
+	 * @param u
+	 * @return  返回 用户ID 
+	 */
+	public int updateLoginInfo(Business bus) throws Exception{
+		Object [] params = {bus.getLoginTime(),bus.getLastLoginTime(),bus.getLoginCount(),bus.getLastLoginIp(),bus.getBusIp(),bus.getBusId()};
+			this.businessDaoImpl.updateLoginInfo(params);
+		return bus.getBusId();
 	}
 
 }

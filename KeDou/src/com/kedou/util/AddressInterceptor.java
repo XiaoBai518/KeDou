@@ -19,9 +19,8 @@ public class AddressInterceptor implements HandlerInterceptor {
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object  handler) throws Exception {
-		System.out.println("地址拦截器开始");
+
     	Address address =  (Address)request.getSession().getAttribute("userAddress");  
-        System.out.println(request.getRequestURI());
 
         
         if(address == null){  
@@ -49,7 +48,7 @@ public class AddressInterceptor implements HandlerInterceptor {
                 }
             }   
         }
-        System.out.println("地址拦截器结束");
+
         return true;  
 	}
 	

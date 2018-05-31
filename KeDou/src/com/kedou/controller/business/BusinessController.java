@@ -8,16 +8,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.ExcessiveAttemptsException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.LockedAccountException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
 import com.kedou.entity.Business;
+import com.kedou.entity.Course;
+import com.kedou.entity.User;
 import com.kedou.service.business.BusinessServiceImpl;
+import com.kedou.shiro.UsernamePasswordByUserTypeToken;
 import com.kedou.util.IpAddress;
+import com.kedou.util.UpLoadErro;
+import com.kedou.util.UpLoadUtil;
 
 @Controller
 @RequestMapping("/business")
@@ -27,7 +41,7 @@ public class BusinessController {
 
 	
 	/**
-	 * 前往机构入驻页面
+	 * 前往机构入驻(注册)页面
 	 * @author 张天润
 	 * @return
 	 */
@@ -101,64 +115,71 @@ public class BusinessController {
 	 * @param bus
 	 * @param session
 	 * @return
+	 * @throws Exception 
 	 */
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public String login(Business bus,
-						HttpSession session,HttpServletRequest request,HttpServletResponse response,Model model){
-		Business bu;
+						HttpSession session,HttpServletRequest request,HttpServletResponse response,Model model) throws Exception{
+		UsernamePasswordByUserTypeToken token = new UsernamePasswordByUserTypeToken(bus.getBusAccount(), bus.getBusPwd(),"3");
+		
+		Subject currentUser = SecurityUtils.getSubject();
+	
 		try {
-			//根据账户查找机构账号
-			bu = this.businessServiceImpl.findByAcount(bus.getBusAccount());
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "数据库错误界面";
-		}
-		if(bu!=null) {
-			//账户存在
-				//检查密码是否正确
-				 bu = this.businessServiceImpl.login(bu,bus.getBusPwd());
-				 if(bu!=null) {
-					 //密码正确
-					 if(bu.getState()!=1) {
-						 if(bu.getState()==0) {
-							 //未激活
-							 System.out.println("未激活");	
-								model.addAttribute("error", "stateActiveErro");
-									return "businessLogin";
-						 }else{
-							//已被锁定
-							 System.out.println("账号被锁定");	
-								model.addAttribute("error", "stateLockErro");
-									return "businessLogin";
-						 }
-						
-					 }else {
-						 //密码正确且状态可登录
-						   //获取当前机构IP
-					       String IP = IpAddress.getIpAddress(request);
-					       	   //设置机构上次登陆IP
-					       	 	bu.setLastLoginIp(bu.getBusIp());
-					       	   //设置机构IP
-					       	 	bu.setBusIp(IP);	
-							 //不自动登录
-						 session.setAttribute("loginBusiness", bu);
-						 System.out.println("登陆成功");
-						 return "redirect:/course/toBusinessHomes?businessId="+bu.getBusId();
-					 }
-				 }else {
-					 //密码错误
-					 System.out.println("密码错误");	
-						model.addAttribute("error", "PwdErro");
-							return "businessLogin";
-				 } 
-		}else {
+			currentUser.login(token);
+			bus = (Business)currentUser.getSession().getAttribute("loginBusiness");
+			//设置用户上次登陆 Ip
+			bus.setLastLoginIp(bus.getBusIp());
+			 //设置用户登录Ip
+			bus.setBusIp(IpAddress.getIpAddress(request));
+			//更新登录信息（登录时间,登录次数）
+				this.businessServiceImpl.login(bus);
+			//保存到session
+			SecurityUtils.getSubject().getSession().setAttribute("loginBusiness", bus);
+			System.out.println("登陆成功");
+			return "busadmin";
+		} catch ( UnknownAccountException uae ) { 
 			//账户不存在
 			System.out.println("账号不存在");
 			model.addAttribute("error", "NoAcountErro");
-			    return "businessLogin";	
+		    return "businessLogin";	
+		} catch ( IncorrectCredentialsException ice ) {
+			//密码错误
+			model.addAttribute("error", "PwdErro");
+			return "businessLogin";
+
+		} catch ( LockedAccountException lae ) {
+			//已被锁定
+			 System.out.println("账号被锁定");	
+			 model.addAttribute("error", "stateLockErro");
+				return "businessLogin";
+		} catch ( ExcessiveAttemptsException eae ) { 
+			System.out.println("d");
+			return "businessLogin";
+
+		} catch ( AuthenticationException ae ) {
+			System.out.println("e");
+			return "businessLogin";
 		}
 	}
 	
+	/**
+	 * 前往商家管理中心（商家个人中心）
+	 * @return
+	 */
+	@RequestMapping(value="/tobusadmin",method=RequestMethod.GET)
+	public String toBusAdmin() {
+		
+		return "busadmin";
+	}
+	/**
+	 * 前往添加课程页
+	 * @return
+	 */
+	@RequestMapping(value="/toaddcourse",method=RequestMethod.GET)
+	public String toAddCourse() {
+		return "bus_addcourse";
+	}
+
 	/**
 	 * 审核机构
 	 * @author 原源

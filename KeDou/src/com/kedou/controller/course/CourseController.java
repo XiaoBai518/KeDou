@@ -1,6 +1,9 @@
 package com.kedou.controller.course;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -12,12 +15,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.kedou.entity.BusinessCourseTypeRelation;
 import com.kedou.entity.Course;
 import com.kedou.entity.CourseType;
 import com.kedou.service.course.CourseServiceImpl;
+import com.kedou.util.UpLoadErro;
+import com.kedou.util.UpLoadUtil;
 
 
 @Controller
@@ -157,5 +164,73 @@ public class CourseController {
 		model.addAttribute("gsonCourseList",g.toJson(courseList));
 		i++;
 		return "content";
+	}
+	/**
+	 * 课程图片上传
+	 * @param file
+	 * @return
+	 */
+	@RequestMapping(value="/uploadImg",method=RequestMethod.POST,produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public String uploadImg(@RequestParam("courseImg") MultipartFile file) {
+	
+    		String uploadResult = UpLoadUtil.uploadImg(file, "course");
+    			if(!"-1".equals(uploadResult)) {
+    				return new Gson().toJson(uploadResult);
+    			}else {
+			UpLoadErro e = new UpLoadErro();
+			e.setResult(false);
+			e.setMessage("写入文件错误");
+    				return new Gson().toJson(e);
+    			}
+	}
+//	/**
+//	 * 添加课程
+//	 */
+//	@RequestMapping(value="/addcourse",method=RequestMethod.POST)
+//	public String addCourse(@RequestParam(value="courseImg")String courseimg,
+//							@RequestParam(value="busId")String busId,
+//							@RequestParam(value="courseName")String courseName,
+//							@RequestParam(value="description")String description,
+//							@RequestParam(value="courseStartTime")String courseStartTime,
+//							@RequestParam(value="courseEndTime")String courseEndTime,
+//							@RequestParam(value="coursePrice")String coursePrice) {
+//		System.out.println(courseimg);
+//		System.out.println(busId);
+//		System.out.println(courseName);
+//		System.out.println(description);
+//		System.out.println(courseStartTime);
+//		System.out.println(courseEndTime);
+//		System.out.println(coursePrice);
+//		return "bus_addcourse";
+////		try {
+////			this.courseServiceImpl.SaveCourse(course);
+////		} catch (Exception e) {
+////			// TODO 自动生成的 catch 块
+////			e.printStackTrace();
+////		}
+////		return "bus_addcourse";
+//	}
+	/**
+	 * 添加课程
+	 */
+	@RequestMapping(value="/addcourse",method=RequestMethod.POST)
+	public String addCourse(Course course,@RequestParam("startTime")String startTime,
+									@RequestParam("endTime")String endTime) {
+	
+		System.out.println(startTime);
+	        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
+	        try {
+	            course.setCourseStartTime(simpleDateFormat.parse(startTime));
+	            course.setCourseEndTime(simpleDateFormat.parse(endTime));
+	            this.courseServiceImpl.SaveCourse(course);
+	        } catch(ParseException px) {
+	            px.printStackTrace();
+	        } catch (Exception e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+			} 
+	        
+		return "bus_addcourse";
 	}
 }

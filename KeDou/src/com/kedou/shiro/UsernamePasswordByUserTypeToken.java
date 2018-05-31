@@ -10,6 +10,7 @@ public class UsernamePasswordByUserTypeToken extends UsernamePasswordToken {
      * 用户类型 
      * 1:用户
      * 2:管理员
+     * 3:商家
      */  
     private String userType;  
   

@@ -1,0 +1,110 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+img{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+ul,li{
+	list-style-type: none;
+	padding: 0px;
+}
+
+td{
+	width: 10px;
+	overflow: hidden;
+}
+iframe{
+	overflow: auto;
+	width: 600px;
+}
+/*网页头部*/
+#header{
+	width: 100%;
+}
+#logo{
+	width: 100px;
+	height: 50px;
+	margin-top: 1%;
+	position: relative;
+	left: 10%;
+	float: left;
+}
+/*个人中心*/
+#myPhoto{
+	margin-top: 1%;
+	margin-bottom: 1%;
+	margin-right: 10%;
+	float: right;
+	width: 50px;
+	height: 50px;
+}
+#myPopover{
+	width: 140px;
+	color: red;
+	display: none;
+	float: right;
+	position: absolute;
+	left: 83%;
+	top: 10%;
+}
+.menu-li{
+	width: 100%;
+	line-height: 25px;
+	padding: 0px;
+	width: 100%;
+}
+/*导航条*/
+#navigation{
+	float: left;
+	width: 100%;
+	overflow: auto;
+	height: 40px;
+	padding-left: 270px;
+	background-color: #EDEEF0;
+	border-top: 1px solid #DEDDDE;
+}
+.nav-a:hover,.nav-a:focus{
+	color: #3280fc;
+	border-bottom-color: #3280fc;
+}
+/*左侧导航*/
+#left-nav{
+	width: 20%;
+	float: left;
+	background-color: #F9F8F7;
+}
+.nav-stacked.nav-secondary > li.nav-left-item > a{
+	height: 50px;
+	line-height: 30px;
+	font-size: 16px;
+}
+.nav-stacked.nav-secondary > li.nav-left-item > a:hover{
+	background-color: #EDEEF0;
+	color: #3280fc;
+	border-left-color: #3280fc;
+	-webkit-box-shadow: inset 2px 0 0 #3280fc;
+	box-shadow: inset 2px 0 0 #3280fc;
+}
+.nav-stacked.nav-secondary > li.nav-left-item > a:focus {
+  background-color: #F0F0EB;
+  color: #3280fc;
+  border-left-color: #3280fc;
+  -webkit-box-shadow: inset 2px 0 0 #3280fc;
+          box-shadow: inset 2px 0 0 #3280fc;
+}
+.collapse-item{
+	margin-left: 8%;
+	padding: 10px;
+}
+
+/*标签管理器*/
+#tabs{
+	float: left;
+	width: 80%;
+	height: 1000px;
+	overflow: hidden;
+
+}

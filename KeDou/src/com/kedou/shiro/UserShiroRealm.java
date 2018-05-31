@@ -1,8 +1,5 @@
 package com.kedou.shiro;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
-
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -15,12 +12,9 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
 
-import com.kedou.dao.role.RoleDaoImpl;
-import com.kedou.dao.role.UserRoleRelationDaoImpl;
-import com.kedou.dao.user.UserDaoImpl;
+
 import com.kedou.entity.User;
 import com.kedou.service.user.UserServiceImpl;
 import com.kedou.util.Constants;

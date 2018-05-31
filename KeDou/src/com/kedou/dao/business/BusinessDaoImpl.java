@@ -45,8 +45,17 @@ public class BusinessDaoImpl  extends BaseDao<Business>  {
 		String hql = "update Organization as b set b.busState = ? where b.id = ?";
 		
 			super.updateByProperty(hql,params);
-		
 
+	}
+	/**
+	 * 更新商家登录信息 （登陆时间 上次登录时间 登录次数）
+	 * @param u
+	 * @return 更新成功 返回 用户ID 否则 返回 -1
+	 */
+	public void updateLoginInfo(Object [] params) throws Exception{
+		String hql = "update Business as bus set bus.loginTime= ? , bus.lastLoginTime= ?,bus.loginCount= ?,bus.lastLoginIp= ?,bus.busIp= ? where bus.busId=?";
+		
+			super.updateByProperty(hql, params);
 	}
 	
 }

@@ -252,39 +252,7 @@ public class UserServiceImpl {
 		this.userDaoImpl.updateUserIcon(params);
 	}
 
-	/**
-	 * 上传用户头像
-	 * @param file
-	 * @return    
-	 *  写文件时出错时   返回-1
-	 *  成功                    返回用户fileName
-	 */
-	public String uploadUserIcon (MultipartFile file) {
-		
-	           //文件后缀
-				String tail = "."+file.getOriginalFilename().split("\\.")[1];
-				String sdate=(new SimpleDateFormat("yyyyMMddHHmmss")).format( new Date());  
-				  //上传文件名
-		           String filename = sdate+tail;
-	           File filepath = new File(Constants.UPLOADURL_PERSONAL,filename);
-	           //判断路径是否存在，如果不存在就创建一个
-	           if (!filepath.getParentFile().exists()) { 
-	               filepath.getParentFile().mkdirs();
-	           }
-	           //将上传文件保存到一个目标文件当中
-	           try {
-				file.transferTo(new File(Constants.UPLOADURL_PERSONAL+ File.separator + filename));
-			} catch (IllegalStateException e) {
-				// TODO 自动生成的 catch 块
-				e.printStackTrace();
-				return "-1";
-			} catch (IOException e) {
-				// TODO 自动生成的 catch 块
-				e.printStackTrace();
-				return "-1";
-			}
-	           return filename;
-	}
+	
 	/**
 	 * @desc 展示用户描述
 	 * @author yuyueming

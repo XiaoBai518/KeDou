@@ -31,7 +31,6 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override  
     public boolean preHandle(HttpServletRequest request,  
             HttpServletResponse response, Object handler) throws Exception {  
-    	System.out.println("拦截器开始");
     	User loginUser =  (User)request.getSession().getAttribute("loginUser");  
         System.out.println(request.getRequestURI());
         Subject subject = SecurityUtils.getSubject();
@@ -67,7 +66,6 @@ public class LoginInterceptor implements HandlerInterceptor {
         	            }
         	        } 
         }
-        System.out.println("拦截器结束");
         return true;  
     }  
   

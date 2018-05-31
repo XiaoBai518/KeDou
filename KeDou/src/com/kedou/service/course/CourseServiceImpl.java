@@ -33,6 +33,17 @@ public class CourseServiceImpl {
 	@Resource
 	private CourseTypeRelationDaoImpl courseTypeRelationDaoImpl;
 	
+	
+	
+	
+	/**
+	 * 添加课程
+	 * @param c
+	 * @throws Exception
+	 */
+	public void SaveCourse (Course c) throws Exception {
+		this.courseDaoImpl.save(c);
+	}
 	/**
 	 * 
 	 * @desc 按类型查询课程(默认个数)
