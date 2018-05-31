@@ -6,3 +6,8 @@ function keyDown(e) {
 				return false;
 			}
 		}
+
+/**管理员后台登陆页面的登录逻辑判断*/
+function bgonsubmit() {
+	
+}

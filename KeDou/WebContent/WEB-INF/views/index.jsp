@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+     <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>  
     <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -54,15 +55,30 @@
             <img src="${ctx }/img/indexball.png" id="indexball"></a>
             
             <div id="nav_div" style="bottom: 0px;right:0px;">
-            <c:if test="${ not empty sessionScope.loginUser}">
-              <a href="${ctx }/user/person"><img src="${ctx }/img/user.png" class="nav"></a>
-            </c:if>
+            
+            <!-- 用户个人中心 -->
+            <shiro:user>  
+				 <a href="${ctx }/user/person"><img src="${ctx }/img/user.png" class="nav"></a>
+			</shiro:user> 
+			<!-- 游客身份登录 -->
+          	<shiro:guest>  
+				 <a href="${ctx }/user/toiframe"><img src="${ctx }/img/login.png" class="nav"></a>
+			</shiro:guest>   
              <c:if test="${ empty sessionScope.loginUser  }">
-              <a href="${ctx }/user/toiframe"><img src="${ctx }/img/login.png" class="nav"></a>
+             
             </c:if>
             </div>
             <div id="nav_div" style="bottom: 0px;right:0px;"><a href="${ctx }/business/tologin"><img src="${ctx }/img/business.png" class="nav"></a></div>
-            <div id="nav_div" style="bottom: 0px;right:0px;"><a href="${ctx }/user/logout"><img src="${ctx }/img/qrcode.png" class="nav"></a></div>
+            <div id="nav_div" style="bottom: 0px;right:0px;">
+             <shiro:user> 
+               <a href="${ctx }/user/logout"><img src="${ctx }/img/login.png" class="nav"></a>
+             </shiro:user>
+             <shiro:guest> 
+              <a href="#"><img src="${ctx }/img/qrcode.png" class="nav"></a>
+             </shiro:guest>
+           
+            
+            </div>
       </div>
    <script>
       $(document).ready(function(){ 

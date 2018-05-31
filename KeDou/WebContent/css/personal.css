@@ -118,18 +118,18 @@ a{
 	background-color: #FAFAFA;
 }
 .main_right{
-	height: 600px;
+	height: 650px;
 	width: 1000px;
 	position:relative;     
 	left:8%;                          
-	z-index:-1;
+	z-index:999;
 }
 .main_message{
-	height: 500px;
+	height: 650px;
 	width: 1000px;
-	position:relative;     
-	top:5%;                          
-	z-index:-1;
+	position:absolute;                     
+	top:2%;            
+	z-index:999;
 }
 .image{
 	width: 100px;
@@ -400,7 +400,7 @@ a{
 	border-style: solid;
 	border-radius:10px 10px 10px 10px;
 	display: block;
-	z-index: 2;
+	z-index: 1000;
 }
 .change_meg{
 	width: 130px;
@@ -799,9 +799,6 @@ table .test td:hover{
 	cursor: pointer;
 
 }
-.table{
-	margin-top: 10px;
-}
 table tr a{
 	text-docoration:none;
 	color:grey;
@@ -811,37 +808,16 @@ table tr a:hover{
 	color:red;
 }
 .page{
-	width:100%;
+	width:80%;
 	height:60px;
-	position:absolute;                     
-	top:70%;
+	float:left;
 	text-align:center;
 	line-height:50px;
 	background-color:;
 }
 .tbutton{
-	width: 50px;
-	height: 50px;
-	position:absolute;                     
-	top:70%;
-	left:3%;
-	text-align:center;
-	cursor: pointer;
+	float:left;
+	margin-left:20px;
+	margin-top:10px;
 	z-index: 9999;
-}
-.button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-.button22 {
-    background-color: white; 
-    color: black; 
-    border: 2px solid #008CBA;
 }

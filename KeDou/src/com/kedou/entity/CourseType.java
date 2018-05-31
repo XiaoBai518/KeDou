@@ -24,7 +24,11 @@ public class CourseType {
 	
 	private String typeName;        
 	private Date typeCreateTime;	//类型创建时间
-	private int typeCreator;	//类型创建时间
+	private int typeCreator;		//类型创建者
+	
+	
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -49,6 +53,8 @@ public class CourseType {
 	public void setTypeCreator(int typeCreator) {
 		this.typeCreator = typeCreator;
 	}
+	
+
 	
 	
 }

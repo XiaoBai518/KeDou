@@ -1,0 +1,24 @@
+@CHARSET "UTF-8";
+.gc {padding-top: 20px;background-color:#F9F8F7;height: 700px;}
+.gc_main {margin: 0 auto;width: 1060px;}
+.content{font-size: 14px;}
+.demo{border: 1px solid #eee;padding:10px;margin:10px;background-color: #FFFFFF;height: 800px}
+.info{font-size: 18px;padding-left: 20px;}
+#hotspace{margin-bottom: 10px;margin-top: 0px;font-size: 18px;padding-left: 22px;}
+#hotspace a{color:#A9A9A9; font-size: 14px;}
+#hotspace a:hover{
+	color: red;
+	text-decoration:none;
+}
+#box input{font-size: 15px;width: 200px;margin-right: 10px;margin-left: 5px}
+#hotspace label{font-size: 17px;font-weight:normal;}
+#box label{font-size: 17px;font-weight:normal;}
+.info label{font-size: 17px;font-weight:normal;}
+select{display: inline-block;width: auto;vertical-align: middle;height: 28px;border: 1px solid rgba(0,0,0,.15);border-radius: .25rem;}
+.uldemo{display: block;height: auto;}
+.uldemo .forexample{display: block;}
+.uldemo .forexample ul.distpicker_province{border: 1px solid #eee;margin-top: 10px;}
+.uldemo .forexample ul.distpicker_city{border: 1px solid #eee;display: none;margin-top: 20px;}
+.uldemo .forexample ul.distpicker_district{border: 1px solid #eee;display: none;margin-top: 20px;}
+.uldemo .forexample ul li{display: inline-block;margin:10px 0px 7px 10px;text-align: center;height: 24px;line-height: 24px;padding: 0px 7px 0px 7px;font-size: 12px;color: #222;background: #fff;border: 1px dashed #cdcdcd;cursor: pointer;}
+.uldemo .forexample ul li.selected,.uldemo .forexample ul li:hover{border: 1px solid #38f;background:#38f;color:#fff;}

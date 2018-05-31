@@ -25,21 +25,21 @@
 		<div id="content">
 			<div id="shop_navigation">
 				<a href="${ctx}/course/toBusinessHomes?businessId=${businessId}" id="pro_category">所有课程</a>
-				<a href="#" class="nav_item">首页</a>
+				<a href="${ctx}/course/toBusinessHomes?businessId=${businessId}" class="nav_item">首页</a>
 				<c:forEach items="${courseTypeList }" var="cl" >
-					<a href="${ctx }/course/businessTypeCourse?businessId=${businessId}&courseTypeId=${cl.id}" class="nav_item">${cl.typeName }</a>
+					<a href="${ctx }/course/TypeCoursemore?businessId=${businessId}&courseTypeId=${cl.id}" class="nav_item">${cl.typeName }</a>
 				</c:forEach>
 			</div>
 			<c:forEach items="${courseList }" var="cl" >
 				<div id="pro_content">
 					<div class="pro_head">
 						<div class="pro_title"><strong style="color: white;">${cl.key.typeName }</strong></div>
-						<div class="more"><a href="${ctx }/course/businessTypeCourse?businessId=${businessId}&courseTypeId=${cl.key.id}"><strong style="color: white;">more+</strong></a></div>
+						<div class="more"><a href="${ctx }/course/TypeCoursemore?businessId=${businessId}&courseTypeId=${cl.key.id}"><strong style="color: white;">more+</strong></a></div>
 					</div>
 					<div class="prolist">
 						<c:forEach items="${cl.value}" var="list">
 							<div class="pro">
-								<div class="proPicture"><a href="#"><img src="/file/${list.courseImg }"></a></div>
+								<div class="proPicture"><a href="#"><img src="/file/course/${list.courseImg }"></a></div>
 								<div class="price">￥${list.coursePrice }</div><div class="sell_count">已售：${list.courseSold }件</div>
 								<div class="proName"><a href="#">${list.courseName}</a></div>
 								<div class="proInfo"><a href="#">简介：${list.description }</a></div>

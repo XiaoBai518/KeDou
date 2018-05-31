@@ -14,7 +14,6 @@
       	int []local = new int[4];
      	for(int i=0;i<4;i++){
      		local[i]=loc.get(i);
-         	System.out.println(local[i]);
      	}
      	List<String> contents =(List<String>)session.getAttribute("disarr");
      	String []content = new String [4];
@@ -75,10 +74,10 @@
 	    			if (data == "yes") {
 	    				window.location.href ="http://localhost:8080/KeDou/user/showuserlabel";
 	    			} else if (data == "no") {
-	    				alert("错了！");
+	    			
 	    			}
 	    		},error: function(data){
-	    			alert("no");
+	    		
 	    		}
 	    	});
 	    }
@@ -88,7 +87,7 @@
 </head>
 <body>
     <!-- 设置背景图片 -->
-    <div id="logoimg"><img src="${ctx }/img/logo1.png"></div>
+    <div id="logoimg"><img src="${ctx }/img/logo2.png"></div>
     <!-- 用户输入框 -->
     <div id="keytext" style="position:relative;z-index:999">
           <input type="text" id="word" placeholder="用一句话描述自己">

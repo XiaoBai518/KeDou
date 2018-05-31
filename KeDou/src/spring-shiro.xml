@@ -1,0 +1,107 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd">
+		
+		<!-- 注入Service Bean -->
+	<bean id="adminServiceImpl" class="com.kedou.service.bg.AdminServiceImpl"></bean>
+ 	<bean id="userServiceImpl" class="com.kedou.service.user.UserServiceImpl"></bean> 
+ 	
+		<!-- 自定义Realm -->
+	<bean id="userShiroRealm" class="com.kedou.shiro.UserShiroRealm">
+        <property name="userServiceImpl" ref="userServiceImpl" />
+        <property name="credentialsMatcher" ref="credentialsMatcher"/>     
+    </bean> 
+    <bean id="adminShiroRealm" class="com.kedou.shiro.AdminShiroRealm">
+    	 <property name="adminServiceImpl" ref="adminServiceImpl" />
+    	  <property name="credentialsMatcher" ref="credentialsMatcher"/>     
+    </bean> 
+    
+	<!-- 凭证匹配器 -->  
+    <bean id="credentialsMatcher" class="com.kedou.shiro.UserCredentialsMatcher">  
+    </bean>   
+	
+		<!-- 项目自定义Authenticator -->  
+	<bean id="pointRealmAuthenticator"  class="com.kedou.shiro.PointRealmAuthenticator">  
+   	 	<!-- realmMap -->  
+    	<property name="definedRealms">  
+        	<map>  
+            	<entry key="userShiroRealm" value-ref="userShiroRealm" />  
+            	<entry key="adminShiroRealm" value-ref="adminShiroRealm" />  
+        	</map>  
+    	</property>  
+	</bean>  
+	<!-- Shiro安全管理器 -->
+	<!-- securityManager -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+    	<property name="authenticator" ref="pointRealmAuthenticator" />  
+    	<!-- 多Realm注入 -->  
+    	<property name="realms">  
+        	<list>  
+            	<ref bean="userShiroRealm" />  
+            	<ref bean="adminShiroRealm" />   
+        	</list>  
+    	</property>  
+    	<property name="rememberMeManager" ref="rememberMeManager" />  
+	</bean>
+	
+   <!-- shiro-all.jar filterChainDefinitions：apache shiro通过filterChainDefinitions参数来分配链接的过滤，资源过滤有常用的以下几个参数：
+    authc 表示需要认证的链接
+    perms[/url] 表示该链接需要拥有对应的资源/权限才能访问
+    roles[admin] 表示需要对应的角色才能访问
+    perms[admin:url] 表示需要对应角色的资源才能访问-->
+ 	<bean id="shiroFilter" name="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+     <property name="securityManager" ref="securityManager" />
+        <property name="loginUrl" value="/user/toiframe" />
+        <property name="successUrl" value="/common/toindex" />
+        <property name="unauthorizedUrl" value="/403.do" />
+    <property name="filterChainDefinitions">
+        <value>
+            # some example chain definitions:
+            /**/fonts/* = anon
+         	/**/*.css = anon
+        	/**/*.js = anon
+       		/**/*.png = anon
+         	/**/*.gif = anon
+        	/**/*.jpg = anon
+         	/**/*.jpeg = anon
+         	/**/*.json = anon
+          	/**/*bg* = anon
+  			/user/person* = user,roles[user]
+  			/bg*/* = authc,roles[admin]
+            # more URL-to-FilterChain definitions here
+        </value>
+    </property>
+</bean>
+	<!-- 启用Shiro 注释 -->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
+    	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+    	<property name="securityManager" ref="securityManager"/>
+	</bean>
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+	
+	<!-- rememberMe配置 -->
+   <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+       <constructor-arg value="rememberMe" />
+       <property name="httpOnly" value="true" />
+       <property name="path" value="/"/>  
+       
+       <!-- 默认记住7天（单位：秒） -->
+       <property name="maxAge" value="604800" />
+   </bean>
+   
+   <!-- rememberMe管理器 -->
+   <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+       <property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}" />
+       
+       <property name="cookie" ref="rememberMeCookie" />
+   </bean>
+</beans>

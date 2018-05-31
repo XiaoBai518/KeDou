@@ -24,7 +24,7 @@
     
     <mvc:interceptors>  
    <!--  使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求   -->
-    <!-- <bean class="com.bybo.aca.web.interceptor.Login"/> -->   
+    
     <mvc:interceptor>  
         <!-- 进行拦截：/**表示拦截所有controller -->
         <mvc:mapping path="/**" />
@@ -36,11 +36,34 @@
          <mvc:exclude-mapping path="/**/*.gif"/>
          <mvc:exclude-mapping path="/**/*.jpg"/>
          <mvc:exclude-mapping path="/**/*.jpeg"/>
+          <mvc:exclude-mapping path="/**/*.json"/>
+          <mvc:exclude-mapping path="/**/*bg*"/>
        
+       <bean class="com.kedou.util.AddressInterceptor" />  
+    </mvc:interceptor>
+    <mvc:interceptor>  
+        <!-- 进行拦截：/**表示拦截所有controller -->
+        <mvc:mapping path="/**" />
+ 		<!-- 不进行拦截 -->
+         <mvc:exclude-mapping path="/**/fonts/*"/>
+         <mvc:exclude-mapping path="/**/*.css"/>
+         <mvc:exclude-mapping path="/**/*.js"/>
+         <mvc:exclude-mapping path="/**/*.png"/>
+         <mvc:exclude-mapping path="/**/*.gif"/>
+         <mvc:exclude-mapping path="/**/*.jpg"/>
+         <mvc:exclude-mapping path="/**/*.jpeg"/>
+          <mvc:exclude-mapping path="/**/*.json"/>
+          <mvc:exclude-mapping path="/**/*bg*"/>
+       	  
        <bean class="com.kedou.util.LoginInterceptor" />  
-    </mvc:interceptor>  
+    </mvc:interceptor>        
+ 
 </mvc:interceptors>    
 
+	   <!-- 开启shiro注解支持 -->
+    <!--  <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager" />
+    </bean>  --> 
 	<!-- 定义JSP文件的位置 --> 
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/"/>

@@ -31,6 +31,7 @@ public class Course {
 	private int courseSold;			//课程已售数量
 	private String courseImg;		//课程图片
 	private int hot;				//是否热门
+	private int state=0;			//课程状态 0为锁定状态  1为正常
 	public int getCourseId() {
 		return courseId;
 	}
@@ -92,6 +93,12 @@ public class Course {
 	}
 	public void setHot(int hot) {
 		this.hot = hot;
+	}
+	public int getState() {
+		return state;
+	}
+	public void setState(int state) {
+		this.state = state;
 	}
 	
 	

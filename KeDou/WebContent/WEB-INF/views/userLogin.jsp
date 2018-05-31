@@ -13,7 +13,7 @@
 <div id="one">	
 	<!--中间内敛框架的变化部分 -->
 	<div id="four_ifr">
-		<iframe src="${ctx }/user/tologin${error}" frameborder="0" width="100%" scrolling="no" height="100%" name="box"></iframe>
+		<iframe src="${ctx }${url}${error}" frameborder="0" width="100%" scrolling="no" height="100%" name="box"></iframe>
 	</div>	
 	<!--底部第三方登录-->
 	<div id="fond_style2">

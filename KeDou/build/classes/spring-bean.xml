@@ -19,24 +19,6 @@
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 	
-	<!--  <bean id="LoginFilter" class="com.kedou.util.LoginFilter">
-   		<property name="userServiceImpl" ref="userServiceImpl"></property>
-	</bean>-->
-	<!-- bean id="dataSource" 
-		class="com.mchange.v2.c3p0.ComboPooledDataSource">
-		<property name="driverClassName">
-			<value>com.mysql.jdbc.Driver</value>
-		</property>
-		<property name="url">
-			<value>jdbc:mysql://localhost:3306/kedou_db?useUnicode=true&amp;characterEncoding=UTF-8</value>
-		</property>
-		<property name="username">
-			<value>root</value>
-		</property>
-		<property name="password">
-			<value></value>
-		</property>
-	</bean-->
 	<bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
 		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/kedou_db?useUnicode=true&amp;characterEncoding=UTF-8" />

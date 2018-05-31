@@ -7,8 +7,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
-import com.kedou.entity.User;
-import com.kedou.util.MD5;
 import com.kedou.util.RandomValidateCode;
 
 @Service
@@ -31,21 +29,6 @@ public class CommonServiceImpl {
         } catch (Exception e) {
             e.printStackTrace();
         }
-	}
-	/**
-	 * 
-	 * @desc 加入Session域
-	 * @author zhangtainrun
-	 * @createDate 2018年3月28日
-	 * @param String key,Object o,int MaxInactiveInterval,HttpSession session,HttpServletResponse response
-	 */
-	public void toSession(String key,Object o,int MaxInactiveInterval,HttpSession session,HttpServletResponse response){
-		session.setAttribute(key, o);
-		session.setMaxInactiveInterval(180);
-		Cookie cookie = new Cookie("JSESSIONID",session.getId());         
-		cookie.setMaxAge(session.getMaxInactiveInterval());  
-		cookie.setPath(session.getServletContext().getContextPath());  
-		response.addCookie(cookie);  
 	}
 	
 }

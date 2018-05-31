@@ -27,6 +27,69 @@ $(document).ready(function() {
 		    //使选择控件不可操作
 		    $("xdaTanFileImg").attr("disabled", "disabled");
 		}
+		
+		/**全选按钮功能*/
+		ischeck = 0;
+		$("input[name='tempString']").on('click', function(){
+			//设置选择效果
+			var k=0;
+			$("input[name='tempString']").each(function(){
+				if(!$(this).is(':checked')) {
+					k=1;
+				}
+			});
+			if(k==0){
+				$("#allCheckBox").attr("checked",true);
+			}
+			else{
+				$("#allCheckBox").attr("checked",false);
+			}
+			
+			//判断删除按钮可否被点击
+			if($(this).is(':checked')) {
+				ischeck+=1;
+			}else{
+				ischeck-=1;
+			}
+			
+			if(ischeck>0){
+				$("button[name='delete']").attr("disabled",false);
+				$("button[name='delete']").css("cursor","pointer");
+				$("button[name='delete']").css("opacity","1");
+			}else{
+				$("button[name='delete']").attr("disabled",true);
+				$("button[name='delete']").css("cursor","not-allowed");
+				$("button[name='delete']").css("opacity","0.6");
+			}
+			
+		});
+		$("input[id='allCheckBox']").on('click', function(){
+			//设置全选效果
+			$("input[name='tempString']").each(function(){
+				$(this).attr("checked",$("#allCheckBox").is(':checked'));
+			});
+			
+			if($(this).is(':checked')) {
+				ischeck=3;
+			}else{
+				ischeck=0;
+			}
+			if(ischeck>0){
+				$("button[name='delete']").attr("disabled",false);
+				$("button[name='delete']").css("cursor","pointer");
+				$("button[name='delete']").css("opacity","1");
+			}else{
+				$("button[name='delete']").attr("disabled",true);
+				$("button[name='delete']").css("cursor","not-allowed");
+				$("button[name='delete']").css("opacity","0.6");
+			}
+		});
+			window.onload = function() { 
+			$("button[name='delete']").attr("disabled",true);
+			$("button[name='delete']").css("cursor","not-allowed");
+			$("button[name='delete']").css("opacity","0.6");
+			};
+
 	
 });
 

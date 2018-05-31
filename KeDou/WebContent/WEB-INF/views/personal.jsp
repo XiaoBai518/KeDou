@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+      <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>  
     <c:set var="ctx" value="${pageContext.request.contextPath}" />
     <c:set var="userImgPath" value="/file/personal" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -44,39 +45,37 @@
 				<!--定位-->
 				<div id="locate">
 					<i class="icon icon-map-marker icon-2x" ></i>
-					<p id="address">[<a href="#" style="color:#3280fc; text-decoration: none;">切换地址</a>]</p>
+					<p id="address">${sessionScope.userAddress.address }[<a href="${ctx }/useraddress/toaddress" style="color:#3280fc; text-decoration: none;">切换地址</a>]</p>
 				</div>
 				<!--个人头像-->
 				<div id="userPad">
-					<div id="myPhoto">
-						<img src="${ctx }/img/login.png"/>
-					</div>
-					<div class="popover bottom" id="myPopover">
-						<div class="arrow"></div>
-							<h3 class="popover-title"><a href="#"><i class="icon icon-home"></i>&nbsp&nbsp个人中心</a></h3>
-							<div class="popover-content">
-								<ul>
-									<li class="menu-li"><a href="#"><i class="icon icon-envelope"></i>&nbsp&nbsp我的消息</a></li>
-									<li class="menu-li"><a href="#"><i class="icon icon-history"></i>&nbsp&nbsp我的足迹</a></li>
-									<li class="menu-li"><a href="#"><i class="icon icon-check-board"></i>&nbsp&nbsp我的预约</a></li>
-									<li class="menu-li"><a href="#"><i class="icon icon-star"></i>&nbsp&nbsp我的收藏</a></li>
-								</ul>
-							</div>
+					 	<div id="myPhoto">
+						<img src="${userImgPath}/${sessionScope.loginUser.userIcon}"/>
 						</div>
-					</div>
+						<div class="popover bottom" id="myPopover">
+							<div class="arrow"></div>
+								<h3 class="popover-title"><a href="${ctx }/user/person"><i class="icon icon-home"></i>&nbsp&nbsp个人中心</a></h3>
+								<div class="popover-content">
+									<ul>
+										<li class="menu-li"><a href="${ctx }/user/person"><i class="icon icon-envelope"></i>&nbsp&nbsp我的消息</a></li>
+										<li class="menu-li"><a href="${ctx }/user/person?address=1"><i class="icon icon-history"></i>&nbsp&nbsp我的足迹</a></li>
+										<li class="menu-li"><a href="${ctx }/user/person?address=2"><i class="icon icon-check-board"></i>&nbsp&nbsp我的预约</a></li>
+										<li class="menu-li"><a href="${ctx }/user/person?address=3"><i class="icon icon-star"></i>&nbsp&nbsp我的收藏</a></li>
+									</ul>
+								</div>
+						</div>
 				</div>
 				
 				<!--导航条-->
 				<div id="navigation">
 					<ul class="nav nav-secondary">
-						<li><a href="#" class="nav-a">首页</a></li>
+						<li><a href="${ctx }/common/toindex" class="nav-a">首页</a></li>
 						<li><a href="#" class="nav-a">动态 <span class="label label-badge label-success">4</span></a></li>
 						<li><a href="#" class="nav-a">项目 </a></li>
 						<li><a href="#" class="nav-a">哈哈</a></li>
 					</ul>
 				</div>
 			</div> 
-		</div>
 		<script>
 			 $(document).ready(function(){
 		         $("#myPhoto").hover(function(){
@@ -96,7 +95,7 @@
 
 		
 		<div class="main_left" style="float:left;">
-			<div class="image"  id="image"><img src="${userImgPath}/${sessionScope.loginUser.userIcon}" width="100%" height="100%"></div>
+			<div class="image"  id="image"><img src="${userImgPath}/${sessionScope.loginUser.userIcon}" width="100%" height="100%" onerror="this.src='${ctx }/img/logo.jpg'"></div>
 			<div class="image_change" id="image_change" onclick="check('chanageImg','${userImgPath}/${sessionScope.loginUser.userIcon}')">
 				<img src="${ctx }/img/timg.jpg"width="100%" height="100%">
 					<p class="image_text" id="image_text">更换头像</p>	
@@ -104,16 +103,23 @@
 			<div class="username">${sessionScope.loginUser.userName }</div>
 			<div class="username_mananger">账户管理</div>
 				<div class="usermessage"></div>
-				<a style="text-decoration: none;" href="${ctx }/user/person_message?address=message" target="preson_megs"><div class="usermessage111" id="usermessage1" name="yes">个人信息</div></a>
-				<a style="text-decoration: none;" href="${ctx }/user/person_message?address=history" target="preson_megs"><div class="usermessage2" id="usermessage2">访问历史</div></a>
-				<a style="text-decoration: none;" href="${ctx }/user/person_message?address=yuyue" target="preson_megs"><div class="usermessage3" id="usermessage3">预约课程</div></a>
-				<a style="text-decoration: none;" href="${ctx }/user/person_message?address=collect" target="preson_megs"><div class="usermessage4" id="usermessage4">收藏课程</div></a>
+				<a style="text-decoration: none;" href="${ctx }/user/personmessage" target="preson_megs"><div class="usermessage1" id="usermessage1" >个人信息</div></a>
+				<a style="text-decoration: none;" href="${ctx }/userhistory/personhistory" target="preson_megs"><div class="usermessage2" id="usermessage2">访问历史</div></a>
+				<a style="text-decoration: none;" href="${ctx }/torder/persontorder" target="preson_megs"><div class="usermessage3" id="usermessage3">预约课程</div></a>
+				<a style="text-decoration: none;" href="${ctx }/collection/personcollection" target="preson_megs"><div class="usermessage4" id="usermessage4">收藏课程</div></a>
 		</div>
-		
+		<script>
+			$(document).ready(function(){
+				$("div[id='usermessage${p}']").attr('class',"usermessage111");
+				if(${p }!=1) {
+					$('#buton1').attr('style','display: none');
+				}
+			});
+		</script>
 		<div class="main_right"  style="float:left;">
 			<div id="buton1" class="buton1" onclick="check('personal')"><label style="line-height :20px;vertical-align:middle;">编辑</label></div>
 			<div class="main_message">
-				<iframe src="${ctx}/user/person_message?address=message"  frameborder="0" width="100%" scrolling="no" height="100%" name="preson_megs"></iframe>
+				<iframe src="${ctx}/${address}"  frameborder="0" width="100%" scrolling="no" height="100%" name="preson_megs"></iframe>
 			</div>
 		</div>
 

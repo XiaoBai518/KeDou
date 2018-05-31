@@ -3,24 +3,24 @@ package com.kedou.util;
 import java.util.Date;
 
 import javax.annotation.Resource;
-import javax.servlet.http.Cookie;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kedou.entity.User;
-import com.kedou.service.BusinessServiceImpl;
-import com.kedou.service.UserServiceImpl;
+import com.kedou.service.user.UserServiceImpl;
+
 
 
 public class LoginInterceptor implements HandlerInterceptor {  
     
     @Resource    
     private UserServiceImpl userServiceImpl;  
-    @Resource
-    private BusinessServiceImpl BusinessServiceImpl;
       
     /**  
      * preHandle方法是进行处理器拦截用的，该方法将在Controller处理之前进行调用，SpringMVC中的Interceptor拦截器是链式的，可以同时存在  
@@ -34,32 +34,16 @@ public class LoginInterceptor implements HandlerInterceptor {
     	System.out.println("拦截器开始");
     	User loginUser =  (User)request.getSession().getAttribute("loginUser");  
         System.out.println(request.getRequestURI());
-
-        
+        Subject subject = SecurityUtils.getSubject();
+ 
         if(loginUser == null){  
-        	
-            String loginCookieUserName = "";  
-            String loginCookiePassword = "";  
-          
-            Cookie[] cookies = request.getCookies();  
-            if(cookies!=null&&cookies.length>0){    
-                for(Cookie cookie : cookies){    
-                    //if("/".equals(cookie.getPath())){ //getPath为null  
-                        if("userAccount".equals(cookie.getName())){  
-                        	System.out.println(cookie.getValue());
-                            loginCookieUserName = cookie.getValue();  
-                        }else if("userPwd".equals(cookie.getName())){  
-                        	System.out.println(cookie.getValue());
-                            loginCookiePassword = cookie.getValue();  
-                        }  
-                    //}  
-                }    
-           
-                if(!"".equals(loginCookieUserName) && !"".equals(loginCookiePassword)){  
-                	
-                    User user = userServiceImpl.findByAcount(loginCookieUserName);
-        			if(MD5.Md5(user.getUserPwd()).equals(loginCookiePassword)){
-        				System.out.println("进行自动登陆");
+        	if(!subject.isAuthenticated() && subject.isRemembered()) {
+        		//用户账号
+        			Object principal = subject.getPrincipal();
+                   if(null!= principal) {
+                	   
+                	   	User user = this.userServiceImpl.findByAcount(String.valueOf(principal));
+                	   	System.out.println("进行自动登陆");
         				//获取当前用户IP
 					     String IP = IpAddress.getIpAddress(request);
 					    //设置用户上次登陆IP
@@ -79,17 +63,9 @@ public class LoginInterceptor implements HandlerInterceptor {
 							// TODO: handle exception
 							e.printStackTrace();
 						}
-					    //更新用户登录信息
-					   
-					     //将用户加入session域
-        				 request.getSession().setAttribute("loginUser", user);  
-        				 System.out.println("自动登陆结束");
-                   }  
-                }  else {
-                	// 没有相应Cookie
-                	
-                }
-            }   
+                	   	subject.getSession().setAttribute("loginUser", user);        	   	
+        	            }
+        	        } 
         }
         System.out.println("拦截器结束");
         return true;  

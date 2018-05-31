@@ -47,19 +47,16 @@
 	    		alert("不能为空哦");
 	    	}
 		$.ajax({
-    		url : "http://localhost:8080/KeDou/user/label",
+    		url : "${ctx}/user/label",
     		type : "POST",
     		data :params,
     		dataType:'json',
     		success : function(data) {
-    			alert(0);
     			if (data == "yes") {
-    				alert("ok");
+    				window.location.href ="${ctx}/common/toindex";
     			} else if (data == "no") {
-    				alert("错了！");
     			}
     		},error: function(data){
-    			alert("no");
     		}
     	});
 	}

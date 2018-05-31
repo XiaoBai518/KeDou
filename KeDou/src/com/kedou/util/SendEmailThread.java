@@ -62,7 +62,7 @@ public void run() {
 	// 用session为参数定义消息对象
 	Session session = Session.getInstance(props, new Authenticator() {
         public PasswordAuthentication getPasswordAuthentication() { /* 若服务器需要身份认证，Sission会自动调用这个方法 */
-            return new PasswordAuthentication("3348958465@qq.com", "yiqzxieijxxycjbi");
+            return new PasswordAuthentication("949947078@qq.com", "gekcahyzfvqdbbhe");
         }
     });
 	// 有了这句便可以在发送邮件的过程中在console处显示过程信息，供调试使
@@ -71,7 +71,7 @@ public void run() {
 	MimeMessage message = new MimeMessage(session);
     try {  
     	// 加载发件人地址
-    	message.setFrom(new InternetAddress("3348958465@qq.com"));
+    	message.setFrom(new InternetAddress("949947078@qq.com"));
     	// 加载收件人地址
     	message.addRecipient(Message.RecipientType.TO, new InternetAddress(emailAddress));
     	// 加载标题

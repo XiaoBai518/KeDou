@@ -1,0 +1,142 @@
+		*{
+			margin: 0px;
+			padding: 0px;
+		}
+		.page1 {
+			width: 100%;
+			height: 100%;
+			position:absolute;
+			background-color: yellow;
+			z-index: 1;
+		}
+		.page2 {
+			width: 100%;
+			height: 100%;
+			position:absolute;
+			background-color: blue;
+			z-index: -1;
+		}
+		.scale {
+			width: 100%;
+			height: 100%;
+			position:absolute;
+			
+				-webkit-animation: scaleUp .7s ease both;
+				-moz-animation: scaleUp .7s ease both;
+				animation: scaleUp .7es ease both;
+		}
+		@-webkit-keyframes scaleUp {
+				from { opacity: 0; -webkit-transform: scale(.8); }
+			
+		}
+		@-moz-keyframes scaleUp {
+				from { opacity: 0; -moz-transform: scale(.8); }
+		
+		}
+		@keyframes scaleUp {
+				from { opacity: 0; transform: scale(.8); }
+				
+			
+		}
+		.tran{
+			width: 100%;
+			height: 100%;
+			position:absolute;
+			-webkit-transform-origin: 0% 0%;
+			-webkit-animation: rotateFall 1s both ease-in;
+			-moz-transform-origin: 0% 0%;
+			-moz-animation: rotateFall 1s both ease-in;
+			transform-origin: 0% 0%;
+			animation: rotateFall 1s both ease-in;
+				
+				}
+		@-webkit-keyframes rotateFall {
+				0% { -webkit-transform: rotateZ(0deg);  z-index: 1}
+				20% { -webkit-transform: rotateZ(10deg); -webkit-animation-timing-function: ease-out; z-index: 1}
+				40% { -webkit-transform: rotateZ(17deg); z-index: 1}
+				60% { -webkit-transform: rotateZ(16deg); z-index: 1}
+				100% { -webkit-transform: translateY(100%) rotateZ(17deg); z-index: 1}
+			}
+		@-moz-keyframes rotateFall {
+				0% { -moz-transform: rotateZ(0deg); z-index: 1}
+				20% { -moz-transform: rotateZ(10deg); -moz-animation-timing-function: ease-out;z-index: 1 }
+				40% { -moz-transform: rotateZ(17deg); z-index: 1}
+				60% { -moz-transform: rotateZ(16deg); z-index: 1}
+				100% { -moz-transform: translateY(100%) rotateZ(17deg);z-index: 1 }
+			}
+		@keyframes rotateFall {
+				0% { transform: rotateZ(0deg); z-index: 1}
+				20% { transform: rotateZ(10deg); animation-timing-function: ease-out; z-index: 1}
+				40% { transform: rotateZ(17deg); z-index: 1}
+				60% { transform: rotateZ(16deg); z-index: 1}
+				100% { transform: translateY(100%) rotateZ(17deg);z-index: 1}
+		}
+.left_div{
+	float: left;
+	width: 15%;
+	height: 30%;
+	margin-top: 6em;
+	margin-left: 15em;
+	text-align:center;
+	border-radius:20px 20px 20px 20px;
+	background-color:#E0FFFF;
+	transition:transform 1s;		/*以下四行是支持不同的浏览器*/
+	-moz-transition:transform 1s;
+	-webkit-transition:transform 1s;
+	-o-transition:transform 1s;
+}
+.p_center{
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family:YouYuan;
+      font-size:25px;
+      font-weight:bold;
+}
+.left_div:hover{
+	transform:scale(1.05);
+}
+
+.right_div{
+	float: right;
+	width: 15%;
+	height: 30%;
+	margin-top: 6em;
+	margin-right: 15em;
+	text-align:center;
+	border-radius:20px 20px 20px 20px;
+	background-color: #FFD700;
+	transition:transform 0.75s;		/*以下四行是支持不同的浏览器*/
+	-moz-transition:transform 0.75s;
+	-webkit-transition:transform 0.75s;
+	-o-transition:transform 0.75s;
+}
+.right_div:hover{
+	transform:scale(1.1);
+}
+
+.center_div{
+	float: left;
+	width: 15%;
+	height: 30%;
+	margin-top: 6em;
+	margin-left: 11em;
+	text-align:center;
+	border-radius:20px 20px 20px 20px;
+	background-color:#8DB6CD;
+	transition:transform 0.75s;		/*以下四行是支持不同的浏览器*/
+	-moz-transition:transform 0.75s;
+	-webkit-transition:transform 0.75s;
+	-o-transition:transform 0.75s;	
+}
+.center_div:hover{
+	transform:scale(1.05);
+}
+.question{
+	float: left;
+	width: 60%;
+	height: 10%;
+	margin-top: 8em;
+	margin-left: 17em;
+	text-align: center;
+}

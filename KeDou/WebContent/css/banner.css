@@ -29,23 +29,25 @@ img{
 /*定位*/
 #locate{
 	float: left;
-	width: 90px;
+	width: 190px;
 	margin-top: 3%;
 	margin-left: 3%;
 	color: #0D7FFC;
+	
 }
 #address{
 	margin-top: 10%;
 	float: right;
-	width: 60px;
+	width: 160px;
 	color: #3280fc;
+	margin-top: 10px;
 }
 /*个人中心*/
 #myPhoto{
 	margin-top: 2%;
 	margin-right: 10%;
 	float: right;
-	width: 50px;
+	width: 100px;
 	height: 50px;
 }
 #myPopover{
@@ -55,7 +57,7 @@ img{
 	float: right;
 	position: absolute;
 	left: 83%;
-	top: 16%;
+	top: 10%;
 }
 .menu-li{
 	width: 100%;

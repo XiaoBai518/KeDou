@@ -1,18 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+ <c:set var="userImgPath" value="/file/personal" />
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
-		<!-- ZUI Javascript 依赖 jQuery -->
 		<script src="${ctx }/js/jquery.zui.js"></script>
 		<link rel="stylesheet" type="text/css" href="${ctx }/css/banner.css">
-		<!-- ZUI 标准版压缩后的 JavaScript 文件 -->
 		<script src="${ctx }/js/jquery.zui.js"></script>
 		<link rel="stylesheet" type="text/css" href="${ctx }/css/content.css">
-		<!-- ZUI 标准版压缩后的 CSS 文件 -->
 		<link rel="stylesheet" href="${ctx }/css/zui.min.css">
 		<script type="text/javascript" src="${ctx}/js/zui.min.js"></script>
     	<script type="text/javascript" src="${ctx }/js/zui.chart.min.js"></script>
@@ -44,32 +42,39 @@
 				<!--定位-->
 				<div id="locate">
 					<i class="icon icon-map-marker icon-2x" ></i>
-					<p id="address">[<a href="#" style="color:#3280fc; text-decoration: none;">切换地址</a>]</p>
+					<p id="address">${sessionScope.userAddress.address }[<a href="${ctx }/useraddress/toaddress" style="color:#3280fc; text-decoration: none;">切换地址</a>]</p>
 				</div>
 				<!--个人头像-->
 				<div id="userPad">
-					<div id="myPhoto">
+						 <c:if test="${ not empty sessionScope.loginUser}">
+					 	<div id="myPhoto">
 						<img src="${ctx }/img/login.png"/>
-					</div>
-					<div class="popover bottom" id="myPopover">
-						<div class="arrow"></div>
-							<h3 class="popover-title"><a href="#"><i class="icon icon-home"></i>&nbsp&nbsp个人中心</a></h3>
-							<div class="popover-content">
-								<ul>
-									<li class="menu-li"><a href="#"><i class="icon icon-envelope"></i>&nbsp&nbsp我的消息</a></li>
-									<li class="menu-li"><a href="#"><i class="icon icon-history"></i>&nbsp&nbsp我的足迹</a></li>
-									<li class="menu-li"><a href="#"><i class="icon icon-check-board"></i>&nbsp&nbsp我的预约</a></li>
-									<li class="menu-li"><a href="#"><i class="icon icon-star"></i>&nbsp&nbsp我的收藏</a></li>
-								</ul>
-							</div>
 						</div>
+						<div class="popover bottom" id="myPopover">
+							<div class="arrow"></div>
+								<h3 class="popover-title"><a href="${ctx }/user/person"><i class="icon icon-home"></i>&nbsp&nbsp个人中心</a></h3>
+								<div class="popover-content">
+									<ul>
+										<li class="menu-li"><a href="${ctx }/user/person"><i class="icon icon-envelope"></i>&nbsp&nbsp我的消息</a></li>
+										<li class="menu-li"><a href="${ctx }/user/person?address=1"><i class="icon icon-history"></i>&nbsp&nbsp我的足迹</a></li>
+										<li class="menu-li"><a href="${ctx }/user/person?address=2"><i class="icon icon-check-board"></i>&nbsp&nbsp我的预约</a></li>
+										<li class="menu-li"><a href="${ctx }/user/person?address=3"><i class="icon icon-star"></i>&nbsp&nbsp我的收藏</a></li>
+									</ul>
+								</div>
+						</div>
+					 </c:if>
+					 <c:if test="${ empty sessionScope.loginUser}">
+					 	<div id="myPhoto">
+							<a href="${ctx }/user/toiframe"><font size="4">登陆 </font></a><font size="5" color="blue"> / </font><a href="${ctx }/user/toiframe?option=regist"><font size="4"> 注册</font></a>
+						</div>
+					 </c:if>
 					</div>
 				</div>
 				
 				<!--导航条-->
 				<div id="navigation">
 					<ul class="nav nav-secondary">
-						<li><a href="#" class="nav-a">首页</a></li>
+						<li><a href="${ctx }/common/toindex" class="nav-a">首页</a></li>
 						<li><a href="#" class="nav-a">动态 <span class="label label-badge label-success">4</span></a></li>
 						<li><a href="#" class="nav-a">项目 </a></li>
 						<li><a href="#" class="nav-a">哈哈</a></li>
@@ -119,7 +124,7 @@
 								<c:forEach  items="${cl }" var="cl">
 									<div class="course">
 										<div class="course-img">
-											<img src="/file/${cl.courseImg }" style="border-radius: 8px;" />
+											<img src="/file/course/${cl.courseImg }" style="border-radius: 8px;" />
 										</div>
 										<div class="course-info">
 											<div class="course-name">
