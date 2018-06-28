@@ -1,5 +1,5 @@
 
-	istrue = new Array(-1,-1,-1);
+	istrue = new Array(-1,-1,-1,-1);
 	//判断输入信息
 		function textblur(a,name) {
 			//邮箱正则
@@ -53,14 +53,25 @@
 					document.getElementById(name).innerHTML = '';
 					istrue[1]=-1;
 				}else {
+					istrue[1] = 0;
 					document.getElementById(name+'msg').innerHTML = '';
 					document.getElementById(name).innerHTML = '';
-					istrue[1] = 0;
+					
 				}
 				
 			}
 					
 		};
+		//是否同意条款
+		function check(id) {
+			var checkbox = document.getElementById(id);//选中checkbox的id；
+			if(checkbox.checked==true){//按钮已选中
+				istrue[3] = 0;
+			     }else{
+				istrue[3] = -1;
+			            }
+
+		};		
 		//消除提示信息
 		function textfocus(name) {
 			document.getElementById(name).innerHTML = '';
@@ -104,9 +115,54 @@
 		          			alert("有项填写错误");
 		          			return false;
 		          		}
+
 		          	}
 		          	var spwd = document.getElementById("inputpwd").value;
 		          	document.getElementById("inputpwd").value = md5(spwd);
 		          	return true;
 		          }
+			  //手机号注册时检测进入输入短信验证码界面
+			  function telsubmit() {
+				  istrue[1]=0;istrue[3]=0;
+		          		for(var i=0;i<4;i++) {
+			          		if(istrue[i]!=0) {
+			          			alert("有项填写错误");
+			          			return false;
+			          		}
+			          		if(istrue[0]==0&&istrue[2]==0) {
+			          			$("#inputregiste input").val("");
+			          			return true;
+			          		}
+		          		}
+		          	return true;
+		          }
+			  //手机号注册时检测进入加入数据库
+			  function endtelsubmit() {
+				  istrue[0]=0;
+	          		for(var i=0;i<4;i++) {
+		          		if(istrue[i]!=0) {
+		          			alert("有项填写错误");
+		          			return false;
+		          		}
+	          		}
+			          	var spwd = document.getElementById("userpwd").value;
+			          	document.getElementById("userpwd").value = md5(spwd);
+			          	return true;
+		          }
+			  //输入验证码倒计时，更新显示剩余时间
+			    function update(number){
+			            var endsceond=end-number;
+			            document.getElementById("text_1").innerHTML=endsceond+"秒";
+			            if(endsceond==0){
+			            	document.getElementById("seconddiv").style.display='none';
+			            	document.getElementById("sendangin").style.display='block';
+
+			            }else{
+			            	document.getElementById("sendangin").style.display='none';
+			            	document.getElementById("seconddiv").style.display='block';
+
+			            }
+			    }
+			    
+
 			

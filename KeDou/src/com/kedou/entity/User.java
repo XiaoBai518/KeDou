@@ -60,6 +60,19 @@ public class User {
 		public User() {
 			
 		}
+		/*
+		 * 返回账号
+		 * 若同时有 手机号和邮箱 则返回邮箱
+		 */
+		public String getAccount() {
+			if(userEmail!=null&&!"".equals(userEmail)&&userTel!=null&&!"".equals(userTel)) {
+				return userEmail;
+			}else if(userEmail!=null&&!"".equals(userEmail)){
+				return userEmail;
+			}else {
+				return userTel;
+			}
+		}
 		
 		
 		public String getUserIcon() {

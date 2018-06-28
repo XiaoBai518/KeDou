@@ -51,4 +51,58 @@
 			</props>
 		</property>
 	</bean>
+		<!--每隔1分钟更新数据Job -->
+	  <bean id="oneMinUpdateVisitNumberJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+			<property name="jobClass" value="com.kedou.Quartz.job.OneMinUptateVisitNumberJob"></property>
+		<property name="jobDataMap">
+			<map>
+				<entry key="cacheManager"><ref bean="springcacheManager"></ref></entry>
+				<entry key="sessionFactory" value-ref="sessionFactory"></entry>  
+			</map>
+		</property>
+		<!-- 没有创建触发器 所以先设置为Ture  表明没有触发器也可以执行 -->
+		  <property name="Durability" value="true"></property>
+	</bean>
+	<!-- 每隔1分钟执行更新数据 Trigger -->
+	  <bean id="oneMinUpdateCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="oneMinUpdateVisitNumberJobDetail"/>
+		<property name="cronExpression" value="0 0/1 * * * ? "></property>
+	</bean>
+	<!-- 每天0：00更新数据Job -->
+	  <bean id="oneDayUpdateVisitNumberJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="com.kedou.Quartz.job.OneDayUptateVisitNumberJob"></property>
+		<property name="jobDataMap">
+			<map>
+				<entry key="cacheManager"><ref bean="springcacheManager"></ref></entry>
+				<entry key="visitNumberServiceImpl"><ref bean="visitNumberServiceImpl"></ref></entry>
+				<entry key="sessionFactory" value-ref="sessionFactory"></entry>  
+			</map>
+		</property>
+		<!-- 没有创建触发器 所以先设置为Ture  表明没有触发器也可以执行 -->
+		  <property name="Durability" value="true"></property>
+	</bean>
+	<!-- 每天0：00执行更新数据 Trigger -->
+	 <bean id="oneDayUpdateCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="oneDayUpdateVisitNumberJobDetail"/>
+		<property name="cronExpression" value="0 0 0 1/1 * ? "></property>
+	</bean>
+	
+	  <!--  <bean id="jobFactory" class="com.kedou.Quartz.job.MyJobFactory"></bean>-->
+	<!-- SchedulerFactory -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	 	  <!--  <property name="jobFactory" ref="jobFactory"></property>-->
+		<property name="jobDetails">
+			<list>
+				<ref bean="oneDayUpdateVisitNumberJobDetail"/>
+				<ref bean="oneMinUpdateVisitNumberJobDetail"/>
+			</list>
+		</property>
+		<property name="triggers">
+			<list>
+				<ref bean="oneDayUpdateCronTrigger"/>
+				<ref bean="oneMinUpdateCronTrigger"/>
+			</list>
+		</property>
+	</bean>
+	<!-- <task:annotation-driven/> -->
 </beans>

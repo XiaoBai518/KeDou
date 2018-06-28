@@ -3,11 +3,10 @@ package com.kedou.controller.user;
 import java.io.IOException;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+
 import javax.annotation.Resource;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,9 +17,8 @@ import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.util.WebUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,30 +27,39 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.aliyuncs.exceptions.ClientException;
 import com.google.gson.Gson;
 
 import com.kedou.entity.Label;
 import com.kedou.entity.User;
+import com.kedou.service.search.SearchServiceImpl;
 import com.kedou.service.user.UserServiceImpl;
 import com.kedou.shiro.UsernamePasswordByUserTypeToken;
-import com.kedou.util.SessionUtil;
 import com.kedou.util.UpLoadUtil;
 import com.kedou.util.Constants;
 import com.kedou.util.IpAddress;
+import com.kedou.util.SendTelCode;
+import com.kedou.util.ShiroClearCacheUtil;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 	@Resource
 	private UserServiceImpl userServiceImpl;
-
+	@Resource
+	private SearchServiceImpl searchServiceImpl;
+	private SendTelCode sendTelCode;
+	
 	/**
 	 * 切换搜索模式
 	 * @param mode
 	 * @return
 	 */
 	@RequestMapping(value="switchMode",method=RequestMethod.GET)
-	public String switchingMode(@RequestParam("mode") String mode) {
+	public String switchingMode(@RequestParam("mode") String mode,Model model) {
+		//默认搜索框搜索内容
+		String defaultContent = searchServiceImpl.defaultSearchContent();
+		model.addAttribute("defaultContent", defaultContent);
 		if(mode.equals("minimalist")) {
 			return "iframe_minimalist";
 		}else {
@@ -65,6 +72,59 @@ public class UserController {
 	 */
 	@RequestMapping(value="toregist",method=RequestMethod.GET)
 	public String toregist() {
+		return "iframe_registe";
+	}
+	/**
+	 * 发送手机验证码
+	 * @param telnum
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/sendTelverifyCode",method=RequestMethod.GET)
+	public String check(@RequestParam("telnum") String telnum,Model model,HttpSession session){
+		//生成1个六位数随机数
+		String str = "";//0 1 2 3 4 5
+		for(int i = 0 ; i < 6;i++){
+			str+=(int)Math.floor(Math.random()*10);
+		}
+		//将验证码添加到session中
+		session.setAttribute("code", str);
+		try {
+			sendTelCode.sendSms(telnum,str);
+		} catch (ClientException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("验证码为  "+str);
+		model.addAttribute("telnum", telnum);
+		model.addAttribute("acounttype", "tel");
+		model.addAttribute("code", str);
+		return "iframe_telRegiste";
+	}
+	/**
+	 * ajax验证手机验证码是否正确
+	 * @return
+	 */
+	@RequestMapping(value="/checkcode",method=RequestMethod.GET)
+	@ResponseBody
+	public String checkcode(@RequestParam("telcode") String code,HttpSession session){
+		System.out.println("验证code    "+code);
+		System.out.println(session.getAttribute("code"));
+		if((boolean) session.getAttribute("code").equals(code) ){
+			System.out.println("正确");
+			return "1";
+		}else{
+			System.out.println("不正确");
+			return "-1";
+		}
+	}
+	/**
+	 * 返回更改手机号
+	 * @return
+	 */
+	@RequestMapping(value="/returnchangetel",method=RequestMethod.GET)
+	public String returnchange(){
+
 		return "iframe_registe";
 	}
 	/**
@@ -82,18 +142,24 @@ public class UserController {
 			              @RequestParam("userpwd")String pwd,
 			              HttpSession session,HttpServletResponse response,Model model,HttpServletRequest request){
 		if(acounttype.equals("tel")){//用户选择的手机号注册
-			/*
-			 * 
-			 * 
-			 * 
-			 * 手机注册
-			 * 
-			 * 
-			 * 
-			 */
-			return "提示用户输入短信验证码";
+			//创建用户对象
+			User u = new User();
+			u.setUserPwd(pwd);
+			u.setUserTel(acount);
+			 //获取用户真实IP
+			 String IP = IpAddress.getIpAddress(request);
+			    //设置用户IP
+			     u.setUserIp(IP);
+				try {
+					userServiceImpl.registerTelUser(u);
+					SecurityUtils.getSubject().getSession().setAttribute("registeUser", u);
+					//通知前台 注册成功
+					return "redirect:/user/showuserdis";
+				} catch (Exception e) {
+					e.printStackTrace();
+					return "iframe_info";
+				}
 		}else if (acounttype.equals("email")) {//用户选择的邮箱注册
-			System.out.println("用户注册的密码："+pwd);
 			//创建用户对象
 			User u = new User(acount,pwd);
 			 //获取用户真实IP
@@ -156,7 +222,7 @@ public class UserController {
 	 */
 	@RequestMapping(value="verify",method=RequestMethod.GET)
 	public String verify(@RequestParam("verifyNum") String userVerifyNum,
-			HttpSession session,HttpServletResponse response,Model model,HttpServletRequest request){
+			HttpServletResponse response,Model model,HttpServletRequest request){
 		//通过参数中的 激活验证码 在数据库查询用户
 		User u = userServiceImpl.findByVerifyNum(userVerifyNum);
 
@@ -165,7 +231,7 @@ public class UserController {
 			  //激活账户 将账户状态变为 正常状态 （1） 激活成功返回用户ID  否则 返回 -1
 			try {
 				this.userServiceImpl.changeState(Constants.BUSINESS_STATE_ACTIVE, u.getUserId());
-						session.setAttribute("loginUser", u);
+						SecurityUtils.getSubject().getSession().setAttribute("registeUser", u);
 					//注册成功 跳转 选择标签页
 					return "redirect:/user/showuserdis";
 			 } catch (Exception e) {
@@ -207,7 +273,7 @@ public class UserController {
 	 */
 	@RequestMapping(value="/toiframe",method=RequestMethod.GET)
 	public String toiframe(@RequestParam(value="option",required=false)String option,@RequestParam(value="error",required=false)String error,
-							Model model) {
+							@RequestParam(value="ifbefore",required=false)String before,Model model,HttpSession session) {
 		if(error!=null&&!"".equals(error)) {
 			model.addAttribute("error","?error="+error);
 		}
@@ -216,6 +282,9 @@ public class UserController {
 				model.addAttribute("url", "/user/toregist");
 				return "userLogin";
 			}
+		}
+		if(before!=null&&!"".equals(before)) {
+			SecurityUtils.getSubject().getSession().setAttribute("ifbefore", before);
 		}
 		model.addAttribute("url", "/user/tologin");
 		return "userLogin";
@@ -226,8 +295,9 @@ public class UserController {
 	 */
 
 	@RequestMapping(value="/tologin",method=RequestMethod.GET)
-	public String tologin(@RequestParam(value="error",required=false)String error,Model model) {
-		if(error!=null) {
+	public String tologin(@RequestParam(value="error",required=false)String error,
+							Model model) {
+		if(error!=null&&!"".equals(error)) {
 			model.addAttribute("error", error);
 		}
 		return "iframe_login";
@@ -250,7 +320,15 @@ public class UserController {
 		token.setRememberMe(true);
 		
 		Subject currentUser = SecurityUtils.getSubject();
-	
+		
+		//查看是否  跳转回之前的页面
+		String url=null;
+		if(currentUser.getSession().getAttribute("ifbefore")!=null) {
+			url= WebUtils.getSavedRequest(request).getRequestUrl().substring(6);
+		}
+		
+		//用户登录  将商家账户注销
+		currentUser.logout();
 		try {
 			currentUser.login(token);
 			User u = (User)currentUser.getSession().getAttribute("loginUser");
@@ -262,7 +340,9 @@ public class UserController {
 				this.userServiceImpl.login(u);
 			//保存到session
 			SecurityUtils.getSubject().getSession().setAttribute("loginUser", u);
-			System.out.println("登陆成功");
+			if(url!=null) {
+				return "redirect:"+url;
+			}
 			return "index";
 		} catch ( UnknownAccountException uae ) { 
 			//账户不存在
@@ -310,7 +390,7 @@ public class UserController {
 		if(p==null) {
 			p = 0;
 		}
-		String [] address = {"user/personmessage","userhistory/personhistory","torder/persontorder","collection/personcollection"};
+		String [] address = {"user/personmessage","userhistory/personhistory","torder/persontorder","collection/personcollection","InformationBinding/binding"};
 		model.addAttribute("address", address[p]);
 		model.addAttribute("p", ++p);
 		return "personal";
@@ -422,8 +502,8 @@ public class UserController {
 	 */
 	@RequestMapping(value="/description",method=RequestMethod.POST)
 	@ResponseBody
-	public String saveDis(String keyword,HttpSession session) throws IOException{	
-		User u = (User)session.getAttribute("loginUser");
+	public String saveDis(String keyword) throws IOException{	
+		User u = (User)SecurityUtils.getSubject().getSession().getAttribute("registeUser");
 		int id = u.getUserId();
 		int line = this.userServiceImpl.saveDis(keyword, id);
 		Gson g = new Gson();
@@ -466,7 +546,7 @@ public class UserController {
 	@RequestMapping(value="/label",method=RequestMethod.POST)
 	@ResponseBody
 	public String saveLabel(String label,HttpSession session) throws IOException{
-		User u = (User)session.getAttribute("loginUser");
+		User u = (User)session.getAttribute("registeUser");
 		int id = u.getUserId();
 		int line = this.userServiceImpl.saveLabel(label,id);
 		Gson g = new Gson();

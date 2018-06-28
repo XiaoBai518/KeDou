@@ -11,10 +11,33 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath*:spring-*.xml</param-value>
   </context-param>
+  	<!-- log4j配置，文件路径，因为是跟随项目启动 -->
+  <context-param>     
+      <param-name>log4jConfigLocation</param-name>     
+      <param-value>/WEB-INF/log4j.xml</param-value>     
+  </context-param>     
+    <!-- 配置log4j.xml变量，如果需要动态的就使用下面方式，使用方法${name} --> 
+  <context-param> 
+  	  <param-name>controller</param-name> 
+      <param-value>controller-log</param-value> 
+  </context-param> 
+  <context-param> 
+  	  <param-name>loggingLevel</param-name> 
+      <param-value>info</param-value> 
+  </context-param> 
+
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	
+	<!-- 加载log4j配置文件 -->
+  	<listener>
+    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+  </listener>
+	  <listener>
+    <listener-class>com.kedou.interceptor.AfterStartLoad</listener-class>
+	</listener>
+
+  
   <servlet>
     <servlet-name>springmvc</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -28,7 +51,7 @@
     <servlet-name>springmvc</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-  
+
   <filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

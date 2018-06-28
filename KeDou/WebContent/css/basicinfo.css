@@ -1,0 +1,53 @@
+img{
+	width: 100%;
+	height: 100%;
+}
+#top{
+	overflow: auto;
+	background-color: pink;
+}
+#content{
+
+}
+#buspicture{
+	float: left;
+	width: 180px;
+	height: 180px;
+	margin-top: -8%;
+	position: fixed;
+	z-index: 1;
+	border: 6px solid white;
+	border-radius: 8px;
+	box-shadow: #E5E4E1 2px 2px 12px;
+}
+#buspicture:hover{
+
+}
+#basicinfo{
+	margin-top: -4%;
+	float: left;
+	width: 75%;
+	margin-left: 25%;
+}
+.infoitem{
+	float: left;
+}
+.info{
+	margin-left: 10%;
+	float: left;
+}
+
+/*联系人*/
+.autoheight{
+	height:auto!important;
+	min-height:30px;
+	max-height:200px;
+}
+.edit{
+	display: none;
+	float: left;
+	margin-left: 5%;
+}
+.forms{
+	display: none;
+}

@@ -1,0 +1,42 @@
+img{
+	width: 100%;
+	height: 100%;
+}
+#realdata{
+	height: 200px;
+}
+.dataitem{
+	width: 350px;
+	margin-left: 70px;
+	margin-bottom: 40px;
+	padding: 20px;
+	float: left;
+	border-radius: 8px;
+	box-shadow: #E5E4E1 2px 2px 12px;
+}
+.small{
+	width: 70px;
+	height: 70px;
+	float: left;
+	margin-left: 10px;
+}
+.smalltext{
+	width: 200px;
+	height: 70px;
+	float: left;
+	margin-left: 25px;
+}
+#myChart{
+	margin-left: 70px;
+}
+.item{
+	font: bold 16px '微软雅黑';
+}
+.itemnum{
+	float: left;
+	width: 50px;
+	height: 30px;
+	margin-left: 60%;
+	font: bold 22px 'Microsoft Yahei';
+	color: #c00;
+}

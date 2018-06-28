@@ -12,16 +12,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.kedou.entity.ChooseAnswer;
+
 import com.kedou.entity.ChooseQuestion;
 import com.kedou.service.minimalistsearch.MinimalistSearchServiceImpl;
+import com.kedou.service.search.SearchServiceImpl;
+import com.kedou.util.Constants;
 
 
 @Controller
 @RequestMapping("/minimalist")
 public class MinimalistSearchController {
 	@Resource
-	private MinimalistSearchServiceImpl chooseServiceImpl;
+	private MinimalistSearchServiceImpl minimalistSearchServiceImpl;
+	
 	
 	/**
 	 * 前往极简搜索界面
@@ -29,42 +32,45 @@ public class MinimalistSearchController {
 	 */
 	@RequestMapping(value="tochoose",method=RequestMethod.GET)
 	public String switchingMode(@RequestParam("search")String search,Model model) {
-		
+		if(search.contains("考研")) {
+			try {
+				ChooseQuestion  chooseQuestion = this.minimalistSearchServiceImpl.findQuestionById(Constants.MINIMALISTSEARCH_KAOYAN);
+				model.addAttribute("question", chooseQuestion);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}else if(search.contains("四六级")||search.contains("四级")||search.contains("六级")) {
+			try {
+				ChooseQuestion  chooseQuestion = this.minimalistSearchServiceImpl.findQuestionById(Constants.MINIMALISTSEARCH_SILIUJI);
+				model.addAttribute("question", chooseQuestion);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		model.addAttribute("search", search);
 			return "minimalistSearch";
 	}
 	
-	@RequestMapping(value="choosetext",method=RequestMethod.GET,produces = "application/json; charset=utf-8")
+	/**
+	 * 切换页面
+	 * @param question
+	 * @return
+	 */
+	@RequestMapping(value="choosenext",method=RequestMethod.GET,produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public String choosetext(@RequestParam("name") String question) {
-		ChooseQuestion qus;
-		List<ChooseAnswer> ans = null;
+	public String choosetext(@RequestParam("id") int questionId) {
 		try {
-			qus = this.chooseServiceImpl.findByQuestion(question);
+			ChooseQuestion question = this.minimalistSearchServiceImpl.findNextQuestionById(questionId);
+			
+				return new  Gson().toJson(question);
+			
+			
 		} catch (Exception e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 			return "数据库错误界面";
 		}
-		if(qus==null){
-			System.out.println("qus为空");
-			Gson json = new  Gson();
-			if(ans==null){
-				System.out.println("ans为空");
-			}
-			return json.toJson(ans);
-			}else{
-				try {
-					ans = this.chooseServiceImpl.findByAnswer(qus.getId());	
-					} catch (Exception e) {
-						// TODO 自动生成的 catch 块
-							e.printStackTrace();
-							return "数据库错误界面";
-					}
-					Gson json = new  Gson();										
-					return json.toJson(ans);				
-
-			}
 
 		}
 

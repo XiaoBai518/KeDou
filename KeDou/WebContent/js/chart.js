@@ -11,28 +11,30 @@
 			 var name0 = data1[0].courseName;
 			 var name1 = data1[1].courseName;
 			 var name2 = data1[2].courseName;
-			 function sendNum(min,max)
-			 {
-			     return Math.floor(Math.random()*(max-min))+min;
-			 };
-			 var Arr = [];
-			 while(Arr.length < 12){
-				 var aa  = sendNum(10,20);
-				 Arr.push(aa);
-			 }
-			 var Arr1 = [];
-			 while(Arr1.length < 12){
-				 var aa  = sendNum(15,25);
-				 Arr1.push(aa);
-			 }
-			 var Arr2 = [];
-			 while(Arr2.length < 12){
-				 var aa  = sendNum(20,30);
-				 Arr2.push(aa);
-			 }
+//			 function sendNum(min,max)
+//			 {
+//			     return Math.floor(Math.random()*(max-min))+min;
+//			 };
+			 var Arr = [17,20,15,35,26,45,10];
+//			 for(var i=0;i<7;i++){
+//				
+//				 Arr.push(data1[0].orderNumber[i]);
+//			 }
+//			
+			
+			 var Arr1 = [23,30,25,27,35,40,21];
+//			 for(var i=0;i<7;i++){
+//					
+//				 Arr1.push(data1[1].orderNumber[i]);
+//			 }
+			 var Arr2 = [14,23,43,35,38,25,19];
+//			 for(var i=0;i<7;i++){
+//					
+//				 Arr2.push(data1[2].orderNumber[i]);
+//			 }
 			var data = {
 				    // labels 数据包含依次在X轴上显示的文本标签
-				    labels: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+				    labels: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
 				    datasets: [{
 				        // 数据集名称，会在图例中显示
 				        label: name0+"销量",
@@ -89,6 +91,6 @@
 				});
 		}
 		var i = 0;
-		function	fc(page,totalCount,search){
-			window.location.href='http://localhost:8080/KeDou/course/searchCourseListAsc?page='+page+'&totalCount='+totalCount+'&search='+search;
-		}
+//		function	fc(page,totalCount,search){
+//			window.location.href='http://localhost:8080/KeDou/course/searchCourseListAsc?page='+page+'&totalCount='+totalCount+'&search='+search;
+//		}

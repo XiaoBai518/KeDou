@@ -6,7 +6,11 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>个人描述</title>
+    <title>课兜儿网——个人描述</title>
+		<link rel="icon" href="${ctx }/img/favicon.ico" type="image/x-icon" />
+   		<link rel="shortcut icon" href="${ctx }/img/favicon.ico">
+   		<link rel="Bookmark" href="${ctx }/img/favicon.ico">
+   		<link rel="SHORTCUT ICON" href="${ctx }/img/favicon.ico"/>
     <link rel="stylesheet" type="text/css" href="${ctx }/css/descript.css">
     <script src="${ctx }/js/jquery-1.11.1.min.js"></script>
      <%
@@ -66,18 +70,17 @@
 	    		alert("不能为空哦");
 	    	}
 	    	$.ajax({
-	    		url : "http://localhost:8080/KeDou/user/description",
+	    		url : "${ctx}/user/description",
 	    		type : "POST",
 	    		data :params,
 	    		dataType:'json',
 	    		success : function(data) {
 	    			if (data == "yes") {
-	    				window.location.href ="http://localhost:8080/KeDou/user/showuserlabel";
+	    				window.location.href ="${ctx}/user/showuserlabel";
 	    			} else if (data == "no") {
 	    			
 	    			}
-	    		},error: function(data){
-	    		
+	    		},error: function(data){  		
 	    		}
 	    	});
 	    }

@@ -821,3 +821,26 @@ table tr a:hover{
 	margin-top:10px;
 	z-index: 9999;
 }
+.nonecourse{
+	width:300px;
+	height:100px;
+	position: absolute;
+	top:200px;
+	left:300px;
+	display:inline;
+}
+.nonecourseText{
+	width:200px;
+	height:100px;
+	text-align: center; 
+	line-height:100px;
+	float: left;
+	font-family: '微软雅黑';
+	font-size: 15px;
+	color:#BEBEBE;
+}
+.nonecourseImg{
+	width:100px;
+	height:100px;
+	float: left;
+}

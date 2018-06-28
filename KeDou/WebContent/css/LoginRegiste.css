@@ -40,12 +40,28 @@
 	margin-left:40px; 
 	background-color:;  
 }
-
+#inputregiste{
+	width:300px; 
+	height:225px; 
+	margin-top:30px; 
+	margin-left:40px; 
+	background-color:;  
+}
+.buttominput{
+	margin-left:40px;
+}
 .input_size{
 	width:300px;
 	height:40px;
 	font-size: 20px;
 	color:#C5C1AA;
+}
+.input_pwdsize{
+	width:300px;
+	height:40px;
+	font-size: 20px;
+	color:#C5C1AA;
+	display:none;
 }
 #input_size1{
 	width:150px;
@@ -76,7 +92,21 @@
 	color:#FFFFE0;
 	border-radius:10px;
 	margin-left:0px;
-	background-color:#1E90FF;  
+	background-color:#1E90FF;
+}
+.input_position2{
+	width:300px;
+	height:40px;
+	margin-top: 40px;
+	font-size: 18px;
+	font-weight:bold;
+	color:#FFFFE0;
+	border-radius:10px;
+	margin-left:0px;
+	text-align:center;
+	line-height:40px;
+	background-color:#1E90FF;
+	display:none;
 }
 #fond_size{
 	width:150px;
@@ -93,13 +123,30 @@
 	color:#8B8970;
 	font-family: SimSun;
 }
+#fond_styleRegiste{
+	width:140px;
+	height:35px;
+	margin-top:20px;
+	margin-left:240px;
+	font-size: 17px;
+	color:#8B8970;
+	font-family: SimSun;
+}
 a{
 	text-decoration: none;
 	color:#1C86EE;
 }
 #fond_style2{
 	width:280px;
-	margin-top:-80px;
+	margin-top:100px;
+	margin-left:100px;
+	font-size: 18px;
+	font-weight:bold;
+	font-family: SimSun; 
+}
+#fond_Telstyle{
+	width:280px;
+	margin-top:-10px;
 	margin-left:100px;
 	font-size: 18px;
 	font-weight:bold;
@@ -110,269 +157,6 @@ a{
 	margin-left:200px;
 }
 
-
-/*banner的css样式*/
-#banner1{
-	width: 100%;
-	height:80px;
-	margin-top:-20px;
-	box-shadow:0px 10px 10px #BEBEBE;
-	background-color:#F8F8FF; 
-}
-#banner{
-	position:absolute;                                
-	left:9%;
-	width: 100%;
-	height:80px;
-	box-shadow:0px 10px 10px #BEBEBE;
-	background-color:#F8F8FF; 
-}
-#banner_logo{
-	width:150px ;
-	height:70px ;
-	float:left;
-	margin-top:5px;
-	margin-left:100px;
-	margin-bottom:100px;
-	background-color:;
-}
-#banner_text1{
-	width:100px ;
-	height:50px ;
-	float:left;
-	margin-top:18px;
-	background-color:red;
-}
-#banner_text2{
-	width:100px ;
-	height:50px ;
-	float:left;
-	margin-top:18px;
-	margin-left:5px;
-	background-color:red;
-}
-#banner_text3{
-	width:100px ;
-	height:50px ;
-	float:left;
-	margin-top:18px;
-	margin-left:5px;
-	background-color:red;
-}
-#banner_seek{
-	float:left;
-	margin-left:100px;
-	margin-top:-3px;
-}
-#banner_input_size{
-	float:left;
-	width: 250px;
-	height:50px;
-	font-size: 17px;
-	font-weight:bold;
-	font-family: YouYuan;
-	border-width:1px;
-	border-radius:8px 0px 0px 8px;
-	margin-top:20px;
-}
-#banner_button{
-	width: 60px;
-	height:55px;
-	float:left;
-}
-.banner_button_style{
-	width: 60px;
-	height:55px;
-	border-width:1px;
-	margin-top:17px;
-	font-size: 18px;
-	font-weight:bold;
-	color:#FFFFE0;
-	border-width:0px;
-	border-radius:0px 8px 8px 0;
-	background-color:#1E90FF; 
-	cursor:pointer ;
-}
-#banner_logo_address{
-	width: 40px;
-	height:55px;
-	float:left;
-	margin-top:25px;
-	margin-left:120px;
-	
-}
-#banner_address_position{
-	width:200px;
-	height:50px;
-	float:left;
-	margin-top:35px;
-	font-size: 18px;
-	font-weight:bold;
-	font-family: YouYuan;
-	color:#CCCCCC;
-	
-}
-.banner_personcenter_position{
-	width: 50px;
-	height:55px;
-	float:left;
-	position:absolute;                     
-	top:30px;            
-	right: 8%;
-	
-
-}
-#banner_aderss_button{
-	width:75px;
-	height:20px;
-	font-size: 13px;
-	font-family: YouYuan;
-	border-width:0px;
-	border-radius:5px;
-	cursor:pointer ;
-}
-#banner_login{
-	width:120px;
-	height:50px;
-	float:left;
-	margin-top:35px;
-	margin-left:20px;
-}
-
-#banner_register_stype{
-	font-size: 17px;
-	font-weight:bold;
-	font-family: YouYuan;
-	color:#CCCCCC;
-}
-#banner_login_stype{
-	font-size: 17px;
-	font-weight:bold;
-	font-family: YouYuan;
-	color:#CCCCCC;
-}
-/*鼠标经过头像*/
-#d1 {
-    width: 50px;
-    height: 50px;
-    background-color: blue;
-}        
-#d2 {
-    width: 300px;
-    height: 300px;
-    margin-left: -150px;
-    border-radius:20px 20px 20px 20px;
-    box-shadow:2px 2px 10px #BEBEBE;
-    background-color:#FFFFE0;
-    display: none;
-    z-index:1000;
-}
-#d1-3{
-	width:250px;
-	height:10px;
-	margin-left: auto;
-	margin-right: auto;
-	 z-index:1000;
-}
-#d1-1{
-	width:250px;
-	height:100px;
-	margin-left: auto;
-	margin-right: auto;
-	background-color:;	
-	 z-index:1000;
-}
-#d1-1-1{
-	width:100px;
-	height:100px;
-	border-radius:50px 50px 50px 50px;
-	float: left;
-	 z-index:1000;
-}
-#d1-1-2{
-	width:100px;
-	height:50px;
-	margin-top:30px;
-	margin-left:20px;
-	font-family: YouYuan ;
-	font-weight:bold;
-	font-size: 22px;
-	float: left;
-	 z-index:1000;
-}
-#d1-2{
-	width: 220px;
-	height: 120px;
-	margin-top:20px ;
-	margin-left: auto;
-	margin-right: auto;
-	background-color:;
-	 z-index:1000;
-}
-#d2-2-1{
-	width: 100px;
-	height: 50px;
-	float: left;
-	font-family: YouYuan ;
-	font-weight:bold;
-	color:#A9A9A9;
-	font-size: 15px;
-	text-align: center;
-	line-height:50px;
-	background-color:beige ;
-	cursor: pointer;
-	 z-index:1000;
-	border-radius:10px 10px 10px 10px;
-}
-#d2-2-2{
-	width: 100px;
-	height: 50px;
-	margin-left: 20px;
-	float: left;
-	font-family: YouYuan ;
-	font-weight:bold;
-	color:#A9A9A9;
-	font-size: 15px;
-	text-align: center;
-	line-height:50px;
-	background-color:beige ;
-	cursor: pointer;
-	 z-index:1000;
-	border-radius:10px 10px 10px 10px;
-}
-#d2-2-3{
-	width: 100px;
-	height: 50px;
-	margin-top:20px ;
-	float: left;
-	font-family: YouYuan ;
-	font-weight:bold;
-	color:#A9A9A9;
-	font-size: 15px;
-	text-align: center;
-	line-height:50px;
-	background-color:beige ;
-	cursor: pointer;
-	 z-index:1000;
-	border-radius:10px 10px 10px 10px;
-}
-#d2-2-4{
-	width: 100px;
-	height: 50px;
-	margin-top:20px ;
-	margin-left: 20px;
-	float: left;
-	font-family: YouYuan ;
-	font-weight:bold;
-	color:#A9A9A9;
-	font-size: 15px;
-	text-align: center;
-	line-height:50px;
-	background-color:beige ;
-	cursor: pointer;
-	 z-index:1000;
-	border-radius:10px 10px 10px 10px;
-}
 
 /*个人中心css*/
 #person_banner{
@@ -672,4 +456,119 @@ a{
 	border-style: solid;
 	border-radius:10px 10px 10px 10px;
 	display: none;
+}
+.h2type{
+	margin-left:140px;
+}
+.info_button{
+	width: 60px;
+	height: 30px;
+	color:white;
+	background-color: #008CBA;
+	font-family: "微软雅黑";
+	font-size: 12px;
+	text-align: center;
+	cursor: pointer;
+	margin-left:160px;
+	margin-top:60px;
+	border-width: 1px 1px 1px 1px ;
+	border-style: solid;
+	border-radius:10px 10px 10px 10px;
+}
+
+/*手机注册输入验证码css*/
+#logotelregiste{
+	width:50px; 
+	height:70px; 
+	margin-top:50px; 
+	margin-left:170px; 
+	background-color:black;  
+}
+.Promptinformation1{
+	width:398px;
+	height:25px;
+	margin-top:50px;
+	text-align:center;
+	color:#696969;
+	font-family: "微软雅黑";
+	font-size: 20px;
+	
+}
+.Promptinformation2{
+	width:398px;
+	height:25px;
+	margin-top:10px;
+	text-align:center;
+	color:#BEBEBE;
+	font-family: "微软雅黑";
+	font-size: 16px;	
+}
+.Telinput_position{
+	width:300px;
+	height:150px;
+	margin-left:50px;
+	margin-top:30px;
+}
+.Telinput_size1{
+	width:150px;
+	height:40px;
+	float: left;
+}
+.Telinput_size2{
+	width:298px;
+	height:40px;
+	margin-top:2px;
+}
+.returnChange{
+	width: 400px;
+	height: 20px;
+	margin-top:10px;
+	text-align:center;
+	font-family: "微软雅黑";
+	font-size: 16px;
+	color:#BEBEBE;
+	cursor:pointer ;
+}
+.telregisteinput1{
+	width: 300px;
+	height: 45px;
+}
+.telchecknumspan{
+	width:100px;
+	height:44px;
+	font-size:13px;
+	color:#BEBEBE;
+	float: left;
+	text-align:center;
+	line-height:44px;
+	display:block;
+}
+.telchecknumspan2{
+	width:100px;
+	height:44px;
+	font-size:13px;
+	color:#BEBEBE;
+	float: left;
+	text-align:center;
+	line-height:44px;
+	display:none;
+}
+.telcheckpwdstyle{
+	width:400px;
+	height:20px;
+	margin-top:2px;
+	font-size:13px;
+	color:darkred;
+}
+.time{
+	width:40px;
+	height:44px;
+	float: left;
+	color:#BEBEBE;
+}
+#text_1{
+	width:40px;
+	height:44px;
+	text-align:center;
+	line-height: 44px;
 }

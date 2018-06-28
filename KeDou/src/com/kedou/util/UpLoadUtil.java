@@ -2,6 +2,7 @@ package com.kedou.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -23,32 +24,46 @@ public class UpLoadUtil {
 				String sdate=(new SimpleDateFormat("yyyyMMddHHmmss")).format( new Date());  
 				  //上传文件名
 		           String filename = sdate+tail;
-	           File filepath = new File(Constants.UPLOADURL_PERSONAL,filename);
+		           String dirname = null;
+		           switch(type) {
+	        	   case "user": {
+	        		   dirname = Constants.UPLOADURL_PERSONAL;
+	        		   break;
+	        	    }
+	        	   case "business" :{
+//	        		   dirname = Constants.UPLOADURL_PERSONAL;
+//	        		   break;
+	        	   }
+	        	   case "course" :{
+	        		   dirname = Constants.UPLOADURL_COURSE;
+	        		   break;
+	        	   }
+	        	   case "notice" :{
+	        		   dirname = Constants.UPLOADURL_NOTICE_BUSINESS;
+	        		   break;
+	        	   }
+	        	   case "article" :{
+	        		   dirname = Constants.UPLOADURL_ARTICLE;
+	        		   break;
+	        	   }
+	        	   case "articleTemp" :{
+	        		   dirname = Constants.UPLOADURL_TEMP;
+	        		   break;
+	        	   }
+	        	   case "admin" :{
+//	        		    dirname = Constants.UPLOADURL_PERSONAL;
+//	        		   break;
+	        	   }
+	        	  }
+	           File filepath = new File(dirname,filename);
 	           //判断路径是否存在，如果不存在就创建一个
-	           if (!filepath.getParentFile().exists()) { 
+	           if (!filepath.getParentFile().exists()) {
+	        	   System.out.println("不存在目录");
 	               filepath.getParentFile().mkdirs();
 	           }
 	           //将上传文件保存到一个目标文件当中
 	           try {
-	        	   switch(type) {
-	        	   case "user": {
-	        		   file.transferTo(new File(Constants.UPLOADURL_PERSONAL+ File.separator + filename));
-	        		   break;
-	        	    }
-	        	   case "business" :{
-//	        		   file.transferTo(new File(Constants.UPLOADURL_PERSONAL+ File.separator + filename));
-//	        		   break;
-	        	   }
-	        	   case "course" :{
-	        		  
-	        		   file.transferTo(new File(Constants.UPLOADURL_COURSE+ File.separator + filename));
-	        		   break;
-	        	   }
-	        	   case "admin" :{
-//	        		   file.transferTo(new File(Constants.UPLOADURL_PERSONAL+ File.separator + filename));
-//	        		   break;
-	        	   }
-	        	  }
+	        	   file.transferTo(new File(dirname+ File.separator + filename));
 				
 			} catch (IllegalStateException e) {
 				// TODO 自动生成的 catch 块
@@ -60,5 +75,19 @@ public class UpLoadUtil {
 				return "-1";
 			}
 	           return filename;
+	}
+	/**
+	 * 文件复制
+	 * @param source
+	 * @param dest
+	 * @throws IOException
+	 */
+	public static void copyFile(File source, File dest) {    
+	        try {
+				Files.copy(source.toPath(), dest.toPath());
+			} catch (IOException e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+			}
 	}
 }

@@ -1,6 +1,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:cache="http://www.springframework.org/schema/cache"
 	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:task="http://www.springframework.org/schema/task"
 	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="
@@ -9,7 +10,9 @@
 		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
 		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
-		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd">
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd
+		http://www.springframework.org/schema/cache
+       http://www.springframework.org/schema/cache/spring-cache.xsd">
 		
 		<!-- 注入Service Bean -->
 	<bean id="adminServiceImpl" class="com.kedou.service.bg.AdminServiceImpl"></bean>
@@ -20,14 +23,20 @@
 	<bean id="userShiroRealm" class="com.kedou.shiro.UserShiroRealm">
         <property name="userServiceImpl" ref="userServiceImpl" />
         <property name="credentialsMatcher" ref="credentialsMatcher"/>     
+        <property name="authorizationCachingEnabled" value="true" />
+        <property name="authorizationCacheName" value="authorizationCache" />
     </bean> 
     <bean id="adminShiroRealm" class="com.kedou.shiro.AdminShiroRealm">
     	 <property name="adminServiceImpl" ref="adminServiceImpl" />
-    	 <property name="credentialsMatcher" ref="credentialsMatcher"/>     
+    	 <property name="credentialsMatcher" ref="credentialsMatcher"/>    
+    	 <property name="authorizationCachingEnabled" value="true" />
+        <property name="authorizationCacheName" value="authorizationCache" /> 
     </bean> 
     <bean id="businessShiroRealm" class="com.kedou.shiro.BusinessShiroRealm">
     	<property name="businessServiceImpl" ref="businessServiceImpl" />
         <property name="credentialsMatcher" ref="credentialsMatcher"/>     
+        <property name="authorizationCachingEnabled" value="true" />
+        <property name="authorizationCacheName" value="authorizationCache" />
     </bean>
     
 	<!-- 凭证匹配器 -->  
@@ -44,21 +53,22 @@
             	<entry key="businessShiroRealm" value-ref="businessShiroRealm" />  
         	</map>  
     	</property>  
-	</bean>  
-	<!-- Shiro安全管理器 -->
-	<!-- securityManager -->
-	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-    	<property name="authenticator" ref="pointRealmAuthenticator" />  
-    	<!-- 多Realm注入 -->  
-    	<property name="realms">  
-        	<list>  
-            	<ref bean="userShiroRealm" />  
-            	<ref bean="adminShiroRealm" />   
-            	<ref bean="businessShiroRealm" />   
-        	</list>  
+	</bean> 
+		<!-- 项目自定义Authenticator -->  
+	<bean id="pointRealmAuthorization"  class="com.kedou.shiro.PointRealmAuthorization">  
+   	 	<!-- realmMap -->  
+    	<property name="definedRealms">  
+        	<map>  
+            	<entry key="userShiroRealm" value-ref="userShiroRealm" />  
+            	<entry key="adminShiroRealm" value-ref="adminShiroRealm" />  
+            	<entry key="businessShiroRealm" value-ref="businessShiroRealm" />  
+        	</map>  
     	</property>  
-    	<property name="rememberMeManager" ref="rememberMeManager" />  
 	</bean>
+
+	
+	
+	
 	
    <!-- shiro-all.jar filterChainDefinitions：apache shiro通过filterChainDefinitions参数来分配链接的过滤，资源过滤有常用的以下几个参数：
     authc 表示需要认证的链接
@@ -67,23 +77,32 @@
     perms[admin:url] 表示需要对应角色的资源才能访问-->
  	<bean id="shiroFilter" name="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
      <property name="securityManager" ref="securityManager" />
-        <property name="loginUrl" value="/user/toiframe" />
-        <property name="successUrl" value="/common/toindex" />
-        <property name="unauthorizedUrl" value="/403.do" />
+        <property name="loginUrl" value="/user/toiframe?ifbefore=true" />
+        <property name="successUrl" value="/common/tobeforelogin" />
+        <property name="unauthorizedUrl" value="/common/noRole" />
     <property name="filterChainDefinitions">
         <value>
             # some example chain definitions:
             /**/fonts/* = anon
          	/**/*.css = anon
         	/**/*.js = anon
+        	/**/*.map = anon
        		/**/*.png = anon
          	/**/*.gif = anon
         	/**/*.jpg = anon
          	/**/*.jpeg = anon
          	/**/*.json = anon
-          	/**/*bg* = anon
+         	/bg_common/tobglogin = anon
+         	/bg_admin/bglogin = anon
+         	
   			/user/person* = user,roles[user]
+  			/forum/showforum = user
+  			/torder/toStartOrder = user,roles[user]
+  			
+  			/business/tobusadmin = user,roles[business]
+  			/collection/* = user,roles[user]
   			/bg*/* = authc,roles[admin]
+  			
             # more URL-to-FilterChain definitions here
         </value>
     </property>
@@ -111,4 +130,39 @@
        
        <property name="cookie" ref="rememberMeCookie" />
    </bean>
+   
+      <!-- Spring提供的基于的Ehcache实现的缓存管理器 -->
+ <!-- 如果有多个ehcacheManager要在bean加上p:shared="true" -->
+    <bean id="ehCacheManager" class ="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">  
+    	<property name="configLocation" value="classpath:ehcache.xml" />  
+    	<property name="shared" value="true"></property>  
+	</bean>  
+	
+	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">  
+        <property name="cacheManager" ref="ehCacheManager"/>  
+	</bean>  
+	
+	<bean id="springcacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">  
+        <property name="cacheManager" ref="ehCacheManager"></property>  
+    </bean> 
+    
+	<!-- Shiro安全管理器 -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+    	<property name="authenticator" ref="pointRealmAuthenticator" />  
+    	<property name="authorizer" ref="pointRealmAuthorization" />  
+    	<!-- 多Realm注入 -->  
+    	<property name="realms">  
+        	<list>  
+        		 <ref bean="userShiroRealm" />  
+        	     <ref bean="businessShiroRealm" />  
+            	 <ref bean="adminShiroRealm" />   
+        	</list>  
+    	</property>  
+    	<property name="rememberMeManager" ref="rememberMeManager" />  
+    	<!-- 缓存 -->
+    	<property name="cacheManager" ref="cacheManager" />  
+	</bean>
+   
+    <!-- cache注解，和spring-redis.xml中的只能使用一个 -->
+    <!--   <cache:annotation-driven cache-manager="cacheManager" proxy-target-class="true"/>-->
 </beans>

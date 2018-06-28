@@ -11,12 +11,21 @@ import com.kedou.dao.user.collection.CollectionDaoImpl;
 import com.kedou.entity.Collection;
 
 @Service
-@Transactional(readOnly=false)
+@Transactional(readOnly=false,rollbackFor=RuntimeException.class)
 public class CollectionServiceImpl {
 
 	@Resource
 	private CollectionDaoImpl collectionDaoImpl;
 	
+
+	/**
+	 * 添加收藏
+	 * @param collection
+	 * @throws Exception
+	 */
+	public void saveCollection(Collection collection) throws Exception {
+		this.collectionDaoImpl.save(collection);
+	}
 	/**
 	 * @desc 通过用户ID查找收藏课程
 	 * @author 陈
@@ -24,9 +33,7 @@ public class CollectionServiceImpl {
 	 * @return 
 	 */
 	public List<Collection> findCollectionByUserId(int userid)throws Exception  {
-		
 			return this.collectionDaoImpl.findCollectionByUserId(userid);
-		
 	}
 	
 

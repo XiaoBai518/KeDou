@@ -1,0 +1,387 @@
+.loginTime{
+	width: 1000px;
+	height: 30px;
+	font-family: YouYuan;
+	font-size: 15px;
+	color:red;
+	text-align: center;
+	line-height: 30px;
+	background-color: #FFDEAD;
+}
+.wordType{
+	width: 100px;
+	height: 30px;
+	font-family: Century Schoolbook;
+	font-size: 20px;
+	font-weight: bold;
+	margin-top: 20px;
+	margin-left: 20px;
+}
+.hrType{
+	height: 0.8px;
+	background-color: #CFCFCF;
+	margin-top: 10px;
+	opacity:0.6;
+}
+.boxType{
+	width: 950px;
+	height: 70px;
+	margin-left:20px;
+}
+.boxImg{
+	width: 50px;
+	height: 70px;
+	text-align: center;
+	padding-top:10px;
+	color:#CFCFCF;
+	float: left;
+
+}
+.boxWordType{
+	width: 550px;
+	height: 70px;
+	margin-left: 20px;
+	float: left;
+}
+.box-div1{
+	width: 100%;
+	height: 30px;
+	padding-top: 5px;
+
+}
+.box-div2{
+	width: 100%;
+	height: 35px;
+	font-family:Century Schoolbook;
+	font-size: 15px;
+	color: #CFCFCF;
+}
+.box-p2{
+	font-family: Century Schoolbook;
+	font-size: 14px;
+	color: red;
+	padding-right:10px;
+}
+.box-p1{
+	font-family: Century Schoolbook;
+	font-size: 16px;
+	font-weight: bold; 
+}
+.boxButton-position{
+	width: 100px;
+	height: 70px;
+	background-color: ;
+	line-height: 70px;
+	float: right;
+}
+.boxButton-type{
+	height: 35px;
+	margin-top: 15px;
+	font-family: Century Schoolbook;
+	font-size: 14px;
+	line-height: 33px;
+	color: #8C8C8C;
+	border: 1px solid #CFCFCF;
+	background-color: white;
+	border-radius:15px;
+	float: right;
+}
+.bottom-Box-Type{
+	width: 800px;
+	height: 100px;
+	margin-left:190px;
+	float: inherit;
+}
+.thirdLogin-box{
+	width: 160px;
+	height: 100px;
+	margin-left: 100px;
+	background-color: white;
+	float: left;
+}
+.imgType{
+	width: 90px;
+	height: 100px;
+	padding-top: 15px;
+	color: #CFCFCF;
+	float: left;
+}
+.imgRightType{
+	width: 70px;
+	height: 80px;
+	margin-top:15px; 
+	float: left;
+}
+.spanType1{
+	margin-top: 20px; 
+	font-family: Century Schoolbook;
+	font-size: 14px;
+	font-weight: bold;
+}
+.spanType2{
+	font-family: Century Schoolbook;
+	font-size: 13px;
+	color: red;
+}
+.span-buttom-button{
+	border: 1px solid #CFCFCF;
+	background-color: white;
+}
+
+/*  弹框css  */
+.messageChangeMail{
+	width: 500px;
+	height: 400px;
+	display:block;
+	background-color:white ;	
+	border-radius:20px 20px 20px 20px;
+	display:block;
+}
+.messageChangeMailBogo{
+	width: 500px;
+	height: 400px;
+	display:none;
+	background-color:white ;	
+	border-radius:20px 20px 20px 20px;
+}
+.title-type{
+	width: 100px;
+	height: 30px;
+	position: relative;
+	left: 20px;
+	top: 50px;
+	font-family: Century Schoolbook;
+	font-size: 18px;
+	font-weight: bold;
+}
+.text-type{
+	position: relative;
+	left: 20px;
+	top: 50px;
+}
+.text-type-bingmail{
+	position: relative;
+	left: 20px;
+	top: 80px;
+}
+.div-input-type{
+	width: 430px;
+	height: 30px;
+	margin-left: 30px;
+	margin-top: 30px;
+	float: inherit;
+}
+.div-input2-type{
+	width: 430px;
+	height: 30px;
+	margin-left: 30px;
+	margin-top: 30px;
+	float: inherit;
+}
+.div-span-type{
+	width: 100px;
+	height: 30px;
+	font-family: Century Schoolbook;
+	font-size: 14px;
+	font-weight: bold;
+	border: 0px solid #CFCFCF;
+	padding-top:8px;
+	float: left;
+}
+.div-sspan-type{
+	width: 430px;
+	height: 20px;
+	margin-left: 30px;
+	margin-top: 10px;
+	float: inherit;
+}
+.inputType{
+	width: 300px;
+	height: 30px;
+	float:left;
+	border: 1px solid #CFCFCF;
+	border-radius:10px 10px 10px 10px;
+}
+.button-type{
+	width: 400px;
+	height: 50px;
+	position: relative;
+	left:120px;
+	top: 100px;
+}
+.button1{
+	width: 70px;
+	height:40px;
+	float: left;
+	text-align: center;
+	line-height:36px;
+	font-family: Century Schoolbook;
+	font-size: 16px;
+	background-color:;
+	cursor: pointer;
+	border:1px solid #c8cccf;
+	border-radius:30px 30px 30px 30px;
+}
+.button2{
+	width: 70px;
+	height:40px;
+	margin-left: 100px;
+	float: left;
+	text-align: center;
+	line-height:36px;
+	font-family: Century Schoolbook;
+	font-size: 16px;
+	background-color: ;
+	cursor: pointer;
+	border:1px solid #c8cccf;
+	border-radius:30px 30px 30px 30px;
+}
+.submit-button{
+	display: none;
+}
+.finishText{
+	width: 150px;
+	height: 30px;
+	position: relative;
+	left: 190px;
+	top: 100px;
+	font-family: Century Schoolbook;
+	font-size: 20px;
+	font-weight: bold;
+	
+}
+.submitbogo{
+	width: 100px;
+	height:100px;
+	margin-top:150px;
+	margin-left:200px;
+}
+/* 更改手机号 */
+.div-code-type{
+	width: 430px;
+	height: 30px;
+	margin-left: 140px;
+	margin-top: 15px;
+	float: inherit;
+}
+.div-input-code{
+	width: 430px;
+	height: 30px;
+	margin-left: 30px;
+	margin-top: 5px;
+	float: inherit;
+}
+.div-wrong-type{
+	width: 430px;
+	height: 30px;
+	margin-left: 140px;
+	margin-top: 5px;
+	float: inherit;
+}
+.div-input-type2{
+	width: 430px;
+	height: 30px;
+	margin-left: 30px;
+	margin-top: 5px;
+	float: inherit;
+}
+.inputcode{
+	width: 300px;
+	height: 30px;
+	float:left;
+	border: 1px solid #CFCFCF;
+	border-radius:10px 10px 10px 10px;
+}
+.button-type-tel{
+	width: 400px;
+	height: 50px;
+	position: relative;
+	left:120px;
+	top:0px;
+}
+.button-type-bingmail{
+	width: 400px;
+	height: 50px;
+	position: relative;
+	left:120px;
+	top:30px;
+}
+.button-type-tel2{
+	width: 400px;
+	height: 50px;
+	position: relative;
+	left:120px;
+	top:50px;
+}
+.text-tochengetel{
+	position: relative;
+	left: 20px;
+	top: 50px;
+}
+.telregisteinputchange{
+	width: 430px;
+	height: 50px;
+	margin-left:100px;
+	margin-top: 50px;
+	float: inherit;
+}
+.Telinputsize{
+	width:150px;
+	height:40px;
+	float: left;
+	border: 1px solid #CFCFCF;
+	border-radius:10px 10px 10px 10px;
+}
+.thetime{
+	width:40px;
+	height:44px;
+	float: left;
+	color:#BEBEBE;
+	text-align:center;
+	line-height:40px;
+}
+.telchecknumspanchange{
+	width:100px;
+	height:44px;
+	font-size:13px;
+	color:#BEBEBE;
+	float: left;
+	text-align:center;
+	line-height:40px;
+	display:block;
+}
+.telchecknumspanchange2{
+	width:100px;
+	height:44px;
+	font-size:13px;
+	color:DeepSkyBlue;
+	float: left;
+	text-align:center;
+	line-height:40px;
+	display:none;
+	cursor:pointer;
+}
+.title2-type{
+	width: 300px;
+	height: 30px;
+	position: relative;
+	left: 140px;
+	top: 20px;
+	font-family: Century Schoolbook;
+	font-size: 18px;
+}
+.div-wrong-type2{
+	width: 430px;
+	height: 30px;
+	margin-left: 110px;
+	margin-top: 5px;
+	float: inherit;
+}
+.messageChangetel{
+	width: 500px;
+	height: 400px;
+	display:block;
+	background-color:white ;	
+	border-radius:20px 20px 20px 20px;
+	display:none;
+}

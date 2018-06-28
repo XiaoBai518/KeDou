@@ -23,7 +23,7 @@ public class UserCredentialsMatcher extends SimpleCredentialsMatcher {
 		 String tokenPwd = String.valueOf(usertoken.getPassword());
 		 
 		 SimpleAuthenticationInfo userinfo = (SimpleAuthenticationInfo)info;
-		 
+		
 		 //用户真实密码
 		 String realPwd = String.valueOf(getCredentials(info));
 		 

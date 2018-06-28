@@ -9,6 +9,11 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="label")
+/**
+ * 用户标签类
+ * @author 张小白
+ *
+ */
 public class Label {
 	@Id
 	@GeneratedValue(generator="increment_generator")

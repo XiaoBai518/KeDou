@@ -14,15 +14,6 @@ img{
 #header{
 	width: 100%;
 }
-#logo{
-	width: 200px;
-	height: 100px;
-	margin-top: 2%;
-	margin-bottom: 1%;
-	position: relative;
-	left: 10%;
-	float: left;
-}
 #navigation{
 	float: left;
 	width: 100%;

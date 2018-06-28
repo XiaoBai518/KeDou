@@ -38,8 +38,10 @@ public class PointRealmAuthenticator extends ModularRealmAuthenticator {
         } else if ("2".equals(token.getUserType())) {  
             realm = (Realm) this.definedRealms.get("adminShiroRealm");  
         } else if ("3".equals(token.getUserType())) {
+        	System.out.println("判断用哪个Realm"+token.getUserType());
         	realm = (Realm) this.definedRealms.get("businessShiroRealm");
         }
         return this.doSingleRealmAuthentication(realm, authenticationToken);  
     }  
+    
 }

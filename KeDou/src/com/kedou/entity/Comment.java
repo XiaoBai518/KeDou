@@ -1,5 +1,7 @@
 package com.kedou.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,22 +22,20 @@ public class Comment {
 	@GenericGenerator(name="increment_generator", strategy="increment")
 	private int comId;
 	
-	private int courseId;//课程ID
+	private int userId; 	//用户Id
+	private String userName;//用户名称
+	private int articleId;//文章ID
 	private String comments;//评价
 	private String comimg1;//附图1
 	private String comimg2;//附图2
 	private String comimg3;//附图3
+	private String userIcon;//用户头像
+	private Date publicTime;//发布时间
 	public int getComId() {
 		return comId;
 	}
 	public void setComId(int comId) {
 		this.comId = comId;
-	}
-	public int getCourseId() {
-		return courseId;
-	}
-	public void setCourseId(int courseId) {
-		this.courseId = courseId;
 	}
 	public String getComments() {
 		return comments;
@@ -60,6 +60,36 @@ public class Comment {
 	}
 	public void setComimg3(String comimg3) {
 		this.comimg3 = comimg3;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public int getArticleId() {
+		return articleId;
+	}
+	public void setArticleId(int articleId) {
+		this.articleId = articleId;
+	}
+	public String getUserIcon() {
+		return userIcon;
+	}
+	public void setUserIcon(String userIcon) {
+		this.userIcon = userIcon;
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	public Date getPublicTime() {
+		return publicTime;
+	}
+	public void setPublicTime(Date publicTime) {
+		this.publicTime = publicTime;
 	}
 	
 	

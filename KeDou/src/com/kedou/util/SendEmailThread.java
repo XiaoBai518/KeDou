@@ -28,12 +28,13 @@ import com.sun.mail.util.MailSSLSocketFactory;
 public class SendEmailThread extends Thread {
 
 	private String emailAddress;//邮箱地址
-	private String code;        //标识码
+	private String text;        //内容
+	
 	
 	//构造方法
-	public SendEmailThread(String email,String code) {
+	public SendEmailThread(String email,String text) {
 		emailAddress = email;
-		this.code = code;
+		this.text = text;
 	}
 	
 @Override
@@ -81,7 +82,8 @@ public void run() {
     	// 设置邮件的文本内容
     	BodyPart contentPart = new MimeBodyPart();
     	//加上"text/html; charset=utf-8"，表示支持html格式的邮件
-    	contentPart.setContent("<h1>尊敬的用户您好,请点击下面链接完成激活操作</h1><h3><a href='http://localhost:8080/KeDou/user/verify?verifyNum="+code+"'>邮箱激活链接</a></h3>", "text/html; charset=utf-8");
+//    	contentPart.setContent("<h1>尊敬的用户您好,请点击下面链接完成激活操作</h1><h3><a href='http://localhost:8080/KeDou/user/verify?verifyNum="+code+"'>邮箱激活链接</a></h3>", "text/html; charset=utf-8");
+    	contentPart.setContent(text, "text/html; charset=utf-8");
     	multipart.addBodyPart(contentPart);
     	message.setContent(multipart);
     	message.setHeader("X-Mailer", "smtpsend");

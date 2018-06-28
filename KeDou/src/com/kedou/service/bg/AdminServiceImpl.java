@@ -76,7 +76,7 @@ public class AdminServiceImpl {
 	 */
 	@Transactional
 	public void editUser(User u) {
-		try {
+		try {		
 			userDaoImpl.update(u);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

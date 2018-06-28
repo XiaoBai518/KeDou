@@ -27,11 +27,13 @@ public class Course {
 	private String description;		//课程描述
 	private Date courseStartTime;	//课程开始时间
 	private Date courseEndTime;		//课程结束时间
+	private int period;				//课程学时
 	private double coursePrice;		//课程价格
 	private int courseSold;			//课程已售数量
 	private String courseImg;		//课程图片
 	private int hot;				//是否热门
 	private int state=0;			//课程状态 0为锁定状态  1为正常
+	private String address;         //上课地点
 	public int getCourseId() {
 		return courseId;
 	}
@@ -100,9 +102,17 @@ public class Course {
 	public void setState(int state) {
 		this.state = state;
 	}
-	
-	
-	
-	
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public int getPeriod() {
+		return period;
+	}
+	public void setPeriod(int period) {
+		this.period = period;
+	}
 	
 }

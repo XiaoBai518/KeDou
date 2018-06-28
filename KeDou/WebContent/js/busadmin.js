@@ -12,12 +12,7 @@ $(document).ready(function(){
 		$("#myPopover").hide();
 	});
 });
-// 定义欢迎标签页
-var tabs = [{
-	title: '实时数据',
-	url: 'iframe/realdata.html',
-	type: 'iframe'
-}];
+
 //初始化标签页管理器
 $(document).ready(function(){
 	$('#tabs').tabs({tabs: tabs});
@@ -36,25 +31,25 @@ function closeOther(){
 }
 //店铺实时数据
 	//实时数据
-	function realData(){
+	function realData(busid){
 		// 获取标签页管理器对象实例
 		var myTabs = closeOther();
 		// 定义标签页
 		var realdata = {
 			title: '实时数据',
-			url: 'iframe/realdata.html',
+			url: '/KeDou/business/toRealData?busid='+busid,
 			type: 'iframe'
 		};
 		myTabs.open(realdata);
 	}
 	//基本信息
-	function basicInfo(){
+	function basicInfo(busid){
 		//获取标签页管理器对象实例
 		var myTabs = closeOther();
 		//定义标签页
 		var basicinfo = {
 			title : '基本信息',
-			url: 'iframe/basicinfo.html',
+			url: '/KeDou/business/tobusInfo?busid='+busid,
 			type:'iframe'
 		};
 		myTabs.open(basicinfo);
@@ -72,13 +67,13 @@ function closeOther(){
 			myTabs.open(addCourse);
 		}
 		//课程列表
-		function allCourse(){
+		function allCourse(pagenum){
 			// 获取标签页管理器对象实例
 			var myTabs = closeOther();
 			// 定义标签页
 			var courselist = {
 				title: '所有课程',
-				url: 'iframe/courselist.html',
+				url: '/KeDou/course/tocourselist?pagenum='+pagenum,
 				type: 'iframe'
 			};
 			myTabs.open(courselist);
@@ -91,7 +86,7 @@ function closeOther(){
 				// 定义标签页
 				var addannounce = {
 					title: '添加公告',
-					url: 'iframe/addannounce.html',
+					url: '/KeDou/businessnotice/toaddNotice',
 					type: 'iframe'
 				};
 				myTabs.open(addannounce);
@@ -103,7 +98,7 @@ function closeOther(){
 				// 定义标签页
 				var announcelist = {
 					title: '所有公告',
-					url: 'iframe/announcelist.html',
+					url: '/KeDou/businessnotice/toNoticeList',
 					type: 'iframe'
 				};
 				myTabs.open(announcelist);
@@ -116,7 +111,7 @@ function closeOther(){
 				// 定义标签页
 				var untreated = {
 					title: '未处理预约',
-					url: 'iframe/untreated.html',
+					url: '/KeDou/torder/tobustorder?page=1&p=untreated',
 					type: 'iframe'
 				};
 				myTabs.open(untreated);
@@ -127,8 +122,8 @@ function closeOther(){
 				var myTabs = closeOther();
 				// 定义标签页
 				var orderlist = {
-					title: '所有预约',
-					url: 'iframe/orderlist.html',
+					title: '已处理预约',
+					url: '/KeDou/torder/tobustorder?page=1&p=treated',
 					type: 'iframe'
 				};
 				myTabs.open(orderlist);
@@ -141,7 +136,7 @@ function closeOther(){
 				// 定义标签页
 				var addexperience = {
 					title: '新增经验贴',
-					url: 'iframe/addexperience.html',
+					url: '/KeDou/forum/tobusaddArticle',
 					type: 'iframe'
 				};
 				myTabs.open(addexperience);

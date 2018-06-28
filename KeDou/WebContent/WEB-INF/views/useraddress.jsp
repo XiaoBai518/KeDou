@@ -8,6 +8,11 @@
 <html >
 <head>
 <meta charset="utf-8">
+<title>课兜儿网——选择地址</title>
+		<link rel="icon" href="${ctx }/img/favicon.ico" type="image/x-icon" />
+   		<link rel="shortcut icon" href="${ctx }/img/favicon.ico">
+   		<link rel="Bookmark" href="${ctx }/img/favicon.ico">
+   		<link rel="SHORTCUT ICON" href="${ctx }/img/favicon.ico"/>
 <link href="${ctx}/css/Address/base.css" rel="stylesheet" type="text/css">
 <link href="${ctx}/css/Address/main.css" rel="stylesheet" type="text/css">
 <link href="${ctx}/css/Address/select.css" rel="stylesheet" type="text/css">
@@ -52,9 +57,9 @@
 				</div>
 				<!--个人头像-->
 				<div id="userPad">
-					 <shiro:user>
+					 <c:if test="${ not empty sessionScope.loginUser}">
 					 	<div id="myPhoto">
-						<img src="${userImgPath}/<shiro:principal property="userIcon"/>"/>
+						<img src="${userImgPath}/${sessionScope.loginUser.userIcon}" onerror="this.src='${ctx }/img/logo.jpg'"/>
 						</div>
 						<div class="popover bottom" id="myPopover">
 							<div class="arrow"></div>
@@ -65,28 +70,25 @@
 										<li class="menu-li"><a href="${ctx }/user/person?address=1"><i class="icon icon-history"></i>&nbsp&nbsp我的足迹</a></li>
 										<li class="menu-li"><a href="${ctx }/user/person?address=2"><i class="icon icon-check-board"></i>&nbsp&nbsp我的预约</a></li>
 										<li class="menu-li"><a href="${ctx }/user/person?address=3"><i class="icon icon-star"></i>&nbsp&nbsp我的收藏</a></li>
+										<li class="menu-li"><a href="${ctx }/user/person?address=4"><i class="icon icon-folder-close"></i>&nbsp&nbsp我的资料</a></li>
 									</ul>
 								</div>
 						</div>
-					 </shiro:user>
-					 	
-					 <shiro:guest>
-					 	<div id="myPhoto">
+					 </c:if>
+					 <c:if test="${ empty sessionScope.loginUser}">
+					 	<div id="loginregiste">
 							<a href="${ctx }/user/toiframe"><font size="4">登陆 </font></a><font size="5" color="blue"> / </font><a href="${ctx }/user/toiframe?option=regist"><font size="4"> 注册</font></a>
 						</div>
-					 </shiro:guest>
-					 	
-					 
+					 </c:if>
 					</div>
 				</div>
 				
 				<!--导航条-->
 				<div id="navigation">
 					<ul class="nav nav-secondary">
-						<li><a href="#" class="nav-a">首页</a></li>
-						<li><a href="#" class="nav-a">动态 <span class="label label-badge label-success">4</span></a></li>
-						<li><a href="#" class="nav-a">项目 </a></li>
-						<li><a href="#" class="nav-a">哈哈</a></li>
+						<li><a href="${ctx }/common/toindex" class="nav-a">首页</a></li>
+						<li><a href="${ctx }/calendar/list" class="nav-a">考试日历</a></li>
+						<li><a href="${ctx }/forum/showforum" class="nav-a">论坛 </a></li>
 					</ul>
 				</div>
 			</div> 
@@ -94,12 +96,12 @@
    <div class="gc_main">
       <div class="demo uldemo">
         <div id="box" style="width: 800px;">
-        <form action="${ctx}/useraddress/detail" method="get">
+        <form action="${ctx}/useraddress/detail" method="get" onsubmit="return detailOnSubmit()">
         <input type="hidden" name="arrcity_3word" id="arrcity_3word" value="" />
         <label for="arrcity">直接搜索城市：</label><input type="text" name="arrcity" id="arrcity"/>
         <input type="text" name="detail" placeholder="详细地址"/>
         <div id='suggest' class="ac_results"></div>
-        <input type="submit" value="确定" name="submit" id="submitbutton" style="width: 40px;">
+        <input type="submit" value="确定" name="submit"  id="submitbutton"  style="width: 40px;">
         </form>
         </div>
         <hr color="#F5F5F5" />

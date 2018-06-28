@@ -1,5 +1,6 @@
 package com.kedou.dao.business;
 
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.kedou.dao.framework.BaseDao;
@@ -56,6 +57,23 @@ public class BusinessDaoImpl  extends BaseDao<Business>  {
 		String hql = "update Business as bus set bus.loginTime= ? , bus.lastLoginTime= ?,bus.loginCount= ?,bus.lastLoginIp= ?,bus.busIp= ? where bus.busId=?";
 		
 			super.updateByProperty(hql, params);
+	}
+	/**
+	 * 
+	 * @desc 机构详情修改（商家个人中心）
+	 * @author 张天润
+	 * @createDate 2018年3月29日
+	 * @return
+	 * @throws Exception
+	 */
+	
+	public void updateBusInfo(Object [] params) {
+		String hql = "update Business as bus set bus."+params[0]+"=:busContact where busid = :busid";
+		
+		Query query = super.getSessionFactory().getCurrentSession().createQuery(hql);
+		query.setParameter("busContact", params[1]);
+		query.setParameter("busid", params[2]);
+		query.executeUpdate();
 	}
 	
 }

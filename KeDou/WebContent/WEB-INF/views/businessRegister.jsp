@@ -9,6 +9,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>商家入驻</title>
+        	<link rel="icon" href="${ctx }/img/favicon.ico" type="image/x-icon" />
+   		<link rel="shortcut icon" href="${ctx }/img/favicon.ico">
+   		<link rel="Bookmark" href="${ctx }/img/favicon.ico">
+   		<link rel="SHORTCUT ICON" href="${ctx }/img/favicon.ico"/>
+        
         <link rel="stylesheet" href="${ctx }/css/bootstrap.min.css">
         <link rel="stylesheet" href="${ctx }/css/busfont-awesome.min.css">
 		<link rel="stylesheet" href="${ctx }/css/busform-elements.css">

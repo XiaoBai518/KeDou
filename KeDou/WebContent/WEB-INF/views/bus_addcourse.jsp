@@ -8,14 +8,12 @@
 <html>
 <head>
 	<title>添加课程</title>
-	
+	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="${ctx }/css/zui.min.css">
 	<link href="${ctx }/css/datetimepicker.min.css" rel="stylesheet">
 	<link href="${ctx }/css/zui.uploader.min.css" rel="stylesheet">
 
-	<!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
 	<script src="${ctx }/js/jquery.zui.js"></script>
-	<!-- ZUI Javascript组件 -->
 	<script src="${ctx }/js/zui.min.js"></script>
 	<script src="${ctx }/js/datetimepicker.min.js"></script>
 	<script src="${ctx }/js/zui.uploader.min.js"></script>
@@ -43,8 +41,8 @@
 		<div style="width: 100%;overflow: hidden;">
 			<h2 style="text-align: center;">请填写课程信息</h2><br/>
 		<form class="form-horizontal" action="${ctx }/course/addcourse" method="post"  id="addcourseForm">
-			<input type="hidden" id="courseImg" name="courseImg" value="">
-			<input type="hidden" name="busId" value="1">
+			<input type="hidden" id="Img" name="courseImg" value="">
+			<input type="hidden" name="busId" value="${sessionScope.loginBusiness.busId }">
 			<div class="form-group">
 				<label class="col-sm-2 required">课程图片</label>
 				<div class="col-md-8 col-sm-10">
@@ -58,7 +56,6 @@
 					    <hr class="divider">
 					    <div class="uploader-status pull-right text-muted"></div>
 					    <button type="button" class="btn btn-link uploader-btn-browse"><i class="icon icon-plus"></i> 选择文件</button>
-					    <button type="button" class="btn btn-link uploader-btn-start"><i class="icon icon-cloud-upload"></i> 开始上传</button>
 					  </div>
 					</div>
 		    	</div>
@@ -74,13 +71,13 @@
 		    <div class="col-md-3 col-sm-10">
 		    	<div class="radio">
 				    <label>
-				      <input type="radio" name="exampleRadioOption1"/> 面授&nbsp
+				      <input type="radio" value="2" checked="checked" name="courseType"/> 面授&nbsp
 				    </label>
 				    <label>
-				      <input type="radio" name="exampleRadioOption1"/> 视频&nbsp
+				      <input type="radio" value="3" name="courseType"/> 视频&nbsp
 				    </label>
 				    <label>
-				      <input type="radio" name="exampleRadioOption1"/> 资源&nbsp
+				      <input type="radio" value="4" name="courseType"/> 资源&nbsp
 				    </label>
 				</div>
 		    </div>
@@ -94,17 +91,23 @@
 		  <div class="form-group">
 		    <label class="col-sm-2 required">开始时间</label>
 		    <div class="col-md-3 col-sm-10">
-		      <input type="text" class="form-control form-date" name="startTime"  placeholder="选择或者输入一个日期" id="courseStartTime" >
+		      <input type="text" class="form-control form-date" name="startTime"  placeholder="选择或者输入一个日期" autoComplete="off" id="courseStartTime" >
 		    </div>
 		    <label class="col-sm-2 required">结束时间</label>
 		    <div class="col-md-3 col-sm-10">
-		      <input type="text" class="form-control form-date" name="endTime" placeholder="选择或者输入一个日期" id="courseEndTime"/>
+		      <input type="text" class="form-control form-date" name="endTime" placeholder="选择或者输入一个日期"   autoComplete="off"  id="courseEndTime"/>
 		    </div>
+		
 		  </div>
 		  <div class="form-group">
 		  	<label class="col-sm-2 required">价格</label>
 		    <div class="col-md-3 col-sm-10">
 		      <input type="text" class="form-control" name="coursePrice" id="coursePrice" placeholder="价格"/>
+		    </div>
+		      <label class="col-sm-2 required ">课时</label>
+		    <div class=" col-md-3 col-sm-10 ">
+		      <input type="text" class="form-control"  name ="period"id="period" onkeyup="value=value.replace(/[^\d]/g,'')"  placeholder="输入课时（数字）"/>
+		       <label for="inputPasswordExample2" class="input-control-label-right text-right text-red">时</label>
 		    </div>
 		  </div>
 		  <div class="form-group">

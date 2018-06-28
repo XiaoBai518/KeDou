@@ -43,12 +43,26 @@ img{
 	margin-top: 10px;
 }
 /*个人中心*/
-#myPhoto{
+#loginregiste{
 	margin-top: 2%;
 	margin-right: 10%;
 	float: right;
 	width: 100px;
 	height: 50px;
+}
+#myPhoto{
+	margin-top: 1%;
+	margin-right: 10%;
+	float: right;
+	width: 80px;
+	height: 80px;
+}
+#myPhoto img{
+    -webkit-border-radius:50%;  
+	-moz-border-radius:50%;  
+	-ms-border-radius:50%;  
+	-o-border-radius:50%;  
+	border-radius:50%;  
 }
 #myPopover{
 	width: 140px;

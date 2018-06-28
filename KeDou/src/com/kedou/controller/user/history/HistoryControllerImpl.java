@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kedou.entity.Checkbox;
 import com.kedou.entity.Course;
 import com.kedou.entity.History;
 import com.kedou.entity.User;
 import com.kedou.service.course.CourseServiceImpl;
 import com.kedou.service.user.history.HistoryServiceImpl;
+import com.kedou.util.Checkbox;
 import com.kedou.util.Constants;
 
 @Controller

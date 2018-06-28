@@ -32,16 +32,17 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request,  
             HttpServletResponse response, Object handler) throws Exception {  
     	User loginUser =  (User)request.getSession().getAttribute("loginUser");  
+    	System.out.println("自动登录拦截器");
         System.out.println(request.getRequestURI());
         Subject subject = SecurityUtils.getSubject();
- 
         if(loginUser == null){  
+
         	if(!subject.isAuthenticated() && subject.isRemembered()) {
         		//用户账号
-        			Object principal = subject.getPrincipal();
-                   if(null!= principal) {
-                	   
-                	   	User user = this.userServiceImpl.findByAcount(String.valueOf(principal));
+       			String username = (String)subject.getPrincipal();
+       			User user = this.userServiceImpl.findByAcount(username);
+       			System.out.println(user);
+                   if(null!= user) {
                 	   	System.out.println("进行自动登陆");
         				//获取当前用户IP
 					     String IP = IpAddress.getIpAddress(request);

@@ -32,6 +32,7 @@
          <mvc:exclude-mapping path="/**/fonts/*"/>
          <mvc:exclude-mapping path="/**/*.css"/>
          <mvc:exclude-mapping path="/**/*.js"/>
+         <mvc:exclude-mapping path="/**/*.map"/>
          <mvc:exclude-mapping path="/**/*.png"/>
          <mvc:exclude-mapping path="/**/*.gif"/>
          <mvc:exclude-mapping path="/**/*.jpg"/>
@@ -48,6 +49,7 @@
          <mvc:exclude-mapping path="/**/fonts/*"/>
          <mvc:exclude-mapping path="/**/*.css"/>
          <mvc:exclude-mapping path="/**/*.js"/>
+          <mvc:exclude-mapping path="/**/*.map"/>
          <mvc:exclude-mapping path="/**/*.png"/>
          <mvc:exclude-mapping path="/**/*.gif"/>
          <mvc:exclude-mapping path="/**/*.jpg"/>
@@ -56,8 +58,17 @@
           <mvc:exclude-mapping path="/**/*bg*"/>
        	  
        <bean class="com.kedou.util.LoginInterceptor" />  
-    </mvc:interceptor>        
- 
+    </mvc:interceptor>
+     <mvc:interceptor>  
+        <!-- 进行拦截：/**表示拦截所有controller -->  
+ 	 	<mvc:mapping path="/business/tohome" />
+       <bean class="com.kedou.interceptor.VisitNumberInterceptor" /> 
+    </mvc:interceptor>
+    <mvc:interceptor>  
+        <!-- 进行拦截：/**表示拦截所有controller -->  
+ 	 	<mvc:mapping path="/forum/details" />
+       <bean class="com.kedou.interceptor.article.ReadNumberInterceptor" /> 
+    </mvc:interceptor>
 </mvc:interceptors>    
 
 	   <!-- 开启shiro注解支持 -->

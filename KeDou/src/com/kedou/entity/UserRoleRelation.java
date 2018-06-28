@@ -11,8 +11,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
+ * 用户角色联系 类
  * @author 张小白
- *
  */
 @Entity
 @Table(name="userrolerelation")

@@ -22,25 +22,27 @@ img{
 	height: 100%;
 }
 iframe{
-	width: 1000px;
+	width: 850px;
 	height: 200px;
 	margin-top: -100px;
-	margin-left: -300px;
+	margin-left: 0px;
 	background-color: rgba(255, 255, 255, 0);
 }
 #center-search{
-	left: 22%;
+	left: 268px;
     top: 10%;
 	background-color: rgba(255, 255, 255, 0);
 	position:fixed;
 	z-index:9998;
 	border:0px;
 	width: 800px;
-	height: 400px;
+	height: 800px;
 	overflow: hidden;
 }
 #est_cn{
-	height: 100px;
+	width:300px;
+	height: 50px;
+	left:10px;
 }
 .est_selected{
     border:0px;
@@ -57,7 +59,7 @@ iframe{
 	border:0px;
 	width: 100px;
 	height: 36px;
-	background:rgba(255, 255, 255, 0.8);
+	background:#DDDDDD;
 	border-radius:20px 20px 0px 0px;
 	position:fixed;
 	z-index:9999;
@@ -65,7 +67,7 @@ iframe{
     line-height: 34px;
 }
 #search{
-	left: 35%;
+
     top: 37%;
 	border:0px;
 	width: 650px;
@@ -75,20 +77,16 @@ iframe{
 	z-index:9998;
 }
 #minimalist{
-	left: 35%;
-    top: 19%;
-    margin-top: 2px;
+    margin-top: 14px;
 }
 #optional{
-	left: 42%;
-    top: 19%;
-    margin-left: 30px;
-    margin-top: 2px;
+    margin-left: 100px;
+    margin-top: 14px;
 }
 #logo{
-	margin-left: 200px;
+	margin-left: 0px;
 	margin-top: -150px;
-	width: 375px;
+	width: 370px;
 	height: 525px;
 }
 
@@ -96,7 +94,7 @@ iframe{
 	right: 0%;
     bottom:0%;
 	position:fixed;
-	z-index:9998;
+	z-index:9999;
 	border:0px;
 	width: 220px;
 	height: 220px;
@@ -128,4 +126,15 @@ iframe{
 	position:absolute;
 	z-index:9998;
 }
+#index-find{
+	height: 45px;
+	width: 700px;
+	border-radius: 0px 0px 0px 0px;
+}
+#index-button{
+	height: 45px;
+	width: 70px;
+	border-radius: 0px 25px 25px 0px;
+}
+
 

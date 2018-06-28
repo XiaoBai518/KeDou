@@ -1,6 +1,8 @@
 package com.kedou.dao.user.collection;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -8,9 +10,36 @@ import org.springframework.stereotype.Repository;
 
 import com.kedou.dao.framework.BaseDao;
 import com.kedou.entity.Collection;
+import com.kedou.entity.Course;
 
 @Repository
 public class CollectionDaoImpl extends BaseDao<Collection> {
+	
+	
+	/***
+	 * 根据 课程List 和UserId 查询该用户收藏了哪些课程
+	 * @param idList
+	 * @param userId
+	 * @return
+	 */
+	public Map<Integer,Collection> findMapByCourseList(List<Integer> idList,int userId) {
+		String hql = "from Collection where courseId in (:idList) and userId = :userid";
+		Query query = super.getSessionFactory().getCurrentSession().createQuery(hql);
+		query.setParameterList("idList", idList);
+		query.setParameter("userid", userId);
+		 List<Collection> collectionList = query.list();
+		 
+		 if(collectionList!=null&&collectionList.size()!=0) {
+			 Map<Integer,Collection> collectionMap = new HashMap<Integer,Collection>();
+			 for(Collection c:collectionList) {
+				 collectionMap.put(c.getCourseId(), c);
+			 }
+			 return collectionMap;
+		 }
+		return null;
+		 
+	}
+	
 	/**
 	    * 
 		* @desc 根据用户id查询其收藏课程的总数

@@ -1,0 +1,78 @@
+*{
+	margin:0;
+	padding:0;
+}
+body{
+	width: 100%;
+}
+img{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+/*网页中部*/
+#content-left{
+	float: left;
+	width: 100%;
+	height:auto!important;
+	min-height: 30px;
+	max-height:2000px;
+	background-color: white;
+}
+/*课程列表*/
+#course{
+	margin-left: 4%;
+	width: 92%;
+	height:auto!important;
+	min-height: 30px;
+	max-height: 1900px;
+	border-radius: 8px;
+	box-shadow: #E5E4E1 2px 2px 12px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding: 30px;
+}
+#course:hover{
+	border-radius: 8px;
+	box-shadow: #E5E4E1 2px 2px 40px;
+}
+.course-img{
+	float: left;
+	width: 430px;
+	height: 320px;
+}
+.course-img:hover{
+	opacity:0.5;
+}
+.course-info{
+	width: 90%;
+	margin-left: 49%;
+	color: #666560;
+	height: 350px;
+}
+#info{
+	width: 50%;
+	height: 100px;
+	overflow: hidden;
+}
+.sourse-price{
+	width: 50px;
+	height: 30px;
+	margin-top: 1%;
+	font: bold 14px 'Microsoft Yahei';
+	color: #c00;
+}
+.sourse-order{
+	float: left;
+	margin-top: -5%;
+	margin-left: 25%;
+}
+/*页面footer*/
+#footer{
+	height: 50px;
+	left: 10%;
+	padding-left: 75px;
+}
+.expiryDate{
+	margin-left:10%;
+}

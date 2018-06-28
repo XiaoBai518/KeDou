@@ -10,7 +10,7 @@ function  formsubmit(formId,uploaderId) {
 	   //上传成功
 	  if(responseObject.status==5) {
 		  //将图片路径写入隐藏域
-		  $('#courseImg').attr('value', responseObject.remoteData);
+		  $('#Img').attr('value', responseObject.remoteData);
 		  $('#'+formId).submit();
 	  }else {
 		 //上传失败不提交

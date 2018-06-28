@@ -5,6 +5,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+	<title>店铺首页</title>
+		<link rel="icon" href="${ctx }/img/favicon.ico" type="image/x-icon" />
+   		<link rel="shortcut icon" href="${ctx }/img/favicon.ico">
+   		<link rel="Bookmark" href="${ctx }/img/favicon.ico">
+   		<link rel="SHORTCUT ICON" href="${ctx }/img/favicon.ico"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="${ctx }/css/homepage.css">

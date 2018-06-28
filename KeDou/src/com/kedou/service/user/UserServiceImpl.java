@@ -1,26 +1,20 @@
 package com.kedou.service.user;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
 import javax.annotation.Resource;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.ExcessiveAttemptsException;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.LockedAccountException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.subject.Subject;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
+
 
 import com.kedou.dao.role.RoleDaoImpl;
 import com.kedou.dao.role.UserRoleRelationDaoImpl;
@@ -29,14 +23,12 @@ import com.kedou.dao.user.UserDaoImpl;
 import com.kedou.entity.Label;
 import com.kedou.entity.User;
 import com.kedou.entity.UserRoleRelation;
-import com.kedou.shiro.UsernamePasswordByUserTypeToken;
 import com.kedou.util.BCrypt;
 import com.kedou.util.Constants;
-import com.kedou.util.IpAddress;
 import com.kedou.util.SendEmailThread;
 
 @Service
-@Transactional(readOnly=false)
+@Transactional(readOnly=false,rollbackFor=RuntimeException.class)
 public class UserServiceImpl {
 	@Resource
 	private UserDaoImpl userDaoImpl;
@@ -97,7 +89,8 @@ public class UserServiceImpl {
 	public  String  sendEmail(String emailAddress){  
 		//生成用户code
         String code=UUID.randomUUID().toString().replace("-", "");
-		new SendEmailThread(emailAddress,code).start();  //向用户注册的邮箱发送验证码
+        String text=Constants.SEND_MAIL1+code+Constants.SEND_MAIL2;
+		new SendEmailThread(emailAddress,text).start();  //向用户注册的邮箱发送验证码
 		return code;
     }  
 	/**
@@ -119,6 +112,7 @@ public class UserServiceImpl {
 				this.userDaoImpl.updateVerifyNum(params);
 		
 	}
+	
 	/**
 	 * 
 	 * @desc 通过邮箱或电话查找用户
@@ -137,6 +131,15 @@ public class UserServiceImpl {
 			return u.getSalt();
 		}
 		return null;
+	}
+	/**
+	 * 更新用户密码
+	 * @param u
+	 * @throws Exception
+	 */
+	public void updateUserPwd(String a,String b,int c)throws Exception {
+		Object [] params = {a,b,c};
+		this.userDaoImpl.updateUserPwd(params);
 	}
 	/**
 	 * 更新用户信息(用户更改信息)
@@ -198,6 +201,29 @@ public class UserServiceImpl {
 			return this.userDaoImpl.get(userid);
 		
 	}
+	/**
+	 * 
+	 * @desc 通过用户ID列表查找用户列表
+	 * @author 张天润	
+	 * @createDate 
+	 * @return User
+	 */
+	public Map<Integer,User> findUserListByUserIdlist(List<Integer> useridList)throws Exception  {
+		
+		if(!useridList.isEmpty()) {
+			 List<User>  userList = this.userDaoImpl.findUserListByUserIdlist(useridList);
+			 Map<Integer,User> userMap = new HashMap<Integer, User>();
+			 	for(User u:userList) {
+			 		userMap.put(u.getUserId(),u);
+			 	}
+						return userMap;
+			
+		}else {
+			return null;
+		}
+		
+	}
+	
 	/**
 	 * 通过账号查询用户角色名
 	 * @param roleName
@@ -319,7 +345,60 @@ public class UserServiceImpl {
 		line = this.userDaoImpl.saveLabel(label, id);
 		return line;
 	}
-
+	/**
+	 * 
+	 * @desc 注册手机用户
+	 * @throws Exception
+	 */
+	public void registerTelUser(User u) throws Exception{
+		   //设置账户状态为激活状态
+			 u.setState(1); 
+		//随机生成 salt
+		String salt =UUID.randomUUID().toString().replace("-", "");
+		   //进行二次加密
+		 u.setUserPwd(BCrypt.hashpw(u.getUserPwd()+salt, BCrypt.gensalt()));
+		   //设置salt值
+		     u.setSalt(salt);
+		 //获取当地时间  并设置为用户创建时间
+		     u.setCreateTime(new Date());
+		 //设置用户登录次数为 0
+		     u.setLoginCount(0);
+		 //创建用户角色联系实体
+		  UserRoleRelation urr = new UserRoleRelation();
+			this.userDaoImpl.save(u);
+			
+			  //设置用户角色联系的用户ID
+			     urr.setUserId(u.getUserId());
+			  //设置用户角色联系的角色ID
+			     urr.setRoleId(1);
+			     this.userRoleRelationDaoImpl.save(urr);
+	}
+	/**
+	 * 更新用户信息绑定手机号
+	 * @param state
+	 * @throws Exception 
+	 */
+	public void updateUserTelNum(String usertel,int id) throws Exception{
+		Object [] params = {usertel,id};
+		this.userDaoImpl.updateUserTelNum(params);
+	}
+	/**
+	 * @desc 发送激活邮件
+	 * 
+	 */
+	public  void  sendEmailcode(String emailAddress,String code){  
+		String text= Constants.SEND_MAILCODE1+code+Constants.SEND_MAILCODE2;
+		new SendEmailThread(emailAddress,text).start();  //向用户注册的邮箱发送验证码
+    }
+	/**
+	 * 绑定用户邮箱
+	 * @param state
+	 * @throws Exception 
+	 */
+	public void bingUsermail(String mailcount,int id) throws Exception{
+		Object [] params = {mailcount,id};
+		this.userDaoImpl.bingUserMail(params);
+	}
 
 	
 }

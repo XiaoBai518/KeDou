@@ -15,6 +15,8 @@
 		<script src="${ctx }/js/personal.js"></script>
 </head>
 <body>
+<!-- 有访问历史 -->
+	<c:if test="${not empty courselist }">
 <form action="${ctx}/userhistory/batchdelete?page=${page }" method="post">
 		<table cellspacing="4" cellpadding="0" class="table">
 					
@@ -46,5 +48,17 @@
 			</div>
 			<ul id="myPager" class="pager" data-ride="pager" data-page="${page}" data-rec-Total="${pagecount }" data-rec-Per-Page="4" data-link-creator="${ctx }/userhistory/page?page={page}&totalCount={recTotal}" ></ul>
 		</div>	
+	</c:if>	
+			<!-- 无访问历史 -->
+	<c:if test="${ empty courselist }">
+		<div class="nonecourse">
+				
+				<div class="nonecourseImg">
+					<img  src="${ctx}/img/none.jpg" width="100%" height="100%">
+				</div>
+				<div class="nonecourseText">没有访问历史。。。</div>
+		</div>
+	
+	</c:if>
 </body>
 </html>

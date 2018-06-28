@@ -147,8 +147,8 @@ public abstract class BaseDao<T> {
      * @return
      * @throws Exception
      */
-    public Long findCount4Page() throws Exception {
-		Query query=this.sessionFactory.getCurrentSession().createQuery("select count("+entityClass.getSimpleName()+"from "+entityClass.getSimpleName());
+    public Long findCount() throws Exception {
+		Query query=this.sessionFactory.getCurrentSession().createQuery("select count(*)"+"from "+entityClass.getSimpleName());
 		return (Long)query.uniqueResult();
 	}
 	

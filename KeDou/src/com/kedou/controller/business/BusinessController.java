@@ -1,7 +1,10 @@
 package com.kedou.controller.business;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -15,29 +18,42 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.subject.Subject;
+import org.springframework.cache.Cache;
+import org.springframework.cache.Cache.ValueWrapper;
+import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.Log4jConfigurer;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.kedou.entity.Business;
-import com.kedou.entity.Course;
-import com.kedou.entity.User;
+import com.kedou.entity.BusinessVisitNumber;
 import com.kedou.service.business.BusinessServiceImpl;
+import com.kedou.service.torder.TorderServiceImpl;
+import com.kedou.service.visitNumber.VisitNumberServiceImpl;
 import com.kedou.shiro.UsernamePasswordByUserTypeToken;
+import com.kedou.superentity.SuperChart;
+import com.kedou.util.Constants;
 import com.kedou.util.IpAddress;
-import com.kedou.util.UpLoadErro;
-import com.kedou.util.UpLoadUtil;
 
 @Controller
 @RequestMapping("/business")
 public class BusinessController {
 	@Resource
 	private BusinessServiceImpl businessServiceImpl;
+	
+	@Resource
+	private TorderServiceImpl torderServiceImpl;
+	
+	@Resource
+	private VisitNumberServiceImpl visitNumberServiceImpl;
+	
+	@Resource(name="springcacheManager")
+	private EhCacheCacheManager CacheManager;
 
 	
 	/**
@@ -90,7 +106,6 @@ public class BusinessController {
 		try {
 			bus = businessServiceImpl.findByAcount(acount);
 		} catch (Exception e) {
-			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 			return "数据库错误界面";
 		}
@@ -123,7 +138,9 @@ public class BusinessController {
 		UsernamePasswordByUserTypeToken token = new UsernamePasswordByUserTypeToken(bus.getBusAccount(), bus.getBusPwd(),"3");
 		
 		Subject currentUser = SecurityUtils.getSubject();
-	
+		
+		//商家登录 将用户账户注销
+			currentUser.logout();
 		try {
 			currentUser.login(token);
 			bus = (Business)currentUser.getSession().getAttribute("loginBusiness");
@@ -136,7 +153,7 @@ public class BusinessController {
 			//保存到session
 			SecurityUtils.getSubject().getSession().setAttribute("loginBusiness", bus);
 			System.out.println("登陆成功");
-			return "busadmin";
+			return "redirect:/business/tobusadmin";
 		} catch ( UnknownAccountException uae ) { 
 			//账户不存在
 			System.out.println("账号不存在");
@@ -161,15 +178,96 @@ public class BusinessController {
 			return "businessLogin";
 		}
 	}
+	/**
+	 * 前往商家个人店铺首页
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/tohome",method=RequestMethod.GET)
+	public String toHome(@RequestParam("businessId") int id) {
+		return "forward:/course/toBusinessHomes";
+	}
 	
 	/**
 	 * 前往商家管理中心（商家个人中心）
 	 * @return
+	 * @throws Exception 
 	 */
 	@RequestMapping(value="/tobusadmin",method=RequestMethod.GET)
-	public String toBusAdmin() {
+	public String toBusAdmin(Model model)  {
+		Business bus = (Business)SecurityUtils.getSubject().getSession().getAttribute("loginBusiness");
+		//查询未处理的顶单个数
+		
+		model.addAttribute("busid", bus.getBusId());
+		try {
+			int count =(int) this.torderServiceImpl.findOrderCountByBusId(bus.getBusId(),0);
+			 model.addAttribute("untreatedCount", count);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		return "busadmin";
+	}
+	/**
+	 * 前往 店铺数据展示页面（商家个人中心）
+	 */
+	@RequestMapping(value="/toRealData",method=RequestMethod.GET)
+	public String toRealData(Model model) {
+			//目前正在登录的商家
+		Subject currentUser = SecurityUtils.getSubject();
+		Business bus = (Business)currentUser.getSession().getAttribute("loginBusiness");
+		int busid = bus.getBusId();
+		//查询今日预约成功个数
+		try {
+			long Todaycount = this.torderServiceImpl.findOrderCountByDate(busid, Constants.TORDER_STATE_TREATED,new Date()); 
+			model.addAttribute("todayTorderCount", Todaycount);
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("todayTorderCount", 0);
+		} 
+		//查询历史预约成功个数
+		try {
+			long Allcount = this.torderServiceImpl.findOrderCountByBusId(busid, Constants.TORDER_STATE_TREATED); 
+			model.addAttribute("allTorderCount", Allcount);
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("allTorderCount", 0);
+		} 
+		
+		//查询今日访问量
+		Cache cache = CacheManager.getCache("visitNumberCache");
+		ValueWrapper value = cache.get("visitNumberMap");
+		
+		if(value==null) {
+			model.addAttribute("visitNumber", 0);
+		}else {
+			Map<Integer,BusinessVisitNumber> visitNumberMap = (Map<Integer,BusinessVisitNumber>)value.get();
+			if(visitNumberMap.get(busid)==null) {
+				BusinessVisitNumber bvn = new BusinessVisitNumber(busid);
+				visitNumberMap.put(busid,bvn);
+				try {
+					this.visitNumberServiceImpl.addBusinessVistNumber(bvn);
+				} catch (Exception e) {
+					// TODO 自动生成的 catch 块
+					e.printStackTrace();
+				}
+				model.addAttribute("visitNumber",visitNumberMap.get(busid).getVisitNumber());
+			}else {
+				model.addAttribute("visitNumber",visitNumberMap.get(busid).getVisitNumber());
+			}
+		
+		}
+		
+		//查询最近一周的订单数量
+		;
+		try {
+			model.addAttribute("gsonSuperChart",new Gson().toJson(this.torderServiceImpl.createSuperChartBusId(busid)));
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("gsonSuperChart",new Gson().toJson(new SuperChart(new ArrayList<Integer>(Arrays.asList(0,0,0,0,0,0,0)))));
+		}
+		
+		return "bus_realdata";
 	}
 	/**
 	 * 前往添加课程页
@@ -179,7 +277,37 @@ public class BusinessController {
 	public String toAddCourse() {
 		return "bus_addcourse";
 	}
-
+	/**
+	 * 前往 (机构个人中心)修改机构个人信息页面
+	 * @return
+	 */
+	@RequestMapping(value="/tobusInfo",method=RequestMethod.GET)
+	public String toBusInfo(@RequestParam("busid")int busid,Model model) {
+		
+		Business bus = null;
+		try {
+			bus = this.businessServiceImpl.findById(busid);
+		} catch (Exception e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		model.addAttribute("business", bus);
+		return "bus_basicinfo";
+	}
+	/**
+	 * 修改机构个人信息(商家个人中心)
+	 * @param value
+	 * @param key
+	 * @return
+	 */
+	@RequestMapping(value="/ModifybusInfo",method=RequestMethod.POST)
+	@ResponseBody
+	public String modifyBusInfo(@RequestParam("value")String value,@RequestParam("key")String key,
+								@RequestParam("busid")String busid) {
+		this.businessServiceImpl.updateBusInfo(key, value, busid);
+		
+		return value;
+	}
 	/**
 	 * 审核机构
 	 * @author 原源

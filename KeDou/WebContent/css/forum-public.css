@@ -1,0 +1,163 @@
+html,body{
+    margin: 0 auto;  width: 100%;  overflow-x: hidden;
+}
+.padding-none{
+    padding: 0px;
+/*    width: 100%;*/
+/*    height: 250px;*/
+}
+img { 
+    height:100%; width:100%; border:0; /*让图片自适应所在div的大小*/
+} 
+.newstitles p{
+    font-size: 25px;
+    font-weight: bold;
+    font-style: 宋体;
+    line-height: 100%;
+}
+.contents p{
+    text-indent: 2em;
+}
+.con{
+	 color: rgb(88, 88, 88); 
+    font-family: arial, &#39;microsoft yahei&#39;, 宋体; 
+    line-height: 28px; 
+    font-size: 14px; 
+}
+.contents span{
+    color: rgb(88, 88, 88); 
+    font-family: arial, &#39;microsoft yahei&#39;, 宋体; 
+    line-height: 28px; 
+    text-align: justify;
+    font-size: 16px; 
+    background-color: rgb(255, 255, 255);
+}
+
+/*index*/
+.banner{
+    margin-top: 10px;
+    height: 300px;
+    width: 100%;
+}
+.star{
+    width: 100%;
+    border-bottom: 1px solid #e1652f;
+    height: 15px;
+    text-align: center;
+    margin: 20px 0 30px 0;
+}
+.star span{
+    font-size: 100%;
+    background-color: #ffffff;
+    padding: 0 20px;
+}
+.star img{
+    height: 25px;
+    margin: -5px 10px 0 0;
+}
+.tag li{
+    background-color: #fff;
+    padding: 5px 8px;
+    float: left;
+    margin: 5px;
+    list-style-type: none;
+}
+.tag .active{
+    background-color: #e1652f;
+    color: #fff;
+}
+.tag .active a{
+    color: #ffffff;
+}
+.tag .active a:hover{
+    color: #ddd;
+}
+.newatype a{
+    color: #222222;
+}
+.newatype a:hover{
+    color: #e1652f;
+}
+.news .am-list-news-bd .am-list li{
+    padding: 20px 0;
+}
+.face1{
+    height: 400px;
+}
+.face{
+    border-radius: 40px;
+}
+.right-bg{
+    padding:20px;
+    background-color: #f5f5f5;
+    margin-top: 0px;
+}
+.right-bg .am-list > li {
+    background-color: #f5f5f5;
+    border: 0px;
+}
+.right-bg .am-list-item-text{
+    font-size: 75%;
+}
+.right-bg .am-list .am-list-item-desced {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+.am-titlebar .am-titlebar-title{
+    color: #222222;
+}
+.am-titlebar .am-titlebar-nav  a{
+    color: #dddddd;
+}
+.am-titlebar .am-titlebar-nav  a:hover{
+    color: #222;
+}
+.right-bg img {
+}
+.am-g{
+    margin-top: 30px;
+}
+.am-g .am-container .padding-none{
+    width: 100%;
+}
+footer{
+    background-color: #222222;
+    color: #ddd;
+    padding: 50px 0;
+    text-align: center;
+    margin-top: 50px;
+}
+footer a{
+    color: #ddd;
+}
+footer a:hover{
+    color: #fff;
+}
+.content{
+    max-width: 550px;
+    margin: 0 auto;
+}
+@media (max-width: 640px) {
+    .content{
+        font-size: 75%;
+    }
+}
+.newsico{
+    color: #ddd;
+    position: absolute;
+    margin-top: -30px;
+    margin-left: 50%;
+}
+@media only screen and (max-width: 640px) {
+    .newsico{
+        margin-left: 65%;
+    }
+}
+@media only screen and (min-width: 640px) {
+    .newsico{
+        margin-left: 75%;
+    }
+}
+
+
+

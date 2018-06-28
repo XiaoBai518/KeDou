@@ -1,5 +1,7 @@
 package com.kedou.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -7,13 +9,14 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-@Entity
-@Table(name="coursetyperelation")
+
 /**
  * 商品类型联系 实体
  * @author 张天润	
  *
  */
+@Entity
+@Table(name="coursetyperelation")
 public class CourseTypeRelation {
 
 	@Id
@@ -21,8 +24,8 @@ public class CourseTypeRelation {
 	@GenericGenerator(name="increment_generator", strategy="increment")
 	private int id;
 	
-	private int courseId;        //课程ID
-	private int buscourtypeId;   //商家课程类型联系Id            
+	private int courseId;			//课程Id
+	private int coursetypeId;		//课程类型Id
 	public int getId() {
 		return id;
 	}
@@ -35,10 +38,12 @@ public class CourseTypeRelation {
 	public void setCourseId(int courseId) {
 		this.courseId = courseId;
 	}
-	public int getBuscourtypeId() {
-		return buscourtypeId;
+	public int getCoursetypeId() {
+		return coursetypeId;
 	}
-	public void setBuscourtypeId(int buscourtypeId) {
-		this.buscourtypeId = buscourtypeId;
+	public void setCoursetypeId(int coursetypeId) {
+		this.coursetypeId = coursetypeId;
 	}
+	
+	
 }

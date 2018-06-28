@@ -12,7 +12,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name="collection")
 /**
- * 收藏 实体
+ * 商品收藏 实体
  * @author zhangtianrun 
  *
  */
@@ -25,6 +25,13 @@ public class Collection {
 	private int userId;//用户ID
 	private int courseId;//课程ID
     private Date timestamp;//收藏时间
+    
+    public Collection(){}
+    public Collection(int userid,int courseid,Date date) {
+    	this.userId = userid;
+    	this.courseId = courseid;
+    	this.timestamp = date;
+    }
 	public int getId() {
 		return id;
 	}

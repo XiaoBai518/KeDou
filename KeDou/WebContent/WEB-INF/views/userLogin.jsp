@@ -6,26 +6,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>index</title>
+	<title>课兜儿网——登录注册</title>
+		<link rel="icon" href="${ctx }/img/favicon.ico" type="image/x-icon" />
+   		<link rel="shortcut icon" href="${ctx }/img/favicon.ico">
+   		<link rel="Bookmark" href="${ctx }/img/favicon.ico">
+   		<link rel="SHORTCUT ICON" href="${ctx }/img/favicon.ico"/>
     <link rel="stylesheet" type="text/css" href="${ctx }/css/LoginRegiste.css"/>
 </head>
-<body bgcolor="#AEEEEE">
+<body style="background: url(${ctx}/img/LoginBack.jpg) no-repeat left top; background-size:100%;">
 <div id="one">	
 	<!--中间内敛框架的变化部分 -->
 	<div id="four_ifr">
 		<iframe src="${ctx }${url}${error}" frameborder="0" width="100%" scrolling="no" height="100%" name="box"></iframe>
 	</div>	
-	<!--底部第三方登录-->
-	<div id="fond_style2">
-		<table cellspacing="10px">
-			<tr>
-				<td>其他登陆方式</td>
-				<td><img src="${ctx }/img/qq3.png"></td> <!--qq登陆-->
-				<td><img src="${ctx }/img/weixin.png"></td><!--微信登陆-->
-				<td><img src="${ctx }/img/weibo.png"></td><!--微博登陆-->
-			</tr>
-		</table>
-	</div>
 </div>
 </body>
 </html>

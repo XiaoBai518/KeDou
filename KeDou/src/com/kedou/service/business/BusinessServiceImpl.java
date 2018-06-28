@@ -1,6 +1,5 @@
 package com.kedou.service.business;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -13,11 +12,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kedou.dao.business.BusinessDaoImpl;
-import com.kedou.dao.course.BusinessCourseTypeRelationDaoImpl;
+import com.kedou.dao.role.BusinessRoleRelationDaoImpl;
+import com.kedou.dao.role.RoleDaoImpl;
 import com.kedou.entity.Business;
-import com.kedou.entity.CourseType;
-import com.kedou.entity.User;
-import com.kedou.service.common.CommonServiceImpl;
+import com.kedou.entity.BusinessRoleRelation;
+import com.kedou.entity.UserRoleRelation;
+import com.kedou.service.visitNumber.VisitNumberServiceImpl;
 import com.kedou.util.BCrypt;
 import com.kedou.util.Constants;
 
@@ -28,7 +28,11 @@ public class BusinessServiceImpl {
 	@Resource
 	private BusinessDaoImpl businessDaoImpl;
 	@Resource
-	private CommonServiceImpl commonServiceImpl;//公共的方法实现
+	private BusinessRoleRelationDaoImpl businessRoleRelationDaoImpl;
+	@Resource
+	private RoleDaoImpl roleDaoImpl;
+	@Resource
+	private VisitNumberServiceImpl visitNumberServiceImpl;
 
 	
 	/**
@@ -87,7 +91,21 @@ public class BusinessServiceImpl {
 		
 
 	}
+	/**
+	 * 
+	 * @desc 机构详情修改（商家个人中心）
+	 * @author 张天润
+	 * @createDate 2018年3月29日
+	 * @return
+	 * @throws Exception
+	 */
 	
+	public void updateBusInfo(String key,String value,String busid) {
+		
+		Object [] params = {key,value,Integer.parseInt(busid)};
+		this.businessDaoImpl.updateBusInfo(params);
+		
+	}
 	/**
 	 * 
 	 * @desc 机构详情修改
@@ -97,9 +115,9 @@ public class BusinessServiceImpl {
 	 * @throws Exception
 	 */
 	public void updateBus(Business bus) throws Exception {
-		
+
 			this.businessDaoImpl.update(bus);
-		
+
 	}
 	/**
 	 * 
@@ -134,8 +152,15 @@ public class BusinessServiceImpl {
 				 //设置用户登录次数为 0
 				    bus.setLoginCount(0);
 			businessDaoImpl.save(bus);
-			int a=bus.getBusId();
-			return a;
+			int busid=bus.getBusId();
+			//创建商家角色联系实体
+			  BusinessRoleRelation brr = new BusinessRoleRelation();
+			  
+				  //设置用户角色联系的用户ID
+					brr.setBusId(busid);
+				     brr.setRoleId(Constants.BUSINESS_ROLEID);
+				this.businessRoleRelationDaoImpl.save(brr);
+			return busid;
 		
 	}
 	/**
@@ -156,6 +181,23 @@ public class BusinessServiceImpl {
 				     bus.setLoginTime(new Date());
 				 this.updateLoginInfo(bus);	
 				return bus;//可以登陆
+		
+	}
+	/**
+	 * 通过账号查询商家角色名
+	 * @param roleName
+	 * @return
+	 * @throws Exception 
+	 */
+	public String getRoleNameByAccount(String businessname) throws Exception {
+		
+		//通过用户账号 查找用户Id
+		int busid = this.businessDaoImpl.findByAcount(new String [] {businessname}).getBusId();
+		//通过用户ID 查找角色Id
+		int roleid = this.businessRoleRelationDaoImpl.getRoleidByBusid(busid);
+		//通过角色Id 查找角色名字
+		String rolename = this.roleDaoImpl.get(roleid).getRoleName();
+		return rolename;
 		
 	}
 	/**

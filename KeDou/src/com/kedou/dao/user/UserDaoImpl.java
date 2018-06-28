@@ -1,5 +1,7 @@
 package com.kedou.dao.user;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -11,7 +13,14 @@ import com.kedou.entity.UserRoleRelation;
 
 @Repository
 public class UserDaoImpl extends BaseDao<User>{
-
+	
+	public List<User> findUserListByUserIdlist(List<Integer> useridList)throws Exception {
+		String hql = "from User where userId in (:userIdList)";
+		
+		Query query = super.getSessionFactory().getCurrentSession().createQuery(hql);
+		query.setParameterList("userIdList", useridList);
+		return query.list();
+	}
 	 /**
 		 * 
 		 * @desc 通过电话或者邮箱查询用户
@@ -52,6 +61,17 @@ public class UserDaoImpl extends BaseDao<User>{
 			return urr.getUrrId();
 			
 		}
+		/**
+		 * 更新用户密码
+		 * @param u
+		 * @throws Exception
+		 */
+		public void updateUserPwd(Object [] params)throws Exception {
+			String hql = "update User u set u.userPwd= ? , u.salt= ? where u.userId=?";
+			
+			super.updateByProperty(hql, params);
+		}
+
 	
 	/**
 	 * 更新数据库邮件激活码字段
@@ -107,21 +127,7 @@ public class UserDaoImpl extends BaseDao<User>{
 		
 		super.updateByProperty(hql, params);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	/**
 	 * @desc 用户注册后保存个人描述
 	 * @author yuyueming
@@ -155,5 +161,24 @@ public class UserDaoImpl extends BaseDao<User>{
 		return line;
 		
 	}
+	/**
+	 * 更改用户手机号
+	 * @param u
+	 * @throws Exception
+	 */
+	public void updateUserTelNum(Object [] params)throws Exception {
+		String hql = "update User u set u.userTel= ? where u.userId=?";
+		super.updateByProperty(hql, params);
+	}
+	/**
+	 * 绑定用户邮箱
+	 * @param u
+	 * @throws Exception
+	 */
+	public void bingUserMail(Object [] params)throws Exception {
+		String hql = "update User u set u.userEmail= ? where u.userId=?";
+		super.updateByProperty(hql, params);
+	}
+
 
 }

@@ -14,6 +14,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 
 import com.kedou.entity.Admin;
+import com.kedou.entity.User;
 import com.kedou.service.bg.AdminServiceImpl;
 
 public class AdminShiroRealm extends AuthorizingRealm {
@@ -35,12 +36,13 @@ public class AdminShiroRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection pc) {
 		System.out.println("开始授权信息");
-		 String adminaccount = (String)pc.fromRealm(getName()).iterator().next();
-        if(adminaccount!=null){
-       	 
+//		 String adminaccount = (String)pc.fromRealm(getName()).iterator().next();
+		Admin admin = (Admin)pc.getPrimaryPrincipal();
+        if(admin!=null){
+        	
             String role = null;
 			try {
-				role = adminServiceImpl.getRoleNameByAccount(adminaccount);
+				role = adminServiceImpl.getRoleNameByAccount(admin.getAdminAccount());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -71,7 +73,7 @@ public class AdminShiroRealm extends AuthorizingRealm {
 			}
             if (admin != null) {   
             	SecurityUtils.getSubject().getSession().setAttribute("loginAdmin", admin);
-                   return new SimpleAuthenticationInfo(adminname, admin.getAdminPwd(),ByteSource.Util.bytes(admin.getAdminSalt()),getName());  
+                   return new SimpleAuthenticationInfo(admin, admin.getAdminPwd(),ByteSource.Util.bytes(admin.getAdminSalt()),getName());  
            
              }else {
             	 //账号不存在

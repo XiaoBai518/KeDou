@@ -9,6 +9,11 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="permission")
+/**
+ * 权限类
+ * @author 张小白
+ *
+ */
 public class Permission {
 
 	

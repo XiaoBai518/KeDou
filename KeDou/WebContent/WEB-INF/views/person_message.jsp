@@ -24,10 +24,6 @@
 				<div class="name_right">${user.gender }</div>
 			</div>
 			<div class="person_name">
-				<div class="name_left">地址</div>
-				<div class="name_right">${user.userName }</div>
-			</div>
-			<div class="person_name">
 				<div class="name_left">个人描述</div>
 				<div class="name_right">${user.userDiscription }</div>
 			</div>	

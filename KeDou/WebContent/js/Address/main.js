@@ -1,3 +1,15 @@
+
+/**
+ * 判断直接搜索城市 form 是否提交
+ * @returns
+ */
+function detailOnSubmit() {
+	if($("input[name='detail']").val()!="") {
+		return true;
+	}
+	return false;
+}
+
 /**
  * 地区代码开始函数
  * @author veer
