@@ -242,7 +242,7 @@
               <img src="${articleImgPath }/${m.titleimg}" alt="#">
             </a>
             <div class="waterfall-info">
-              <p class="title">${m.title}</p>
+              <p class="title" style="display: block;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">${m.title}</p>
               <p class="icon"><span class="icon-star"></span><i class="icon icon-heart" style="color:red">${m.likes}</i></p>
             </div>
             <div class="info">

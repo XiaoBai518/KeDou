@@ -81,9 +81,8 @@
 				<div id="navigation">
 					<ul class="nav nav-secondary">
 						<li><a href="${ctx }/common/toindex" class="nav-a">首页</a></li>
-						<li><a href="#" class="nav-a">动态 <span class="label label-badge label-success">4</span></a></li>
-						<li><a href="#" class="nav-a">项目 </a></li>
-						<li><a href="#" class="nav-a">哈哈</a></li>
+						<li><a href="${ctx }/calendar/list" class="nav-a">考试日历</a></li>
+						<li><a href="${ctx }/forum/showforum" class="nav-a">论坛 </a></li>
 					</ul>
 				</div>
 			</div> 

@@ -12,15 +12,15 @@
    		<link rel="Bookmark" href="${ctx }/img/favicon.ico">
    		<link rel="SHORTCUT ICON" href="${ctx }/img/favicon.ico"/>
 	<link href="${ctx }/css/zui.min.css" rel="stylesheet">
-	<link href="${ctx }/css/Calendar/doc.min.css" rel="stylesheet">
+	<link href="${ctx }/css/doc.min.css" rel="stylesheet">
 	<link href="${ctx }/css//zui.calendar.min.css" rel="stylesheet">
 	<script src="${ctx }/js/jquery.zui.js"></script>
 	<script src="${ctx }/js/zui.calendar.min.js"></script>
  	<script src="${ctx }/js/zui.min.js"></script>
 </head>
 <body>
-	<div hight="80px" width="100%">
-		<h1>&nbsp;&nbsp;&nbsp;2018年</h1><br><h1>&nbsp;&nbsp;&nbsp;考试日历</h1><br>
+	<div style="height: 30px; width:100%;text-align:center;">
+		<h1>2018年考试日历</h1>
 	</div>
 	<br>
 	<div class="example"><div id="calendar" class="calendar"></div></div>

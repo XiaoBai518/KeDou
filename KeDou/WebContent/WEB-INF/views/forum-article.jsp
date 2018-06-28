@@ -43,7 +43,7 @@
 			
 			//更改评论时间格式
 			$(".comment-time").each(function(){
-				 var date = new Date( $(this).html());
+				 var date = new Date($(this).html());
 		    	 $(this).text(dateFtt("yyyy年MM月dd日 hh时mm分ss秒",date));
 			});
 			//更改 文章

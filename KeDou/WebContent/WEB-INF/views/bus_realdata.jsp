@@ -53,7 +53,7 @@
 					</div>
 				</div>
 			</div>
-			<h2 style="text-align: center;color: #2B91DE;">近一年预约数据</h2><br/>
+			<h2 style="text-align: center;color: #2B91DE;">近一周预约数据</h2><br/>
 			<canvas id="myChart" width="780" height="400"></canvas>
 		</div>
 	</div>
