@@ -10,44 +10,44 @@
 
 项目成员
 
-+ 张天润
++ 张天润（项目经理，数据库工程师，产品，架构师）
   + email：949947078@qq.com
   + Github: https://github.com/XiaoBai518
   
-+ 于越明
++ 于越明（项目经理，产品经理，数据库工程师，开发工程师）
   + email：15732169632@163.com
   + Github: https://github.com/YYM0813
-+ 宋亚楼
++ 宋亚楼（UI设计师，开发工程师）
   + email：songyalou@163.com
   + Github: https://github.com/SONGYALOU
-+ 原源
++ 原源（开发工程师）
   + email：1945746983@qq.com
   + Github: https://github.com/yuanyuan1998
-+ 康紫云
++ 康紫云（开发工程师）
   + email：861797623@qq.com
   + Github: https://github.com/kangziyun
-+ 杨宏利
++ 杨宏利（UI设计师）
   + email：1209754720@qq.com
   + Github: https://github.com/Yhongli 
-+ 和宝同
++ 和宝同（开发工程师）
   + email：15732116353@163.com 
   + Github: https://github.com/hebaotong
-+ 王泽鑫
++ 王泽鑫（开发工程师）
   + email：295816201@qq.com
   + Github: https://github.com/sillyy123
-+ 邢丽萍
++ 邢丽萍（UI设计师）
   + email：957373773@qq.com
   + Github: https://github.com/xingxingliping
-+ 时自虎
++ 时自虎（开发工程师）
   + email：1473003409@qq.com
   + Github: https://github.com/liontiger2
-+ 陈佳风
++ 陈佳风（UI设计师，开发工程师）
   + email：2432027288@qq.com
   + Github: https://github.com/oppor9s
-+ 魏兴华
++ 魏兴华（UI设计师，产品）
   + email：844366624@qq.com
   + Github: https://github.com/weixinghua09
-+ 聂帅宝
++ 聂帅宝（UI设计师）
   + email：670344856@qq.com
   + Github: https://github.com/nieshuaibao
   
